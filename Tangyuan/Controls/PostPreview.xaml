@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tangyuan.Controls.PostPreview">
+    <Border Stroke="{StaticResource SecondaryBrush}" StrokeThickness="2"
+            StrokeShape="RoundRectangle 10,10,10,10" HorizontalOptions="Center" BackgroundColor="White">
+        <Grid HeightRequest="200">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Image x:Name="imgImage" Aspect="AspectFill"/>
+            <Grid Grid.Row="1" Margin="8,3,8,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label x:Name="lblTitle" FontSize="Medium"  FontAttributes="Bold"/>
+                <Label x:Name="lblDesc" Grid.Row="1"/>
+            </Grid>
+            <Label Margin="8" x:Name="lblInfo" Grid.Row="2" FontSize="Micro" HorizontalTextAlignment="End" VerticalTextAlignment="End" TextColor="Gray"/>
+
+        </Grid>
+    </Border>
+</ContentView>

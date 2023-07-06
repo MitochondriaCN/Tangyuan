@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Tangyuan.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Tangyuan.Pages"
+    Shell.FlyoutBehavior="Disabled">
+
+    <TabBar>
+        <ShellContent Title="首页" ContentTemplate="{DataTemplate local:IndexPage}"
+                      Icon="https://icons.veryicon.com/png/o/miscellaneous/linear-icon-44/home-home-3.png"/>
+        <ShellContent Title="市场" ContentTemplate="{DataTemplate local:MarketPage}"
+                      Icon="https://icons.veryicon.com/png/o/internet--web/cloud-computing-background-icon/market-23.png"/>
+        <ShellContent Title="私信" ContentTemplate="{DataTemplate local:ChatPage}"
+                      Icon="https://icons.veryicon.com/png/o/commerce-shopping/online-retailers/chat-80.png"/>
+        <ShellContent Title="我的" ContentTemplate="{DataTemplate local:UserPage}"
+                      Icon="https://icons.veryicon.com/png/o/application/yitao-wireless-icon-library/user-122.png"/>
+    </TabBar>
+
+</Shell>
