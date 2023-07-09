@@ -12,17 +12,17 @@ namespace Tangyuan.Data
 {
     internal static class SQLDataHelper
     {
-        static readonly MySqlConnection mysqlConn;
-        static SQLDataHelper()
-        {
-            mysqlConn = new MySqlConnection();
-        }
+        private const string host = "81.68.124.30";
+        private const uint port = 3306;
+        private const string database = "tangyuan";
+        private const string username = "tangyuan";
+        private const string passwd = "Fuyuxuan372819";
 
         /// <summary>
-        /// 与数据库建立连接。在生命周期中，该方法应当只调用一次，因为只需要与一个数据库建立连接。
+        /// 获取一个新的数据库连接对象。
         /// </summary>
         /// <param name="connStr"></param>
-        internal static void SetNewConnection(string host, uint port, string database, string username, string passwd)
+        internal static MySqlConnection GetNewConnection()
         {
             MySqlConnectionStringBuilder sb = new MySqlConnectionStringBuilder();
             sb.Server = host;
@@ -31,16 +31,8 @@ namespace Tangyuan.Data
             sb.UserID = username;
             sb.Password = passwd;
             sb.SslMode = MySqlSslMode.None;
-            mysqlConn.ConnectionString = sb.ToString();
-            try
-            {
-                mysqlConn.Open();
-            }
-            catch
-            {
-                mysqlConn.Close();
-                throw;
-            }
+            MySqlConnection conn = new MySqlConnection(sb.ToString());
+            return conn;
         }
 
         /// <summary>
@@ -54,6 +46,8 @@ namespace Tangyuan.Data
 
         internal static List<PostInfo> GetRecentPosts(uint number)
         {
+            MySqlConnection mysqlConn = GetNewConnection();
+            mysqlConn.Open();
             if (mysqlConn.State == ConnectionState.Open)
             {
                 List<PostInfo> posts = new List<PostInfo>();
@@ -67,6 +61,34 @@ namespace Tangyuan.Data
                             data.GetUInt32("views"), XDocument.Parse(data.GetString("content"))));
                     }
                     return posts;
+                }
+                catch
+                {
+                    mysqlConn.Close();
+                    throw;
+                }
+            }
+            else
+            {
+                throw new Exception("尚未连接数据库。");
+            }
+        }
+
+        internal static string GetUserNicknameByID(uint id)
+        {
+            MySqlConnection mysqlConn = GetNewConnection();
+            mysqlConn.Open();
+            if (mysqlConn.State == ConnectionState.Open)
+            {
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM user_table WHERE id=" + id, mysqlConn);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        return reader.GetString("nickname");
+                    }
+                    return null;
                 }
                 catch
                 {

@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace Tangyuan.Data
 {
-    internal class PostInfo
+    public class PostInfo
     {
         internal uint PostID { get; private set; }
         internal uint AuthorID { get; private set; }
@@ -18,7 +18,12 @@ namespace Tangyuan.Data
 
         internal PostInfo(uint postID, uint authorID, DateTime postDate, uint likes, uint views, XDocument content)
         {
-            
+            PostID= postID;
+            AuthorID= authorID;
+            PostDate= postDate;
+            Likes= likes;
+            Views= views;
+            Content= content;
         }
     }
 }

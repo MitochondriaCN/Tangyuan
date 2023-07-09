@@ -4,23 +4,23 @@
              x:Class="Tangyuan.Controls.PostPreview">
     <Border Stroke="{StaticResource SecondaryBrush}" StrokeThickness="2"
             StrokeShape="RoundRectangle 10,10,10,10" HorizontalOptions="Center" BackgroundColor="White">
-        <Grid HeightRequest="200">
+        <Grid x:Name="grdMain">
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-
             <Image x:Name="imgImage" Aspect="AspectFill"/>
-            <Grid Grid.Row="1" Margin="8,3,8,0">
+
+            <Grid Grid.Row="1" Margin="8,5,8,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Label x:Name="lblTitle" FontSize="Medium"  FontAttributes="Bold"/>
-                <Label x:Name="lblDesc" Grid.Row="1"/>
+                <Label x:Name="lblTitle" FontSize="Medium"  FontAttributes="Bold" LineBreakMode="TailTruncation"/>
+                <Label x:Name="lblDesc" Grid.Row="1" MaxLines="2"/>
             </Grid>
-            <Label Margin="8" x:Name="lblInfo" Grid.Row="2" FontSize="Micro" HorizontalTextAlignment="End" VerticalTextAlignment="End" TextColor="Gray"/>
+            <Label Margin="8,5,10,8" x:Name="lblInfo" Grid.Row="2" FontSize="Micro" HorizontalTextAlignment="End" VerticalTextAlignment="End" TextColor="Gray"/>
 
         </Grid>
     </Border>

@@ -19,7 +19,7 @@
                 <Label Margin="5" VerticalTextAlignment="Center" TextColor="Black">线粒体CN</Label>
             </HorizontalStackLayout>
             <!--选项卡占位-->
-            
+
             <!---->
             <HorizontalStackLayout FlowDirection="RightToLeft" Grid.Column="2">
                 <ImageButton Source="https://icons.veryicon.com/png/o/miscellaneous/data-product-icon-library/search-663.png"
@@ -33,7 +33,7 @@
     </Shell.TitleView>
 
     <!--主要内容-->
-    <ScrollView BackgroundColor="{StaticResource Secondary}">
+    <ScrollView BackgroundColor="White">
         <StackLayout Margin="10">
             <!--近期表白墙-->
             <Border StrokeShape="RoundRectangle 15,15,15,15" BackgroundColor="{StaticResource Tertiary}" HeightRequest="200" Margin="5" StrokeThickness="0">
@@ -47,7 +47,7 @@
                 </Grid>
             </Border>
             <!--市场-->
-            <Border StrokeShape="RoundRectangle 15,15,15,15" BackgroundColor="White" HeightRequest="160" Margin="5" StrokeThickness="0">
+            <Border StrokeShape="RoundRectangle 15,15,15,15" BackgroundColor="{StaticResource Secondary}" HeightRequest="160" Margin="5" StrokeThickness="0">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -56,19 +56,17 @@
                     <Label FontSize="Title" FontAttributes="Bold" TextColor="{StaticResource Prestige}">近期市场</Label>
                     <ScrollView Margin="0,3,0,0" Grid.Row="1" Orientation="Horizontal">
                         <HorizontalStackLayout>
-
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Border StrokeShape="RoundRectangle 10,10,10,10" WidthRequest="60" BackgroundColor="{StaticResource Secondary}" StrokeThickness="0">
+                            <Border StrokeShape="RoundRectangle 10,10,10,10" WidthRequest="60" BackgroundColor="White" StrokeThickness="0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
                                     <Image Source="../Resources/Images/test2.jpg" Aspect="Fill"/>
-                                </Border>
-                                <Label Grid.Row="1" FontAttributes="Bold" Margin="3" HorizontalTextAlignment="Start"
+                                    <Label Grid.Row="1" FontAttributes="Bold" Margin="3" HorizontalTextAlignment="Start"
                                        VerticalTextAlignment="Center" TextColor="{StaticResource Prestige}">￥500</Label>
-                            </Grid>
-
+                                </Grid>
+                            </Border>
                         </HorizontalStackLayout>
                     </ScrollView>
                 </Grid>

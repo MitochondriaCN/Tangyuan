@@ -16,17 +16,11 @@ public partial class IndexPage : ContentPage
 		{
 			if (signal % 2 == 0)
 			{
-				stlPostsLeft.Children.Add(new PostPreview(v.Content.Root.Descendants().FirstOrDefault(a => a.Name.LocalName == "P").Value,
-					v.AuthorID.ToString(),
-					v.Content.Root.Descendants().FirstOrDefault(a => a.Name.LocalName == "Title").Value,
-					v.Content.Root.Descendants().FirstOrDefault(a => a.Name.LocalName == "Image").Value));
-			}
+				stlPostsLeft.Children.Add(new PostPreview(v));
+            }
 			else
 			{
-                stlPostsRight.Children.Add(new PostPreview(v.Content.Root.Descendants().FirstOrDefault(a => a.Name.LocalName == "P").Value,
-                    v.AuthorID.ToString(),
-                    v.Content.Root.Descendants().FirstOrDefault(a => a.Name.LocalName == "Title").Value,
-                    v.Content.Root.Descendants().FirstOrDefault(a => a.Name.LocalName == "Image").Value));
+				stlPostsRight.Children.Add(new PostPreview(v));
             }
 			signal++;
 		}
