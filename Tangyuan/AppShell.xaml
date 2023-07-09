@@ -6,9 +6,10 @@
     xmlns:local="clr-namespace:Tangyuan.Pages"
     Shell.FlyoutBehavior="Disabled">
 
-    <TabBar>
+    <TabBar Route="main">
         <ShellContent Title="首页" ContentTemplate="{DataTemplate local:IndexPage}"
-                      Icon="https://icons.veryicon.com/png/o/miscellaneous/linear-icon-44/home-home-3.png"/>
+                      Icon="https://icons.veryicon.com/png/o/miscellaneous/linear-icon-44/home-home-3.png"
+                      Route="index"/>
         <ShellContent Title="市场" ContentTemplate="{DataTemplate local:MarketPage}"
                       Icon="https://icons.veryicon.com/png/o/internet--web/cloud-computing-background-icon/market-23.png"/>
         <ShellContent Title="私信" ContentTemplate="{DataTemplate local:ChatPage}"
@@ -16,5 +17,4 @@
         <ShellContent Title="我的" ContentTemplate="{DataTemplate local:UserPage}"
                       Icon="https://icons.veryicon.com/png/o/application/yitao-wireless-icon-library/user-122.png"/>
     </TabBar>
-
 </Shell>
