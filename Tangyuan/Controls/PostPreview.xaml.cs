@@ -20,6 +20,6 @@ public partial class PostPreview : ContentView
 
 	private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
 	{
-		Shell.Current.GoToAsync("/post?id" + postInfo.PostID);
+		Shell.Current.GoToAsync("/post?id=" + postInfo.PostID);
 	}
 }

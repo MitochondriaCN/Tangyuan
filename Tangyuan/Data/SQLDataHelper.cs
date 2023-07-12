@@ -44,61 +44,98 @@ namespace Tangyuan.Data
             //TODO
         }
 
+        /// <summary>
+        /// 获取最近帖子。
+        /// </summary>
+        /// <param name="number">指定获取帖子数</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         internal static List<PostInfo> GetRecentPosts(uint number)
         {
-            MySqlConnection mysqlConn = GetNewConnection();
-            mysqlConn.Open();
-            if (mysqlConn.State == ConnectionState.Open)
+            using (MySqlConnection mysqlConn = GetNewConnection())
             {
-                List<PostInfo> posts = new List<PostInfo>();
-                try
+                mysqlConn.Open();
+                if (mysqlConn.State == ConnectionState.Open)
                 {
-                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM post_table order by post_date desc", mysqlConn);
-                    MySqlDataReader data = cmd.ExecuteReader();
-                    while (data.Read())
+                    List<PostInfo> posts = new List<PostInfo>();
+                    try
                     {
-                        posts.Add(new PostInfo(data.GetUInt32("id"), data.GetUInt32("author_id"), data.GetDateTime("post_date"), data.GetUInt32("likes"),
-                            data.GetUInt32("views"), XDocument.Parse(data.GetString("content"))));
+                        MySqlCommand cmd = new MySqlCommand("SELECT * FROM post_table order by post_date desc", mysqlConn);
+                        MySqlDataReader data = cmd.ExecuteReader();
+                        while (data.Read())
+                        {
+                            posts.Add(new PostInfo(data.GetUInt32("id"), data.GetUInt32("author_id"), data.GetDateTime("post_date"), data.GetUInt32("likes"),
+                                data.GetUInt32("views"), XDocument.Parse(data.GetString("content"))));
+                        }
+                        return posts;
                     }
-                    return posts;
+                    catch
+                    {
+                        mysqlConn.Close();
+                        throw;
+                    }
                 }
-                catch
+                else
                 {
-                    mysqlConn.Close();
-                    throw;
+                    throw new Exception("尚未连接数据库。");
                 }
-            }
-            else
-            {
-                throw new Exception("尚未连接数据库。");
             }
         }
 
+        /// <summary>
+        /// 通过用户ID获取用户昵称。
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         internal static string GetUserNicknameByID(uint id)
         {
-            MySqlConnection mysqlConn = GetNewConnection();
-            mysqlConn.Open();
-            if (mysqlConn.State == ConnectionState.Open)
+            using (MySqlConnection mysqlConn = GetNewConnection())
             {
-                try
+                mysqlConn.Open();
+                if (mysqlConn.State == ConnectionState.Open)
                 {
-                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM user_table WHERE id=" + id, mysqlConn);
-                    MySqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    try
                     {
-                        return reader.GetString("nickname");
+                        MySqlCommand cmd = new MySqlCommand("SELECT * FROM user_table WHERE id=" + id, mysqlConn);
+                        MySqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            return reader.GetString("nickname");
+                        }
+                        return null;
                     }
-                    return null;
+                    catch
+                    {
+                        mysqlConn.Close();
+                        throw;
+                    }
                 }
-                catch
+
+                else
                 {
-                    mysqlConn.Close();
-                    throw;
+                    throw new Exception("尚未连接数据库。");
                 }
             }
-            else
+        }
+
+        /// <summary>
+        /// 通过ID获取帖子。
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        internal static PostInfo GetPostByID(uint id)
+        {
+            using (MySqlConnection c = GetNewConnection())
             {
-                throw new Exception("尚未连接数据库。");
+                c.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from post_table where id=" + id + " limit 1", c);
+                MySqlDataReader r = cmd.ExecuteReader();
+                if (r.Read())
+                    return new PostInfo(r.GetUInt32("id"), r.GetUInt32("author_id"), r.GetDateTime("post_date"),
+                        r.GetUInt32("likes"), r.GetUInt32("views"), XDocument.Parse(r.GetString("content")));
+                else
+                    return null;
             }
         }
     }
