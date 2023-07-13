@@ -30,6 +30,7 @@
                 </Border>
             </HorizontalStackLayout>
             <StackLayout x:Name="stlTextLayouter" Margin="0,20,0,0"/>
+            <Label x:Name="lblViews" HorizontalTextAlignment="End" TextColor="{StaticResource Gray400}"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

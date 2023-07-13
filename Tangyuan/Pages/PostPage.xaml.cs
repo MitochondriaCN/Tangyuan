@@ -28,6 +28,7 @@ public partial class PostPage : ContentPage,IQueryAttributable
 		PostInfo pi = SQLDataHelper.GetPostByID(postID);
 		lblTitle.Text = pi.Content.Root.Descendants("Title").ToList()[0].Value.ToString();
 		lblDate.Text = pi.PostDate.Date.ToString();
+		lblViews.Text = "ÔÄ¶Á " + pi.Views.ToString();
 		TangyuanArranging(pi.Content);
 	}
 
