@@ -66,6 +66,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\70060680_p0_master1200.jpg" />
+	  <None Remove="Resources\Images\icon_send.png" />
 	  <None Remove="Resources\Images\test.jpg" />
 	  <None Remove="Resources\Images\test2.jpg" />
 	  <None Remove="Resources\Images\testimage.jpg" />
