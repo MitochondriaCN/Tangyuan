@@ -1,4 +1,5 @@
 using System.Xml.Linq;
+using Tangyuan.Controls;
 using Tangyuan.Data;
 
 namespace Tangyuan.Pages;
@@ -15,6 +16,8 @@ public partial class PostPage : ContentPage,IQueryAttributable
 	}
 
 	private uint postID;
+	private PostInfo postInfo;
+
 	List<ImageInfo> images=new List<ImageInfo>();
 	public PostPage()
 	{
@@ -25,18 +28,18 @@ public partial class PostPage : ContentPage,IQueryAttributable
 	public void ApplyQueryAttributes(IDictionary<string, object> query)
 	{
 		postID = uint.Parse(query["id"].ToString());
-		PostInfo pi = SQLDataHelper.GetPostByID(postID);
+		postInfo = SQLDataHelper.GetPostByID(postID);
 		
 		//排版基本信息
-		lblTitle.Text = pi.Content.Root.Descendants("Title").ToList()[0].Value.ToString();
-		lblDate.Text = pi.PostDate.Date.ToString();
-		lblViews.Text = "阅读 " + pi.Views.ToString();
+		lblTitle.Text = postInfo.Content.Root.Descendants("Title").ToList()[0].Value.ToString();
+		lblDate.Text = postInfo.PostDate.Date.ToString();
+		lblViews.Text = "阅读 " + postInfo.Views.ToString();
 
-		//排版正文
-		TangyuanArranging(pi.Content);
+        //排版正文
+        TangyuanArranging(postInfo.Content);
 
 		//排版评论
-		TangyuanCommentsArranging(SQLDataHelper.GetCommentsByPostID(postID));
+		TangyuanCommentsArranging(SQLDataHelper.GetFirstLevelCommentsByPostID(postID));
 	}
 
 	/// <summary>
@@ -74,9 +77,14 @@ public partial class PostPage : ContentPage,IQueryAttributable
 	/// <param name="comments"></param>
 	private void TangyuanCommentsArranging(List<CommentInfo> comments)
 	{
+		lblCommentsNumber.Text = "评论 · " + comments.Count.ToString();
 		if (comments.Count > 0)
 		{
-			
+			foreach (var v in comments)
+			{
+				stlCommentsLayouter.Children.Add(new CommentView(v));
+			}
 		}
+		
 	}
 }

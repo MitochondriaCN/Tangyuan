@@ -140,17 +140,17 @@ namespace Tangyuan.Data
         }
 
         /// <summary>
-        /// 根据帖子ID获取帖子所有评论。
+        /// 根据帖子ID获取帖子所有一级评论。
         /// </summary>
         /// <param name="postID">帖子ID</param>
         /// <returns></returns>
-        internal static List<CommentInfo> GetCommentsByPostID(uint postID)
+        internal static List<CommentInfo> GetFirstLevelCommentsByPostID(uint postID)
         {
             List<CommentInfo> comments = new List<CommentInfo>();
             using (MySqlConnection mc = GetNewConnection())
             {
                 mc.Open();
-                MySqlCommand cmd = new MySqlCommand("select * from comment_table where post_id=" + postID, mc);
+                MySqlCommand cmd = new MySqlCommand("select * from comment_table where post_id=" + postID + " and is_reply=0", mc);
                 MySqlDataReader r = cmd.ExecuteReader();
                 while (r.Read())
                 {
@@ -167,6 +167,27 @@ namespace Tangyuan.Data
                 return comments;
             }
 
+        }
+
+        internal static UserInfo GetUserInfoByID(uint userID)
+        {
+            using (MySqlConnection mc = GetNewConnection())
+            {
+                mc.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from user_table where id=" + userID + " limit 1", mc);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    return new UserInfo(
+                        reader.GetUInt32("id"),
+                        reader.GetString("nickname"),
+                        reader.GetString("phone_number"),
+                        reader.GetUInt32("school_id"),
+                        reader.GetString("avatar"),
+                        reader.GetUInt32("grade_code"));
+                }
+                return null;
+            }
         }
     }
 }
