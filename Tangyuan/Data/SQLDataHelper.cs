@@ -138,5 +138,35 @@ namespace Tangyuan.Data
                     return null;
             }
         }
+
+        /// <summary>
+        /// 根据帖子ID获取帖子所有评论。
+        /// </summary>
+        /// <param name="postID">帖子ID</param>
+        /// <returns></returns>
+        internal static List<CommentInfo> GetCommentsByPostID(uint postID)
+        {
+            List<CommentInfo> comments = new List<CommentInfo>();
+            using (MySqlConnection mc = GetNewConnection())
+            {
+                mc.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from comment_table where post_id=" + postID, mc);
+                MySqlDataReader r = cmd.ExecuteReader();
+                while (r.Read())
+                {
+                    comments.Add(new CommentInfo(
+                        r.GetUInt32("id"),
+                        r.GetUInt32("user_id"),
+                        r.GetUInt32("post_id"),
+                        r.GetDateTime("date"),
+                        r.GetUInt32("likes"),
+                        r.GetString("content"),
+                        r.GetBoolean("is_reply"),
+                        r.GetUInt32("reply_id")));
+                }
+                return comments;
+            }
+
+        }
     }
 }

@@ -26,10 +26,17 @@ public partial class PostPage : ContentPage,IQueryAttributable
 	{
 		postID = uint.Parse(query["id"].ToString());
 		PostInfo pi = SQLDataHelper.GetPostByID(postID);
+		
+		//排版基本信息
 		lblTitle.Text = pi.Content.Root.Descendants("Title").ToList()[0].Value.ToString();
 		lblDate.Text = pi.PostDate.Date.ToString();
 		lblViews.Text = "阅读 " + pi.Views.ToString();
+
+		//排版正文
 		TangyuanArranging(pi.Content);
+
+		//排版评论
+		TangyuanCommentsArranging(SQLDataHelper.GetCommentsByPostID(postID));
 	}
 
 	/// <summary>
@@ -58,6 +65,18 @@ public partial class PostPage : ContentPage,IQueryAttributable
 					LineHeight=1.2
 				});
 			}
+		}
+	}
+
+	/// <summary>
+	/// 糖原评论排版引擎。
+	/// </summary>
+	/// <param name="comments"></param>
+	private void TangyuanCommentsArranging(List<CommentInfo> comments)
+	{
+		if (comments.Count > 0)
+		{
+			
 		}
 	}
 }
