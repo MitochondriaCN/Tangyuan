@@ -97,6 +97,9 @@
 	  <MauiXaml Update="Pages\IndexPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\LogInSignUpPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\MarketPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -196,7 +196,7 @@ namespace Tangyuan.Data
             using (MySqlConnection mc = GetNewConnection())
             {
                 mc.Open();
-                MySqlCommand cmd = new MySqlCommand("select * from user_table where phone_numebr=" + phoneNumber + " limit 1", mc);
+                MySqlCommand cmd = new MySqlCommand("select * from user_table where phone_number=" + phoneNumber + " limit 1", mc);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {

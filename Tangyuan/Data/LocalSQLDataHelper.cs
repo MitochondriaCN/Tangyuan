@@ -16,25 +16,26 @@ namespace Tangyuan.Data
             SQLiteOpenFlags.SharedCache;
         private static string databasePath = Path.Combine(FileSystem.AppDataDirectory, databaseName);
 
-        private static SQLiteAsyncConnection conn;
+        private static SQLiteConnection conn;
 
         internal class LocalLoginInfo
         {
-            internal string LoginUserPhoneNumber { get; private set; }
-            internal string LoginUserPassword { get; private set; }
+            public string LoginUserPhoneNumber { get; set; }
+            public string LoginUserPassword { get; set; }
         }
 
         static LocalSQLDataHelper()
         {
-            conn = new SQLiteAsyncConnection(databasePath, flags);
-            conn.CreateTableAsync(typeof(LocalLoginInfo));
+            conn = new SQLiteConnection(databasePath, flags);
+            conn.CreateTable<LocalLoginInfo>();
+            conn.Insert(new LocalLoginInfo() { LoginUserPassword = "Fuyuxuan372819", LoginUserPhoneNumber = "18993791251" });
         }
 
-        internal static async Task<LocalLoginInfo> GetLoginInfoAsync()
+        internal static LocalLoginInfo GetLoginInfo()
         {
             try
             {
-                return await conn.Table<LocalLoginInfo>().FirstAsync();
+                return conn.Table<LocalLoginInfo>().First();
             }
             catch
             {

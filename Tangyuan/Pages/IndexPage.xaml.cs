@@ -28,7 +28,7 @@ public partial class IndexPage : ContentPage
 		#endregion
 
 		#region µÇÂ¼
-		LocalSQLDataHelper.LocalLoginInfo logininfo = LocalSQLDataHelper.GetLoginInfoAsync().Result;
+		LocalSQLDataHelper.LocalLoginInfo logininfo = LocalSQLDataHelper.GetLoginInfo();
 		if (logininfo != null)
 		{
 			if (LoginStatusManager.TryLogIn(logininfo.LoginUserPhoneNumber, logininfo.LoginUserPassword))
