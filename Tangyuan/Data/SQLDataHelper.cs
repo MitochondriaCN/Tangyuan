@@ -180,6 +180,29 @@ namespace Tangyuan.Data
                 {
                     return new UserInfo(
                         reader.GetUInt32("id"),
+                        reader.GetString("passwd"),
+                        reader.GetString("nickname"),
+                        reader.GetString("phone_number"),
+                        reader.GetUInt32("school_id"),
+                        reader.GetString("avatar"),
+                        reader.GetUInt32("grade_code"));
+                }
+                return null;
+            }
+        }
+
+        internal static UserInfo GetUserInfoByPhoneNumber(string phoneNumber)
+        {
+            using (MySqlConnection mc = GetNewConnection())
+            {
+                mc.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from user_table where phone_numebr=" + phoneNumber + " limit 1", mc);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    return new UserInfo(
+                        reader.GetUInt32("id"),
+                        reader.GetString("passwd"),
                         reader.GetString("nickname"),
                         reader.GetString("phone_number"),
                         reader.GetUInt32("school_id"),

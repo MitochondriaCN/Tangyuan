@@ -20,7 +20,7 @@ namespace Tangyuan.Data
 
         internal class LocalLoginInfo
         {
-            internal uint LoginUserID { get; private set; }
+            internal string LoginUserPhoneNumber { get; private set; }
             internal string LoginUserPassword { get; private set; }
         }
 
@@ -32,7 +32,14 @@ namespace Tangyuan.Data
 
         internal static async Task<LocalLoginInfo> GetLoginInfoAsync()
         {
-            return await conn.Table<LocalLoginInfo>().FirstAsync();
+            try
+            {
+                return await conn.Table<LocalLoginInfo>().FirstAsync();
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

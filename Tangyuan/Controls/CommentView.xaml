@@ -28,7 +28,8 @@
                 <Label x:Name="lblUserName" Text="线粒体XianlitiCN" VerticalTextAlignment="Center"/>
                 <Border x:Name="bodGradeContainer" BackgroundColor="{StaticResource Forthly}" Margin="3,0,0,0"
                         StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0">
-                    <Label x:Name="lblGrade" TextColor="White" Margin="3,2,3,2" VerticalTextAlignment="Center"/>
+                    <Label x:Name="lblGrade" FontSize="10" TextColor="White" Margin="3,2,3,2" 
+                           VerticalTextAlignment="Center" FontFamily="HiraginoW6"/>
                 </Border>
             </HorizontalStackLayout>
 

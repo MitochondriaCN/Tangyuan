@@ -14,9 +14,9 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <HorizontalStackLayout FlowDirection="LeftToRight">
-                <ImageButton Source="https://icons.veryicon.com/png/o/miscellaneous/xinjiang-tourism/user-169.png"
+                <ImageButton x:Name="imbUserAvatar" Source="https://icons.veryicon.com/png/o/miscellaneous/xinjiang-tourism/user-169.png"
                              HeightRequest="30" WidthRequest="30"/>
-                <Label Margin="5" VerticalTextAlignment="Center" TextColor="Black">线粒体CN</Label>
+                <Label x:Name="lblUserNickname" Margin="5" VerticalTextAlignment="Center" TextColor="Black">线粒体CN</Label>
             </HorizontalStackLayout>
             <!--选项卡占位-->
 

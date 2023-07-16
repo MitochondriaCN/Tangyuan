@@ -29,12 +29,13 @@
                 </CarouselView>
                 <IndicatorView x:Name="idvCurrentImage" IndicatorColor="{StaticResource Secondary}" SelectedIndicatorColor="{StaticResource Gray400}"
                            HorizontalOptions="Center"/>
-                <Label x:Name="lblTitle" FontAttributes="Bold" FontSize="Title"  MaxLines="3"/>
+                <Label x:Name="lblTitle" FontFamily="HiraginoW6" FontSize="Title"  MaxLines="3"/>
                 <HorizontalStackLayout Margin="0,6,0,0" VerticalOptions="Center">
                     <Label x:Name="lblDate" FontSize="Micro" TextColor="{StaticResource Gray400}" VerticalTextAlignment="Center"/>
                     <Label x:Name="lblLocation" Margin="12,0,0,0" FontSize="Micro" TextColor="{StaticResource Gray400}" VerticalTextAlignment="Center" Text="发布于甘肃"/>
                     <Border StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0" BackgroundColor="CadetBlue" Margin="12,0,0,0" VerticalOptions="Center">
-                        <Label x:Name="lblSchool" FontSize="Micro" Margin="3" TextColor="White" VerticalOptions="Center" Text="嘉峪关市酒钢三中"/>
+                        <Label x:Name="lblSchool" FontSize="Micro" Margin="3" TextColor="White" 
+                               VerticalOptions="Center" Text="嘉峪关市酒钢三中" FontFamily="HiraginoW6"/>
                     </Border>
                 </HorizontalStackLayout>
                 <!--正文-->

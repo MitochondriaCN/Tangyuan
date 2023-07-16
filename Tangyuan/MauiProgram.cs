@@ -9,7 +9,8 @@ public static class MauiProgram
 			.UseMauiApp<App>()
 			.ConfigureFonts(fonts =>
 			{
-				fonts.AddFont("NotoSansSC-Regular.otf", "OpenSansRegular");
+				fonts.AddFont("HiraginoSansGB-W3.ttf", "OpenSansRegular");
+				fonts.AddFont("HiraginoSansGB-W6.ttf", "HiraginoW6");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 

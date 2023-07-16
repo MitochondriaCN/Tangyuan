@@ -64,8 +64,8 @@ public partial class PostPage : ContentPage,IQueryAttributable
 				{
 					LineBreakMode = LineBreakMode.WordWrap,
 					Text = v.Value.ToString(),
-					Margin = new Thickness(0, 0, 0, 16),
-					LineHeight=1.2
+					Margin = new Thickness(0, 0, 0, 10),
+					LineHeight=1.4
 				});
 			}
 		}
