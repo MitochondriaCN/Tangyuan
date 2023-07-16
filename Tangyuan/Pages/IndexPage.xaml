@@ -28,9 +28,9 @@
 
             <!---->
             <HorizontalStackLayout FlowDirection="RightToLeft" Grid.Column="2">
-                <ImageButton Source="https://icons.veryicon.com/png/o/internet--web/lobomeeting_web_designsystem/message-16.png"
+                <ImageButton x:Name="btnNewPost" Source="https://icons.veryicon.com/png/o/miscellaneous/smile-preference/add-255.png"
                              HeightRequest="24" WidthRequest="24" Margin="5"
-                             CornerRadius="12"/>
+                             CornerRadius="12" Clicked="btnNewPost_Clicked"/>
                 <ImageButton Source="https://icons.veryicon.com/png/o/miscellaneous/data-product-icon-library/search-663.png"
                              HeightRequest="24" WidthRequest="24" Margin="5"
                              CornerRadius="12"/>

@@ -32,7 +32,7 @@ public partial class PostPage : ContentPage,IQueryAttributable
 		
 		//排版基本信息
 		lblTitle.Text = postInfo.Content.Root.Descendants("Title").ToList()[0].Value.ToString();
-		lblDate.Text = postInfo.PostDate.Date.ToString();
+		lblDate.Text = postInfo.PostDate.ToString();
 		lblViews.Text = "阅读 " + postInfo.Views.ToString();
 
         //排版正文
@@ -51,10 +51,13 @@ public partial class PostPage : ContentPage,IQueryAttributable
 		//帖子类型
 		if (tangyuanPost.Root.Attribute("Type").Value == "Post")
 		{
-			//排版图片展示框
-			foreach (var v in tangyuanPost.Root.Descendants("ImageGallery").ToList()[0].Descendants("Image"))
+			if (tangyuanPost.Root.Descendants("ImageGallery").ToList().Count != 0)
 			{
-				images.Add(new ImageInfo(v.Value.ToString()));
+				//排版图片展示框
+				foreach (var v in tangyuanPost.Root.Descendants("ImageGallery").ToList()[0].Descendants("Image"))
+				{
+					images.Add(new ImageInfo(v.Value.ToString()));
+				}
 			}
 
 			//排版正文

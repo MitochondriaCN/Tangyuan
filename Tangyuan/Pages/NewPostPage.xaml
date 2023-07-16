@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tangyuan.Pages.NewPostPage"
+             Title="发帖"
+             Shell.BackgroundColor="White"
+             Shell.ForegroundColor="{StaticResource Prestige}"
+             Shell.TitleColor="{StaticResource Prestige}">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="true" IsVisible="true"/>
+    </Shell.BackButtonBehavior>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Entry x:Name="entTitle" Placeholder="标题" PlaceholderColor="{StaticResource Gray400}" FontFamily="HiraginoW6" FontSize="Large"
+               TextColor="{StaticResource Prestige}"/>
+        
+        <BoxView Grid.Row="1" Color="{StaticResource Secondary}" HeightRequest="1" HorizontalOptions="Fill"/>
+
+        <ScrollView Grid.Row="2">
+            <Editor x:Name="edtContent" AutoSize="TextChanges" Placeholder="键入帖子内容" PlaceholderColor="{StaticResource Gray400}"
+                    TextColor="{StaticResource Prestige}" MaxLength="10240" TextChanged="edtContent_TextChanged"/>
+        </ScrollView>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="lblRemainingTextLength" TextColor="{StaticResource Gray400}" VerticalTextAlignment="Center" Text="剩余 10240"/>
+            <Button Grid.Column="1" x:Name="btnSend" Text="发帖" BackgroundColor="{StaticResource Primary}" TextColor="White" FontFamily="HiraginoW6"
+                    CornerRadius="20" Clicked="btnSend_Clicked"/>
+        </Grid>
+        
+    </Grid>
+</ContentPage>

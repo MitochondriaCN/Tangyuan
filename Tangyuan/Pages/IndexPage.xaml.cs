@@ -52,4 +52,9 @@ public partial class IndexPage : ContentPage
 			Shell.Current.GoToAsync("/login");
 		}
 	}
+
+	private void btnNewPost_Clicked(object sender, EventArgs e)
+	{
+		Shell.Current.GoToAsync("/newpost");
+	}
 }
