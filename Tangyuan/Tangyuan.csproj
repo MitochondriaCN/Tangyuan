@@ -65,6 +65,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\NotoSansSC-Regular.otf" />
 	  <None Remove="Resources\Images\70060680_p0_master1200.jpg" />
 	  <None Remove="Resources\Images\icon_send.png" />
 	  <None Remove="Resources\Images\test.jpg" />
@@ -74,6 +75,8 @@
 
 	<ItemGroup>
 	  <PackageReference Include="MySqlConnector" Version="2.3.0-beta.2" />
+	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+	  <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.5" />
 	</ItemGroup>
 
 	<ItemGroup>
