@@ -66,6 +66,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\NotoSansSC-Regular.otf" />
+	  <None Remove="Resources\Fonts\NotoSerifSC-Regular.otf" />
 	  <None Remove="Resources\Images\70060680_p0_master1200.jpg" />
 	  <None Remove="Resources\Images\icon_send.png" />
 	  <None Remove="Resources\Images\test.jpg" />
