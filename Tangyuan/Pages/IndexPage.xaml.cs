@@ -28,19 +28,11 @@ public partial class IndexPage : ContentPage
 		#endregion
 
 		#region µÇÂ¼
-		LocalSQLDataHelper.LocalLoginInfo logininfo = LocalSQLDataHelper.GetLoginInfo();
-		if (logininfo != null)
+		if (LoginStatusManager.TryLogIn())
 		{
-			if (LoginStatusManager.TryLogIn(logininfo.LoginUserPhoneNumber, logininfo.LoginUserPassword))
-			{
-				UserInfo ui = SQLDataHelper.GetUserInfoByPhoneNumber(logininfo.LoginUserPhoneNumber);
-				imbUserAvatar.Source = ImageSource.FromUri(new Uri(ui.Avatar));
-				lblUserNickname.Text = ui.Nickname;
-			}
-			else
-			{
-				lblUserNickname.Text = "Î´µÇÂ¼";
-			}
+			UserInfo ui = SQLDataHelper.GetUserInfoByID(LoginStatusManager.LoggedInUserID);
+			imbUserAvatar.Source = ImageSource.FromUri(new Uri(ui.Avatar));
+			lblUserNickname.Text = ui.Nickname;
 		}
 		else
 		{
@@ -48,4 +40,16 @@ public partial class IndexPage : ContentPage
 		}
         #endregion
     }
+
+	private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+	{
+		if (LoginStatusManager.IsLoggedIn)
+		{
+            Shell.Current.GoToAsync("/login");
+        }
+		else
+		{
+			Shell.Current.GoToAsync("/login");
+		}
+	}
 }

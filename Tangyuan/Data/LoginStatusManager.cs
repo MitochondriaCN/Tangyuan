@@ -18,7 +18,35 @@ namespace Tangyuan.Data
             {
                 IsLoggedIn = true;
                 LoggedInUserID = ui.UserID;
+                LocalSQLDataHelper.UpdateLoginInfo(new LocalSQLDataHelper.LocalLoginInfo()
+                {
+                    LoginUserPassword = passwd,
+                    LoginUserPhoneNumber = phoneNumber
+                });
                 return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        internal static bool TryLogIn()
+        {
+            LocalSQLDataHelper.LocalLoginInfo logininfo = LocalSQLDataHelper.GetLoginInfo();
+            if (logininfo != null)
+            {
+                if (LoginStatusManager.TryLogIn(logininfo.LoginUserPhoneNumber, logininfo.LoginUserPassword))
+                {
+                    UserInfo ui = SQLDataHelper.GetUserInfoByPhoneNumber(logininfo.LoginUserPhoneNumber);
+                    IsLoggedIn = true;
+                    LoggedInUserID = ui.UserID;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {

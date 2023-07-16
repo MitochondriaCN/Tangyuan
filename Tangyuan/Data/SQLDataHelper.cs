@@ -21,7 +21,6 @@ namespace Tangyuan.Data
         /// <summary>
         /// 获取一个新的数据库连接对象。
         /// </summary>
-        /// <param name="connStr"></param>
         internal static MySqlConnection GetNewConnection()
         {
             MySqlConnectionStringBuilder sb = new MySqlConnectionStringBuilder();
@@ -38,7 +37,6 @@ namespace Tangyuan.Data
         /// <summary>
         /// 发新帖
         /// </summary>
-        /// <param name="query"></param>
         internal static void NewPost(uint authorID, XmlDocument content)
         {
             //TODO
@@ -60,7 +58,7 @@ namespace Tangyuan.Data
                     List<PostInfo> posts = new List<PostInfo>();
                     try
                     {
-                        MySqlCommand cmd = new MySqlCommand("SELECT * FROM post_table order by post_date desc", mysqlConn);
+                        MySqlCommand cmd = new MySqlCommand("SELECT * FROM post_table order by post_date desc limit " + number, mysqlConn);
                         MySqlDataReader data = cmd.ExecuteReader();
                         while (data.Read())
                         {

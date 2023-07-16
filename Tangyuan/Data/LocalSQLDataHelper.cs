@@ -28,7 +28,6 @@ namespace Tangyuan.Data
         {
             conn = new SQLiteConnection(databasePath, flags);
             conn.CreateTable<LocalLoginInfo>();
-            conn.Insert(new LocalLoginInfo() { LoginUserPassword = "Fuyuxuan372819", LoginUserPhoneNumber = "18993791251" });
         }
 
         internal static LocalLoginInfo GetLoginInfo()
@@ -41,6 +40,12 @@ namespace Tangyuan.Data
             {
                 return null;
             }
+        }
+
+        internal static void UpdateLoginInfo(LocalLoginInfo info)
+        {
+            conn.DeleteAll<LocalLoginInfo>();
+            conn.Insert(info);
         }
     }
 }
