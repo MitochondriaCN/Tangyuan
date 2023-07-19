@@ -12,10 +12,10 @@ namespace Tangyuan.Data
 {
     internal static class SQLDataHelper
     {
-        private const string host = "81.68.124.30";
+        private const string host = "tangyuan-maindb.mysql.database.azure.com";
         private const uint port = 3306;
         private const string database = "tangyuan";
-        private const string username = "tangyuan";
+        private const string username = "xianliticn";
         private const string passwd = "Fuyuxuan372819";
 
         /// <summary>
@@ -59,12 +59,12 @@ namespace Tangyuan.Data
         }
 
         /// <summary>
-        /// 获取最近帖子。
+        /// 获取三天内随机帖子。
         /// </summary>
-        /// <param name="number">指定获取帖子数</param>
+        /// <param name="maxNumber">指定获取最大帖子数</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        internal static List<PostInfo> GetRecentPosts(uint number)
+        internal static List<PostInfo> GetRecentPosts(uint maxNumber)
         {
             using (MySqlConnection mysqlConn = GetNewConnection())
             {
@@ -74,12 +74,19 @@ namespace Tangyuan.Data
                     List<PostInfo> posts = new List<PostInfo>();
                     try
                     {
-                        MySqlCommand cmd = new MySqlCommand("SELECT * FROM post_table order by post_date desc limit " + number, mysqlConn);
+                        MySqlCommand cmd = new MySqlCommand("SELECT * FROM post_table where post_date>DATE_ADD(NOW(),INTERVAL -3 DAY)", mysqlConn);
                         MySqlDataReader data = cmd.ExecuteReader();
                         while (data.Read())
                         {
-                            posts.Add(new PostInfo(data.GetUInt32("id"), data.GetUInt32("author_id"), data.GetDateTime("post_date"), data.GetUInt32("likes"),
-                                data.GetUInt32("views"), XDocument.Parse(data.GetString("content"))));
+                            if (new Random().Next(0, 1) == 1)
+                            {
+                                posts.Add(new PostInfo(data.GetUInt32("id"), data.GetUInt32("author_id"), data.GetDateTime("post_date"), data.GetUInt32("likes"),
+                                    data.GetUInt32("views"), XDocument.Parse(data.GetString("content"))));
+                            }
+                        }
+                        if (posts.Count > maxNumber)
+                        {
+                            posts.RemoveRange(0, (int)(posts.Count - maxNumber));
                         }
                         return posts;
                     }

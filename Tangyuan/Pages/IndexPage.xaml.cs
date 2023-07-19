@@ -11,7 +11,7 @@ public partial class IndexPage : ContentPage
 		InitializeComponent();
 
         #region 获取最近帖
-        List<PostInfo> posts = SQLDataHelper.GetRecentPosts(5);
+        List<PostInfo> posts = SQLDataHelper.GetRecentPosts(3);
 		uint signal = 1;
 		foreach (var v in posts)
 		{
@@ -56,5 +56,10 @@ public partial class IndexPage : ContentPage
 	private void btnNewPost_Clicked(object sender, EventArgs e)
 	{
 		Shell.Current.GoToAsync("/newpost");
+	}
+
+	private void RefreshView_Refreshing(object sender, EventArgs e)
+	{
+
 	}
 }
