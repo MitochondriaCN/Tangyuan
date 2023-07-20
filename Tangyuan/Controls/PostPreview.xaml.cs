@@ -4,7 +4,7 @@ namespace Tangyuan.Controls;
 
 public partial class PostPreview : ContentView
 {
-	private PostInfo postInfo;
+	internal PostInfo Post;
 
 	public PostPreview(PostInfo post)
 	{
@@ -17,11 +17,11 @@ public partial class PostPreview : ContentView
 		lblDesc.Text = post.Content.Root.Descendants("P").ToList()[0].Value;
 		lblInfo.Text = SQLDataHelper.GetUserNicknameByID(post.AuthorID);
 
-		postInfo=post;
+		Post=post;
     }
 
 	private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
 	{
-		Shell.Current.GoToAsync("/post?id=" + postInfo.PostID);
+		Shell.Current.GoToAsync("/post?id=" + Post.PostID);
 	}
 }

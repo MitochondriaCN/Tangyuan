@@ -9,22 +9,12 @@ public partial class IndexPage : ContentPage
 	public IndexPage()
 	{
 		InitializeComponent();
+        //傻逼东西Bug真他妈的多，RefreshView作为页面根元素又他妈不填充页面的全高度，只填充他妈的三分之二，
+        //无奈之下只好加一个Grid作为根元素，然后让RefreshView去匹配它的高度，微软真你妈的傻逼
+        rfvMainScroll.HeightRequest = this.Content.Height;
 
         #region 获取最近帖
-        List<PostInfo> posts = SQLDataHelper.GetRecentPosts(3);
-		uint signal = 1;
-		foreach (var v in posts)
-		{
-			if (signal % 2 == 0)
-			{
-				stlPostsLeft.Children.Add(new PostPreview(v));
-            }
-			else
-			{
-				stlPostsRight.Children.Add(new PostPreview(v));
-            }
-			signal++;
-		}
+        RefreshPosts();
 		#endregion
 
 		#region 登录
@@ -60,6 +50,72 @@ public partial class IndexPage : ContentPage
 
 	private void RefreshView_Refreshing(object sender, EventArgs e)
 	{
+        RefreshPosts();
+        rfvMainScroll.IsRefreshing = false;
+    }
 
-	}
+    /// <summary>
+    /// 刷新推荐帖。
+    /// </summary>
+	private void RefreshPosts()
+	{
+        List<PostInfo> posts = SQLDataHelper.GetRecentPosts(5);
+        List<PostInfo> final = new List<PostInfo>();
+        foreach (var v in posts)
+        {
+            bool isExistedInLeft = false;
+            foreach (var va in stlPostsLeft.Children)
+            {
+                if (v.PostID == (va as PostPreview).Post.PostID)
+                {
+                    isExistedInLeft = true;
+                }
+            }
+            bool isExistedInRight = false;
+            foreach (var vb in stlPostsRight.Children)
+            {
+                if (v.PostID == (vb as PostPreview).Post.PostID)
+                {
+                    isExistedInRight = true;
+                }
+            }
+            if (!(isExistedInLeft || isExistedInRight))
+            {
+                final.Add(v);
+            }
+        }
+
+        if (final.Count > 0)
+        {
+            //如果只有一个帖，就哪边少放哪边
+            if (final.Count == 1)
+            {
+                if (stlPostsLeft.Children.Count > stlPostsRight.Children.Count)
+                {
+                    stlPostsRight.Children.Insert(0, new PostPreview(final[0]));
+                }
+                else
+                {
+                    stlPostsLeft.Children.Insert(0, new PostPreview(final[0]));
+                }
+            }
+            //如果大于一，就轮流放
+            else
+            {
+                uint signal = 1;
+                foreach (var v in final)
+                {
+                    if (signal % 2 == 0)
+                    {
+                        stlPostsLeft.Children.Insert(0, new PostPreview(v));
+                    }
+                    else
+                    {
+                        stlPostsRight.Children.Insert(0, new PostPreview(v));
+                    }
+                    signal++;
+                }
+            }
+        }
+    }
 }

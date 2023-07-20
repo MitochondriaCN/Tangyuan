@@ -76,9 +76,10 @@ namespace Tangyuan.Data
                     {
                         MySqlCommand cmd = new MySqlCommand("SELECT * FROM post_table where post_date>DATE_ADD(NOW(),INTERVAL -3 DAY)", mysqlConn);
                         MySqlDataReader data = cmd.ExecuteReader();
+                        Random r = new Random();
                         while (data.Read())
                         {
-                            if (new Random().Next(0, 1) == 1)
+                            if (r.Next(0, 2) == 1)
                             {
                                 posts.Add(new PostInfo(data.GetUInt32("id"), data.GetUInt32("author_id"), data.GetDateTime("post_date"), data.GetUInt32("likes"),
                                     data.GetUInt32("views"), XDocument.Parse(data.GetString("content"))));
