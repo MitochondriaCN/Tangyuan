@@ -14,5 +14,8 @@
 		<intent>
 			<action android:name="android.media.action.PICK_IMAGES" />
 		</intent>
+		<intent>
+			<action android:name="android.media.action.IMAGE_CAPTURE" />
+		</intent>
 	</queries>
 </manifest>

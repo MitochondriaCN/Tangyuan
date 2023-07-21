@@ -60,18 +60,18 @@ public partial class NewPostPage : ContentPage
 		}
 	}
 
-	private void btnPhoto_Clicked(object sender, EventArgs e)
+	private async void btnPhoto_Clicked(object sender, EventArgs e)
 	{
-		Task<FileResult> t = MediaPicker.Default.PickPhotoAsync();
-		FileResult photo = t.Result;
+		FileResult photo = await MediaPicker.Default.PickPhotoAsync();
 		if (photo != null)
 		{
 			hstImageBar.Add(new Image
 			{
 				Source = photo.FullPath,
 				Aspect = Aspect.AspectFill,
-				HeightRequest = 50,
-				WidthRequest = 50
+				HeightRequest = 80,
+				WidthRequest = 80,
+				Margin = new Thickness(0, 0, 5, 0)
 			});
 		}
 	}

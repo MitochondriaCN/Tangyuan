@@ -25,7 +25,7 @@
             </Grid.RowDefinitions>
 
             <HorizontalStackLayout>
-                <Label x:Name="lblUserName" Text="线粒体XianlitiCN" VerticalTextAlignment="Center"/>
+                <Label x:Name="lblUserName" Text="线粒体XianlitiCN" TextColor="{StaticResource Prestige}" VerticalTextAlignment="Center"/>
                 <Border x:Name="bodGradeContainer" BackgroundColor="{StaticResource Forthly}" Margin="3,0,0,0"
                         StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0">
                     <Label x:Name="lblGrade" FontSize="10" TextColor="White" Margin="3,2,3,2" 
@@ -44,6 +44,6 @@
         </HorizontalStackLayout>
 
         <Label Grid.Column="1" Grid.Row="1" x:Name="lblContent" TextColor="{StaticResource Prestige}" LineBreakMode="WordWrap"
-               Margin="5,5,0,0"/>
+               Margin="5,0,0,0"/>
     </Grid>
 </ContentView>

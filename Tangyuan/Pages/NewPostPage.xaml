@@ -21,11 +21,13 @@
         <Entry x:Name="entTitle" Placeholder="标题" PlaceholderColor="{StaticResource Gray400}" FontFamily="HiraginoW6" FontSize="Large"
                TextColor="{StaticResource Prestige}"/>
         
-        <BoxView Grid.Row="1" Color="{StaticResource Secondary}" HeightRequest="1" HorizontalOptions="Fill"/>
+        <BoxView Grid.Row="1" Color="{StaticResource Gray100}" HeightRequest="1" HorizontalOptions="Fill"/>
 
-        <ScrollView Grid.Row="2">
+        <ScrollView Grid.Row="2" Margin="0,10,0,0">
             <StackLayout>
-                <HorizontalStackLayout x:Name="hstImageBar"/>
+                <ScrollView VerticalScrollBarVisibility="Never" Orientation="Horizontal">
+                    <HorizontalStackLayout x:Name="hstImageBar"/>
+                </ScrollView>
                 <Editor x:Name="edtContent" AutoSize="TextChanges" Placeholder="键入帖子内容" PlaceholderColor="{StaticResource Gray400}"
                     TextColor="{StaticResource Prestige}" MaxLength="10240" TextChanged="edtContent_TextChanged"/>
             </StackLayout>
