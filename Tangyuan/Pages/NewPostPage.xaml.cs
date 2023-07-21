@@ -1,3 +1,4 @@
+using Microsoft.Maui.Media;
 using System.Xml.Linq;
 using Tangyuan.Data;
 
@@ -56,6 +57,22 @@ public partial class NewPostPage : ContentPage
 		else
 		{
 			return null;
+		}
+	}
+
+	private void btnPhoto_Clicked(object sender, EventArgs e)
+	{
+		Task<FileResult> t = MediaPicker.Default.PickPhotoAsync();
+		FileResult photo = t.Result;
+		if (photo != null)
+		{
+			hstImageBar.Add(new Image
+			{
+				Source = photo.FullPath,
+				Aspect = Aspect.AspectFill,
+				HeightRequest = 50,
+				WidthRequest = 50
+			});
 		}
 	}
 }

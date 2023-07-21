@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Tangyuan.Controls.PostPreview">
+             x:Class="Tangyuan.Controls.PostPreview" Margin="0,0,0,6">
     <ContentView.GestureRecognizers>
         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
     </ContentView.GestureRecognizers>
-    <Border Stroke="{StaticResource SecondaryBrush}" StrokeThickness="2"
+    <Border Stroke="{StaticResource SecondaryBrush}" StrokeThickness="0"
             StrokeShape="RoundRectangle 10,10,10,10" HorizontalOptions="Center" BackgroundColor="White">
         <Grid x:Name="grdMain">
             <Grid.RowDefinitions>
@@ -21,9 +21,10 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Label x:Name="lblTitle" FontSize="Medium" FontFamily="HiraginoW6" LineBreakMode="TailTruncation"/>
-                <Label x:Name="lblDesc" Grid.Row="1" MaxLines="2"/>
+                <Label x:Name="lblDesc" Grid.Row="1" MaxLines="2" LineHeight="1.2" Margin="0,3,0,0"/>
             </Grid>
-            <Label Margin="8,5,10,8" x:Name="lblInfo" Grid.Row="2" FontSize="Micro" HorizontalTextAlignment="End" VerticalTextAlignment="End" TextColor="Gray"/>
+            <Label Margin="8,5,10,8" x:Name="lblInfo" Grid.Row="2" FontSize="Micro" HorizontalTextAlignment="End" 
+                   VerticalTextAlignment="End" TextColor="{StaticResource Gray400}"/>
 
         </Grid>
     </Border>

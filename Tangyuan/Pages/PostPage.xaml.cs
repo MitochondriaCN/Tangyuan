@@ -9,10 +9,10 @@ public partial class PostPage : ContentPage,IQueryAttributable
 	/// <summary>
 	/// 图片对象，用于CarouselView的数据绑定。
 	/// </summary>
-	internal struct ImageInfo
+	public class ImageInfo
 	{
-		internal string ImageUrl { get; private set; }
-		internal ImageInfo(string imageUrl) { ImageUrl = imageUrl; }
+		public string ImageUrl { get; set; }
+		public ImageInfo(string imageUrl) { ImageUrl = imageUrl; }
 	}
 
 	private uint postID;
@@ -29,6 +29,8 @@ public partial class PostPage : ContentPage,IQueryAttributable
 	{
 		postID = uint.Parse(query["id"].ToString());
 		postInfo = SQLDataHelper.GetPostByID(postID);
+
+		crvImages.IndicatorView = idvCurrentImage;
 		
 		//排版基本信息
 		lblTitle.Text = postInfo.Content.Root.Descendants("Title").ToList()[0].Value.ToString();
@@ -58,6 +60,11 @@ public partial class PostPage : ContentPage,IQueryAttributable
 				{
 					images.Add(new ImageInfo(v.Value.ToString()));
 				}
+				crvImages.ItemsSource = images;
+				if (images.Count == 1)
+				{
+					crvImages.IsSwipeEnabled = false;
+				}
 			}
 
 			//排版正文
@@ -67,7 +74,7 @@ public partial class PostPage : ContentPage,IQueryAttributable
 				{
 					LineBreakMode = LineBreakMode.WordWrap,
 					Text = v.Value.ToString(),
-					Margin = new Thickness(0, 0, 0, 10),
+					Margin = new Thickness(10, 0, 10, 10),
 					LineHeight=1.4
 				});
 			}

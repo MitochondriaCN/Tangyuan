@@ -11,12 +11,12 @@ public partial class LogInSignUpPage : ContentPage
 
 	private async void btnNext_Clicked(object sender, EventArgs e)
 	{
-		if (entPhoneNumber.Text.Length == 11)
+		if (entPhoneNumber.Text != null && entPhoneNumber.Text.Length == 11)
 		{
 			entPasswd.IsVisible = true;
 			btnNext.Text = "µÇÂ¼";
 		}
-		if (entPasswd.Text.Length > 6)
+		if (entPasswd.Text != null && entPasswd.Text.Length > 6)
 		{
 			if (LoginStatusManager.TryLogIn(entPhoneNumber.Text, entPasswd.Text))
 			{

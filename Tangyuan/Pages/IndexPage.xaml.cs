@@ -6,16 +6,12 @@ namespace Tangyuan.Pages;
 
 public partial class IndexPage : ContentPage
 {
+
 	public IndexPage()
 	{
 		InitializeComponent();
-        //傻逼东西Bug真他妈的多，RefreshView作为页面根元素又他妈不填充页面的全高度，只填充他妈的三分之二，
-        //无奈之下只好加一个Grid作为根元素，然后让RefreshView去匹配它的高度，微软真你妈的傻逼
-        rfvMainScroll.HeightRequest = this.Content.Height;
 
-        #region 获取最近帖
         RefreshPosts();
-		#endregion
 
 		#region 登录
 		if (LoginStatusManager.TryLogIn())

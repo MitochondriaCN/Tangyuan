@@ -3,34 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Tangyuan.Pages.PostPage"
              Title="帖子"
-             Shell.BackgroundColor="White"
+             Shell.BackgroundColor="{StaticResource Secondary}"
              Shell.ForegroundColor="{StaticResource Prestige}"
              Shell.TitleColor="{StaticResource Prestige}">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="true" IsVisible="true"/>
     </Shell.BackButtonBehavior>
 
-    <Grid Margin="10,0,10,0">
+    <Grid BackgroundColor="{StaticResource Secondary}">
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
         <!--主内容区-->
         <ScrollView Grid.Row="0">
             <StackLayout>
-                <!--头部-->
-                <CarouselView x:Name="crvImages" IndicatorView="{x:Reference idvCurrentImage}" ItemsSource="{Binding images}">
+                <CarouselView x:Name="crvImages">
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
-                            <Image Aspect="AspectFill" Source="{Binding ImageUrl}"/>
+                            <Image Aspect="AspectFill" Source="{Binding ImageUrl}" HeightRequest="200"/>
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
-                <IndicatorView x:Name="idvCurrentImage" IndicatorColor="{StaticResource Secondary}" SelectedIndicatorColor="{StaticResource Gray400}"
-                           HorizontalOptions="Center"/>
-                <Label x:Name="lblTitle" FontFamily="HiraginoW6" FontSize="Title"  MaxLines="3"/>
-                <HorizontalStackLayout Margin="0,6,0,0" VerticalOptions="Center">
+                <IndicatorView x:Name="idvCurrentImage" IndicatorColor="{StaticResource Gray200}" SelectedIndicatorColor="{StaticResource Gray300}"
+                           HorizontalOptions="Center" Margin="10" HideSingle="False"/>
+                
+                <Label x:Name="lblTitle" FontFamily="HiraginoW6" FontSize="Title" MaxLines="3" Margin="10,4,10,0"/>
+                <HorizontalStackLayout Margin="10,6,10,0" VerticalOptions="Center">
                     <Label x:Name="lblDate" FontSize="Micro" TextColor="{StaticResource Gray400}" VerticalTextAlignment="Center"/>
                     <Label x:Name="lblLocation" Margin="12,0,0,0" FontSize="Micro" TextColor="{StaticResource Gray400}" VerticalTextAlignment="Center" Text="发布于甘肃"/>
                     <Border StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0" BackgroundColor="CadetBlue" Margin="12,0,0,0" VerticalOptions="Center">
@@ -40,10 +40,10 @@
                 </HorizontalStackLayout>
                 <!--正文-->
                 <StackLayout x:Name="stlTextLayouter" Margin="0,20,0,0"/>
-                <Label x:Name="lblViews" HorizontalTextAlignment="End" TextColor="{StaticResource Gray400}" FontSize="Micro" Margin="0,5,0,0"/>
+                <Label x:Name="lblViews" HorizontalTextAlignment="End" TextColor="{StaticResource Gray400}" FontSize="Micro" Margin="10,5,10,0"/>
                 <!--评论-->
-                <Label x:Name="lblCommentsNumber" FontSize="Subtitle" Text="评论" FontAttributes="Bold" Margin="0,30,0,0"/>
-                <StackLayout x:Name="stlCommentsLayouter" Margin="0,15,0,0"/>
+                <Label x:Name="lblCommentsNumber" FontSize="Subtitle" Text="评论" FontAttributes="Bold" Margin="10,30,10,0"/>
+                <StackLayout x:Name="stlCommentsLayouter" Margin="10,15,10,0"/>
             </StackLayout>
         </ScrollView>
 

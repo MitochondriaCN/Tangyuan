@@ -4,11 +4,11 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="Primary">#ff6348</Color>
-    <Color x:Key="Secondary">#dfe4ea</Color>
-    <Color x:Key="Tertiary">#ff4757</Color>
-    <Color x:Key="Forthly">#5352ed</Color>
-    <Color x:Key="Prestige">#2f3542</Color>
+    <Color x:Key="Primary">#e84118</Color>
+    <Color x:Key="Secondary">#f5f6fa</Color>
+    <Color x:Key="Tertiary">#c23616</Color>
+    <Color x:Key="Forthly">#00a8ff</Color>
+    <Color x:Key="Prestige">#2f3640</Color>
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Gray100">#E1E1E1</Color>

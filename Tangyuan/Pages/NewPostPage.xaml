@@ -24,8 +24,11 @@
         <BoxView Grid.Row="1" Color="{StaticResource Secondary}" HeightRequest="1" HorizontalOptions="Fill"/>
 
         <ScrollView Grid.Row="2">
-            <Editor x:Name="edtContent" AutoSize="TextChanges" Placeholder="键入帖子内容" PlaceholderColor="{StaticResource Gray400}"
+            <StackLayout>
+                <HorizontalStackLayout x:Name="hstImageBar"/>
+                <Editor x:Name="edtContent" AutoSize="TextChanges" Placeholder="键入帖子内容" PlaceholderColor="{StaticResource Gray400}"
                     TextColor="{StaticResource Prestige}" MaxLength="10240" TextChanged="edtContent_TextChanged"/>
+            </StackLayout>
         </ScrollView>
 
         <Grid Grid.Row="3">
@@ -35,8 +38,13 @@
             </Grid.ColumnDefinitions>
 
             <Label x:Name="lblRemainingTextLength" TextColor="{StaticResource Gray400}" VerticalTextAlignment="Center" Text="剩余 10240"/>
-            <Button Grid.Column="1" x:Name="btnSend" Text="发帖" BackgroundColor="{StaticResource Primary}" TextColor="White" FontFamily="HiraginoW6"
+            <HorizontalStackLayout Grid.Column="1" FlowDirection="RightToLeft">
+                <Button x:Name="btnSend" Text="发帖" BackgroundColor="{StaticResource Primary}" TextColor="White" FontFamily="HiraginoW6"
                     CornerRadius="20" Clicked="btnSend_Clicked"/>
+                <Button x:Name="btnPhoto" Text="图片" BackgroundColor="{StaticResource Forthly}" TextColor="White" FontFamily="HiraginoW6"
+                    CornerRadius="20" Clicked="btnPhoto_Clicked"/>
+            </HorizontalStackLayout>
+            
         </Grid>
         
     </Grid>
