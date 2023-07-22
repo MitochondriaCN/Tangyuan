@@ -11,7 +11,7 @@ public partial class IndexPage : ContentPage
 	{
 		InitializeComponent();
 
-        RefreshPosts();
+        RefreshPostsAsync();
 
 		#region µÇÂ¼
 		if (LoginStatusManager.TryLogIn())
@@ -46,16 +46,15 @@ public partial class IndexPage : ContentPage
 
 	private void RefreshView_Refreshing(object sender, EventArgs e)
 	{
-        RefreshPosts();
-        rfvMainScroll.IsRefreshing = false;
+        RefreshPostsAsync();
     }
 
     /// <summary>
     /// Ë¢ÐÂÍÆ¼öÌû¡£
     /// </summary>
-	private void RefreshPosts()
+	private async void RefreshPostsAsync()
 	{
-        List<PostInfo> posts = SQLDataHelper.GetRecentPosts(5);
+        List<PostInfo> posts = await Task.Run(() => SQLDataHelper.GetRecentPosts(5));
         List<PostInfo> final = new List<PostInfo>();
         foreach (var v in posts)
         {
@@ -113,5 +112,6 @@ public partial class IndexPage : ContentPage
                 }
             }
         }
+        rfvMainScroll.IsRefreshing = false;
     }
 }

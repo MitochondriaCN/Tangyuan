@@ -27,8 +27,13 @@ public partial class PostPage : ContentPage,IQueryAttributable
 
 	public void ApplyQueryAttributes(IDictionary<string, object> query)
 	{
-		postID = uint.Parse(query["id"].ToString());
-		postInfo = SQLDataHelper.GetPostByID(postID);
+		UICompleter(uint.Parse(query["id"].ToString()));
+	}
+
+	private async void UICompleter(uint postID)
+	{
+		this.postID = postID;
+		postInfo = await Task.Run(() => SQLDataHelper.GetPostByID(postID));
 
 		crvImages.IndicatorView = idvCurrentImage;
 		
@@ -41,7 +46,7 @@ public partial class PostPage : ContentPage,IQueryAttributable
         TangyuanArranging(postInfo.Content);
 
 		//ÅÅ°æÆÀÂÛ
-		TangyuanCommentsArranging(SQLDataHelper.GetFirstLevelCommentsByPostID(postID));
+		TangyuanCommentsArranging(await Task.Run(() => SQLDataHelper.GetFirstLevelCommentsByPostID(postID)));
 	}
 
 	/// <summary>
@@ -95,6 +100,5 @@ public partial class PostPage : ContentPage,IQueryAttributable
 				stlCommentsLayouter.Children.Add(new CommentView(v));
 			}
 		}
-		
 	}
 }

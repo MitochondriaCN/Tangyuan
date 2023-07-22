@@ -5,8 +5,8 @@
     <ContentView.GestureRecognizers>
         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
     </ContentView.GestureRecognizers>
-    <Border Stroke="{StaticResource SecondaryBrush}" StrokeThickness="0"
-            StrokeShape="RoundRectangle 10,10,10,10" HorizontalOptions="Center" BackgroundColor="White">
+    <Border Stroke="{StaticResource GrayBrush}" StrokeThickness="1"
+            StrokeShape="RoundRectangle 10,10,10,10" HorizontalOptions="Center">
         <Grid x:Name="grdMain">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
