@@ -43,10 +43,25 @@ public partial class NewPostPage : ContentPage
 		{
 			XDocument xd = new XDocument();
 
+			//¸ù½Úµã
 			xd.Add(new XElement("TangyuanPost"));
 			xd.Root.SetAttributeValue("Type", "Post");
+
+			//ImageGallery
+			if (hstImageBar.Children.Count > 0)
+			{
+				XElement gallery = new XElement("ImageGallery");
+				foreach (var v in hstImageBar.Children)
+				{
+					gallery.Add(new XElement("Image", (((v as Image).Source) as FileImageSource).File));
+				}
+				xd.Root.Add(gallery);
+			}
+
+			//Title
 			xd.Root.Add(new XElement("Title", entTitle.Text));
 
+			//P
 			foreach (var v in edtContent.Text.Trim().Split('\n'))
 			{
 				xd.Root.Add(new XElement("P", v));
