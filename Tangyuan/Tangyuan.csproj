@@ -40,10 +40,8 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -65,6 +63,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\AppIcon\appicon.svg" />
 	  <None Remove="Resources\Fonts\HiraginoSansGB-W3.ttf" />
 	  <None Remove="Resources\Fonts\HiraginoSansGB-W6.ttf" />
 	  <None Remove="Resources\Images\70060680_p0_master1200.jpg" />
@@ -72,6 +71,12 @@
 	  <None Remove="Resources\Images\test.jpg" />
 	  <None Remove="Resources\Images\test2.jpg" />
 	  <None Remove="Resources\Images\testimage.jpg" />
+	  <None Remove="Resources\Splash\splash.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiIcon Include="Resources\AppIcon\appicon.svg" />
+	  <MauiSplashScreen Include="Resources\Splash\splash.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
