@@ -18,6 +18,19 @@
         <Entry x:Name="entPasswd" Margin="0,6,0,0" Placeholder="密码（至多16位）" PlaceholderColor="{StaticResource Gray400}"
                CharacterSpacing="1.5" ClearButtonVisibility="WhileEditing" FontSize="Medium" Keyboard="Default" MaxLength="16"
                HorizontalTextAlignment="Center" IsPassword="True" IsVisible="False"/>
+        
+        <VerticalStackLayout x:Name="vstSignUpFormLayouter" IsVisible="False">
+            <Entry x:Name="entUsername" Margin="0,6,0,0" Placeholder="昵称" PlaceholderColor="{StaticResource Gray400}"
+               CharacterSpacing="1.5" FontSize="Medium" HorizontalTextAlignment="Center"/>
+            <Entry x:Name="entNewUserPasswd" Margin="0,6,0,0" Placeholder="设置密码（至多16位）" PlaceholderColor="{StaticResource Gray400}"
+               CharacterSpacing="1.5" ClearButtonVisibility="WhileEditing" FontSize="Medium" MaxLength="16"
+               IsPassword="True" HorizontalTextAlignment="Center"/>
+            <SearchBar x:Name="scbSchoolSelector" Margin="0,6,0,0" FontSize="Medium"
+                       Placeholder="选择学校" PlaceholderColor="{StaticResource Gray400}"/>
+            <ListView x:Name="lstSchoolSelector" IsVisible="False"/>
+            <Picker x:Name="pckGradePicker" FontSize="Medium" Title="选择年级" TitleColor="{StaticResource Gray400}" Margin="0,6,0,0"/>
+        </VerticalStackLayout>
+        
         <Button x:Name="btnNext" BackgroundColor="{StaticResource Tertiary}" TextColor="White" FontSize="Medium" Text="继续"
                 FontFamily="HiraginoW6" Margin="0,10,0,0" Clicked="btnNext_Clicked"/>
     </VerticalStackLayout>

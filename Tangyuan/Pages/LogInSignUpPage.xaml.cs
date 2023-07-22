@@ -13,8 +13,17 @@ public partial class LogInSignUpPage : ContentPage
 	{
 		if (entPhoneNumber.Text != null && entPhoneNumber.Text.Length == 11)
 		{
-			entPasswd.IsVisible = true;
-			btnNext.Text = "µÇÂ¼";
+			if (SQLDataHelper.GetUserInfoByPhoneNumber(entPhoneNumber.Text) != null)
+			{
+				//µÇÂ¼Á÷³Ì
+				entPasswd.IsVisible = true;
+				btnNext.Text = "µÇÂ¼";
+			}
+			else
+			{
+				//×¢²áÁ÷³Ì
+				vstSignUpFormLayouter.IsVisible = true;
+			}
 		}
 		if (entPasswd.Text != null && entPasswd.Text.Length > 6)
 		{
@@ -33,5 +42,11 @@ public partial class LogInSignUpPage : ContentPage
 		entPasswd.IsVisible = false;
 		btnNext.Text = "¼ÌÐø";
 		entPasswd.Text = "";
+		vstSignUpFormLayouter.IsVisible = false;
+		entUsername.Text = "";
+		entNewUserPasswd.Text = "";
+		scbSchoolSelector.Text = "";
+		lstSchoolSelector.ItemsSource = null;
+		pckGradePicker.ItemsSource = null;
 	}
 }
