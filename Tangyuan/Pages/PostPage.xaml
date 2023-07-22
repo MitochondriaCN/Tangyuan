@@ -56,12 +56,12 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Border StrokeShape="RoundRectangle 15,15,15,15" BackgroundColor="{StaticResource Secondary}" StrokeThickness="0">
-                <Editor x:Name="edtComment" AutoSize="TextChanges" Placeholder="键入评论（目前无评论功能）" PlaceholderColor="{StaticResource Gray400}" TextColor="{StaticResource Prestige}"
-                    Keyboard="Chat" MaxLength="1024" Margin="8,0,8,0"/>
+            <Border StrokeShape="RoundRectangle 10,10,10,10" BackgroundColor="{StaticResource Gray}" StrokeThickness="0" Margin="5,0,0,0">
+                <Editor x:Name="edtComment" AutoSize="TextChanges" Placeholder="键入评论" PlaceholderColor="{StaticResource Gray400}" TextColor="{StaticResource Prestige}"
+                    Keyboard="Chat" MaxLength="1024" Margin="10,0,10,0"/>
             </Border>
-            <Border Grid.Column="1" StrokeShape="Ellipse" StrokeThickness="0" Margin="5,0,0,0">
-                <ImageButton Source="Resources/Images/icon_send.png"/>
+            <Border Grid.Column="1" StrokeShape="Ellipse" StrokeThickness="0" Margin="5,0,10,0">
+                <ImageButton Source="Resources/Images/icon_send.png" VerticalOptions="End" Clicked="ImageButton_Clicked"/>
             </Border>
             
         </Grid>

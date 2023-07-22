@@ -92,6 +92,8 @@ public partial class PostPage : ContentPage,IQueryAttributable
 	/// <param name="comments"></param>
 	private void TangyuanCommentsArranging(List<CommentInfo> comments)
 	{
+		stlCommentsLayouter.Children.Clear();
+
 		lblCommentsNumber.Text = "ÆÀÂÛ ¡¤ " + comments.Count.ToString();
 		if (comments.Count > 0)
 		{
@@ -99,6 +101,20 @@ public partial class PostPage : ContentPage,IQueryAttributable
 			{
 				stlCommentsLayouter.Children.Add(new CommentView(v));
 			}
+		}
+	}
+
+	private async void ImageButton_Clicked(object sender, EventArgs e)
+	{
+		if (LoginStatusManager.IsLoggedIn)
+		{
+			if (edtComment.Text != null && edtComment.Text.Trim() != "")
+			{
+				await Task.Run(() => SQLDataHelper.NewComment(LoginStatusManager.LoggedInUserID, postID, edtComment.Text));
+                TangyuanCommentsArranging(await Task.Run(() => SQLDataHelper.GetFirstLevelCommentsByPostID(postID)));
+				edtComment.Text = "";
+				edtComment.Unfocus();
+            }
 		}
 	}
 }

@@ -52,7 +52,7 @@ namespace Tangyuan.Data
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("insert into post_table values(" + postID +
                     "," + authorID +
-                    ",NOW()"+
+                    ",NOW()" +
                     ",0,0,'" + content.ToString(SaveOptions.DisableFormatting) + "')", conn);
                 cmd.ExecuteReader();
             }
@@ -232,6 +232,31 @@ namespace Tangyuan.Data
                         reader.GetUInt32("grade_code"));
                 }
                 return null;
+            }
+        }
+        internal static void NewComment(uint authorID, uint postID, string content)
+        {
+            string finalContent = System.Text.RegularExpressions.Regex.Escape(content).Replace("\'", "\\\'");
+            uint commentID;
+            using (MySqlConnection c = GetNewConnection())
+            {
+                c.Open();
+                MySqlCommand cmd = new MySqlCommand("select max(id) from comment_table", c);
+                MySqlDataReader r = cmd.ExecuteReader();
+                r.Read();
+                commentID = r.GetUInt32(0) + 1;
+            }
+            using (MySqlConnection c = GetNewConnection())
+            {
+                c.Open();
+                MySqlCommand cmd = new MySqlCommand("insert into comment_table values (" +
+                    commentID + "," +
+                    authorID + "," +
+                    postID + "," +
+                    "NOW()," +
+                    "0,0,0," +
+                    "'" + finalContent + "')", c);
+                cmd.ExecuteNonQuery();
             }
         }
     }
