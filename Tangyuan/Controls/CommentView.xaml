@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Tangyuan.Controls"
              x:Class="Tangyuan.Controls.CommentView">
     <Grid Margin="0,0,0,15">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -16,22 +18,12 @@
         <Border StrokeShape="Ellipse" StrokeThickness="0" WidthRequest="35" HeightRequest="35">
             <ImageButton x:Name="imbAvatar" Aspect="AspectFit"/>
         </Border>
-        
-        
-        <Grid Grid.Column="1" Margin="5,0,0,0">
+       
+        <Grid x:Name="grdNameDateLayouter" Grid.Column="1" Margin="5,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-
-            <HorizontalStackLayout>
-                <Label x:Name="lblUserName" Text="线粒体XianlitiCN" TextColor="{StaticResource Prestige}" VerticalTextAlignment="Center"/>
-                <Border x:Name="bodGradeContainer" BackgroundColor="{StaticResource Forthly}" Margin="3,0,0,0"
-                        StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0">
-                    <Label x:Name="lblGrade" FontSize="10" TextColor="White" Margin="3,2,3,2" 
-                           VerticalTextAlignment="Center" FontFamily="HiraginoW6"/>
-                </Border>
-            </HorizontalStackLayout>
 
             <Label Grid.Row="1" x:Name="lblDate" TextColor="{StaticResource Gray400}" FontSize="Micro"/>
         </Grid>
@@ -45,5 +37,8 @@
 
         <Label Grid.Column="1" Grid.Row="1" x:Name="lblContent" TextColor="{StaticResource Prestige}" LineBreakMode="WordWrap"
                Margin="5,0,0,0"/>
+
+        <BoxView Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="Fill" HeightRequest="0.5" 
+                 Color="{StaticResource Gray}" Margin="15,10,15,1"/>
     </Grid>
 </ContentView>

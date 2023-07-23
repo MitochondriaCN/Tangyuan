@@ -298,6 +298,34 @@ namespace Tangyuan.Data
             }
         }
 
+        internal static SchoolInfo GetSchoolInfoByID(uint schoolID)
+        {
+            using (MySqlConnection c = GetNewConnection())
+            {
+                c.Open();
+                MySqlDataReader r = new MySqlCommand("select * from school_table where id=" + schoolID + " limit 1", c).ExecuteReader();
+                r.Read();
+
+                List<SchoolInfo.GradeDefinition> gds = new();
+                XDocument rawGds = XDocument.Parse(r.GetString("grade_definitions"));
+                if (rawGds.Root.Name == "TangyuanGradeDefinitions")
+                {
+                    foreach (var v in rawGds.Root.Descendants("GradeDefinition"))
+                    {
+                        gds.Add(new SchoolInfo.GradeDefinition(
+                            uint.Parse(v.Attribute("ID").Value),
+                            v.Attribute("Name").Value,
+                            Color.Parse(v.Attribute("ThemeColor").Value)));
+                    }
+                }
+                return new SchoolInfo(
+                    r.GetUInt32("id"),
+                    r.GetString("name"),
+                    gds,
+                    Color.Parse(r.GetString("theme_color")));
+            }
+        }
+
         /// <summary>
         /// 尝试注册新用户。
         /// </summary>

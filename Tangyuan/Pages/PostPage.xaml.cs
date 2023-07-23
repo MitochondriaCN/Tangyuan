@@ -110,10 +110,12 @@ public partial class PostPage : ContentPage,IQueryAttributable
 		{
 			if (edtComment.Text != null && edtComment.Text.Trim() != "")
 			{
-				await Task.Run(() => SQLDataHelper.NewComment(LoginStatusManager.LoggedInUserID, postID, edtComment.Text));
-                TangyuanCommentsArranging(await Task.Run(() => SQLDataHelper.GetFirstLevelCommentsByPostID(postID)));
+				await ((ImageButton)sender).RotateTo(360);
+				((ImageButton)sender).Rotation = 0;
+				string content = edtComment.Text;
 				edtComment.Text = "";
-				edtComment.Unfocus();
+				await Task.Run(() => SQLDataHelper.NewComment(LoginStatusManager.LoggedInUserID, postID, content));
+                TangyuanCommentsArranging(await Task.Run(() => SQLDataHelper.GetFirstLevelCommentsByPostID(postID)));
             }
 		}
 	}
