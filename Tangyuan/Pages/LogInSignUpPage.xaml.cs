@@ -37,6 +37,11 @@ public partial class LogInSignUpPage : ContentPage
 		
 	}
 
+	private async void UpdateSchoolInfoAsync()
+	{
+		
+	}
+
 	private void entPhoneNumber_TextChanged(object sender, TextChangedEventArgs e)
 	{
 		entPasswd.IsVisible = false;

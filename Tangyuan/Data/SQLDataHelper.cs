@@ -234,6 +234,7 @@ namespace Tangyuan.Data
                 return null;
             }
         }
+
         internal static void NewComment(uint authorID, uint postID, string content)
         {
             string finalContent = System.Text.RegularExpressions.Regex.Escape(content).Replace("\'", "\\\'");
@@ -259,5 +260,7 @@ namespace Tangyuan.Data
                 cmd.ExecuteNonQuery();
             }
         }
+
+        
     }
 }
