@@ -27,7 +27,7 @@
                IsPassword="True" HorizontalTextAlignment="Center"/>
             <SearchBar x:Name="scbSchoolSelector" Margin="0,6,0,0" FontSize="Medium" TextChanged="scbSchoolSelector_TextChanged"
                        Placeholder="选择学校" PlaceholderColor="{StaticResource Gray400}"/>
-            <ListView x:Name="lstSchoolSelector" IsVisible="False"/>
+            <ListView x:Name="lstSchoolSelector" IsVisible="False" ItemSelected="lstSchoolSelector_ItemSelected"/>
             <Picker x:Name="pckGradePicker" FontSize="Medium" Title="选择年级" TitleColor="{StaticResource Gray400}" Margin="0,6,0,0"/>
         </VerticalStackLayout>
         

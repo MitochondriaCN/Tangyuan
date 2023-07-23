@@ -23,6 +23,18 @@ public partial class LogInSignUpPage : ContentPage
 			{
 				//注册流程
 				vstSignUpFormLayouter.IsVisible = true;
+				if (entUsername.Text != null && entNewUserPasswd.Text != null && lstSchoolSelector.SelectedItem != null && pckGradePicker.SelectedItem != null)
+				{
+					if (SQLDataHelper.TrySignUp(entPhoneNumber.Text,
+						entUsername.Text,
+						entNewUserPasswd.Text, (lstSchoolSelector.SelectedItem as SchoolInfo).SchoolID,
+						(pckGradePicker.SelectedItem as SchoolInfo.GradeDefinition).GradeID))
+					{
+                        await DisplayAlert("已注册", "注册成功，现在请登录。", "确定");
+                        await Shell.Current.GoToAsync("..");
+						await Shell.Current.GoToAsync("/login");
+                    }
+				}
 			}
 		}
 		if (entPasswd.Text != null && entPasswd.Text.Length > 6)
@@ -37,18 +49,10 @@ public partial class LogInSignUpPage : ContentPage
 		
 	}
 
-	private async void UpdateSchoolInfoAsync()
+	private async void SearchSchoolAsync()
 	{
 		List<SchoolInfo> schools = await Task.Run(() => SQLDataHelper.GetAllSchoolInfos());
 		lstSchoolSelector.ItemsSource = schools;
-		if (lstSchoolSelector.SelectedItem != null)
-		{
-			pckGradePicker.ItemsSource = ((SchoolInfo)lstSchoolSelector.SelectedItem).GradeDefinitions;
-		}
-		else
-		{
-			pckGradePicker.ItemsSource = null;
-		}
 	}
 
 	private void entPhoneNumber_TextChanged(object sender, TextChangedEventArgs e)
@@ -57,8 +61,8 @@ public partial class LogInSignUpPage : ContentPage
 		btnNext.Text = "继续";
 		entPasswd.Text = "";
 		vstSignUpFormLayouter.IsVisible = false;
-		entUsername.Text = "";
-		entNewUserPasswd.Text = "";
+		entUsername.Text = null;
+		entNewUserPasswd.Text = null;
 		scbSchoolSelector.Text = "";
 		lstSchoolSelector.ItemsSource = null;
 		pckGradePicker.ItemsSource = null;
@@ -66,6 +70,14 @@ public partial class LogInSignUpPage : ContentPage
 
 	private void scbSchoolSelector_TextChanged(object sender, TextChangedEventArgs e)
 	{
-		UpdateSchoolInfoAsync();
+		lstSchoolSelector.IsVisible = true;
+		pckGradePicker.ItemsSource = null;
+		SearchSchoolAsync();
+	}
+
+	private void lstSchoolSelector_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+	{
+		pckGradePicker.ItemsSource = (lstSchoolSelector.SelectedItem as SchoolInfo).GradeDefinitions;
+		pckGradePicker.SelectedIndex = 0;
 	}
 }

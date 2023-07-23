@@ -46,7 +46,7 @@ public partial class PostPage : ContentPage,IQueryAttributable
         TangyuanArranging(postInfo.Content);
 
 		//ÅÅ°æÆÀÂÛ
-		Task.Run(() => TangyuanCommentsArranging(SQLDataHelper.GetFirstLevelCommentsByPostID(postID)));
+		TangyuanCommentsArranging(await Task.Run(() => SQLDataHelper.GetFirstLevelCommentsByPostID(postID)));
 	}
 
 	/// <summary>

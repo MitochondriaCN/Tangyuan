@@ -298,6 +298,40 @@ namespace Tangyuan.Data
             }
         }
 
+        /// <summary>
+        /// 尝试注册新用户。
+        /// </summary>
+        /// <param name="phoneNumber"></param>
+        /// <param name="nickname"></param>
+        /// <param name="schoolID"></param>
+        /// <param name="gradeID"></param>
+        /// <returns></returns>
+        internal static bool TrySignUp(string phoneNumber, string nickname, string passwd, uint schoolID, uint gradeID,
+            string avatarUri = "https://icons.veryicon.com/png/o/miscellaneous/xinjiang-tourism/user-169.png")
+        {
+            //校验手机号
+            if (GetUserInfoByPhoneNumber(phoneNumber) == null)
+            {
+                using (MySqlConnection c = GetNewConnection())
+                {
+                    c.Open();
+                    new MySqlCommand("insert into user_table values(" +
+                        GetNewIDInTable("user_table") + "," +
+                        "'" + passwd + "'," +
+                        "'" + nickname + "'," +
+                        "'" + phoneNumber + "'," +
+                        schoolID + "," +
+                        "'" + avatarUri + "'," +
+                        gradeID + "," +
+                        "'ORDINARY_STUDENT')", c)
+                        .ExecuteNonQuery();
+                    return true;
+                }
+            }
+            else
+                return false;
+        }
+
         private static UserInfo.Role StringToUserRole(string rawStr)
         {
             switch (rawStr)
@@ -320,6 +354,20 @@ namespace Tangyuan.Data
                     return UserInfo.Role.Teacher;
                 default:
                     throw new Exception("无法将" + rawStr + "转换为任何匹配的UserInfo.Role。");
+            }
+        }
+
+        private static uint GetNewIDInTable(string table_name)
+        {
+            uint ID;
+            using (MySqlConnection c = GetNewConnection())
+            {
+                c.Open();
+                MySqlCommand cmd = new MySqlCommand("select max(id) from " + table_name, c);
+                MySqlDataReader r = cmd.ExecuteReader();
+                r.Read();
+                ID = r.GetUInt32(0) + 1;
+                return ID;
             }
         }
     }
