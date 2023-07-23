@@ -39,7 +39,16 @@ public partial class LogInSignUpPage : ContentPage
 
 	private async void UpdateSchoolInfoAsync()
 	{
-		
+		List<SchoolInfo> schools = await Task.Run(() => SQLDataHelper.GetAllSchoolInfos());
+		lstSchoolSelector.ItemsSource = schools;
+		if (lstSchoolSelector.SelectedItem != null)
+		{
+			pckGradePicker.ItemsSource = ((SchoolInfo)lstSchoolSelector.SelectedItem).GradeDefinitions;
+		}
+		else
+		{
+			pckGradePicker.ItemsSource = null;
+		}
 	}
 
 	private void entPhoneNumber_TextChanged(object sender, TextChangedEventArgs e)
@@ -53,5 +62,10 @@ public partial class LogInSignUpPage : ContentPage
 		scbSchoolSelector.Text = "";
 		lstSchoolSelector.ItemsSource = null;
 		pckGradePicker.ItemsSource = null;
+	}
+
+	private void scbSchoolSelector_TextChanged(object sender, TextChangedEventArgs e)
+	{
+		UpdateSchoolInfoAsync();
 	}
 }

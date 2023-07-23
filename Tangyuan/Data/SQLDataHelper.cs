@@ -207,7 +207,8 @@ namespace Tangyuan.Data
                         reader.GetString("phone_number"),
                         reader.GetUInt32("school_id"),
                         reader.GetString("avatar"),
-                        reader.GetUInt32("grade_code"));
+                        reader.GetUInt32("grade_code"),
+                        StringToUserRole(reader.GetString("role")));
                 }
                 return null;
             }
@@ -229,7 +230,8 @@ namespace Tangyuan.Data
                         reader.GetString("phone_number"),
                         reader.GetUInt32("school_id"),
                         reader.GetString("avatar"),
-                        reader.GetUInt32("grade_code"));
+                        reader.GetUInt32("grade_code"),
+                        StringToUserRole(reader.GetString("role")));
                 }
                 return null;
             }
@@ -261,6 +263,64 @@ namespace Tangyuan.Data
             }
         }
 
-        
+        /// <summary>
+        /// 获取所有学校信息。
+        /// </summary>
+        /// <returns></returns>
+        internal static List<SchoolInfo> GetAllSchoolInfos()
+        {
+            List<SchoolInfo> schoolInfos = new List<SchoolInfo>();
+            using (MySqlConnection c = GetNewConnection())
+            {
+                c.Open();
+                MySqlDataReader r = new MySqlCommand("select * from school_table", c).ExecuteReader();
+                while (r.Read())
+                {
+                    List<SchoolInfo.GradeDefinition> gds = new();
+                    XDocument rawGds = XDocument.Parse(r.GetString("grade_definitions"));
+                    if (rawGds.Root.Name == "TangyuanGradeDefinitions")
+                    {
+                        foreach (var v in rawGds.Root.Descendants("GradeDefinition"))
+                        {
+                            gds.Add(new SchoolInfo.GradeDefinition(
+                                uint.Parse(v.Attribute("ID").Value),
+                                v.Attribute("Name").Value,
+                                Color.Parse(v.Attribute("ThemeColor").Value)));
+                        }
+                    }
+                    schoolInfos.Add(new SchoolInfo(
+                        r.GetUInt32("id"),
+                        r.GetString("name"),
+                        gds,
+                        Color.Parse(r.GetString("theme_color"))));
+                }
+                return schoolInfos;
+            }
+        }
+
+        private static UserInfo.Role StringToUserRole(string rawStr)
+        {
+            switch (rawStr)
+            {
+                case "WEBMASTER":
+                    return UserInfo.Role.Webmaster;
+                case "COFOUNDER":
+                    return UserInfo.Role.CoFounder;
+                case "OBSERVER":
+                    return UserInfo.Role.Observer;
+                case "SCHOOL_LEADER":
+                    return UserInfo.Role.SchoolLeader;
+                case "GRADE_LEADER":
+                    return UserInfo.Role.GradeLeader;
+                case "CLASS_LEADER":
+                    return UserInfo.Role.ClassLeader;
+                case "ORDINARY_STUDENT":
+                    return UserInfo.Role.OrdinaryStudent;
+                case "TEACHER":
+                    return UserInfo.Role.Teacher;
+                default:
+                    throw new Exception("无法将" + rawStr + "转换为任何匹配的UserInfo.Role。");
+            }
+        }
     }
 }
