@@ -88,6 +88,7 @@ public partial class NewPostPage : ContentPage
 				WidthRequest = 80,
 				Margin = new Thickness(0, 0, 5, 0)
 			});
+			SmMsHelper.UploadImageAsync(photo.FullPath);
 		}
 	}
 }
