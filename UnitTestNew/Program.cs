@@ -7,9 +7,9 @@ string authorization = "gyNYN0762kVBFHvbEGEQzwpyPmuh8AHV";
 HttpClient client;
 client = new HttpClient();
 client.DefaultRequestHeaders.Add("Authorization", authorization);
-StringContent content = new(JsonSerializer.Serialize(new
-{
-    smfile = File.ReadAllBytes("C:\\Users\\XianlitiCN\\Pictures\\70060680_p0_master1200.jpg"),
-    format = "json"
-}), Encoding.UTF8, "multipart/form-data");
-HttpResponseMessage r = await client.PostAsync("https://sm.ms/api/v2/upload", content);
+HttpContent content = new StreamContent(new FileInfo("C:\\Users\\XianlitiCN\\Pictures\\get.jpg").OpenRead());
+var mp = new MultipartFormDataContent();
+mp.Add(content, "smfile", "123.jpg");
+HttpResponseMessage r = await client.PostAsync("https://sm.ms/api/v2/upload", mp);
+Console.WriteLine(await r.Content.ReadAsStringAsync());
+Console.ReadLine();

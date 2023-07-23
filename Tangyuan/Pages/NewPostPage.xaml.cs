@@ -16,20 +16,24 @@ public partial class NewPostPage : ContentPage
 		lblRemainingTextLength.Text = "剩余 " + (edtContent.MaxLength - edtContent.Text.Length).ToString();
 	}
 
-	private void btnSend_Clicked(object sender, EventArgs e)
+	private async void btnSend_Clicked(object sender, EventArgs e)
 	{
-		XDocument doc = TangyuanEncoding();
+		btnSend.IsEnabled = false;
+		btnSend.Text = "正在发送";
+		XDocument doc = await TangyuanEncoding();
 		if (doc != null)
 		{
 			if (LoginStatusManager.IsLoggedIn)
 			{
 				SQLDataHelper.NewPost(LoginStatusManager.LoggedInUserID, doc);
-				Shell.Current.GoToAsync("..");
+				await Shell.Current.GoToAsync("..");
 			}
 		}
 		else
 		{
-			DisplayAlert("错误", "请键入标题和内容。", "好的");
+			await DisplayAlert("错误", "请键入标题和内容。", "好的");
+			btnSend.IsEnabled = true;
+			btnSend.Text = "发帖";
 		}
 	}
 
@@ -37,7 +41,7 @@ public partial class NewPostPage : ContentPage
 	/// 糖原编码引擎。
 	/// </summary>
 	/// <returns></returns>
-	private XDocument TangyuanEncoding()
+	private async Task<XDocument> TangyuanEncoding()
 	{
 		if (entTitle.Text != null && edtContent.Text != null)
 		{
@@ -53,7 +57,8 @@ public partial class NewPostPage : ContentPage
 				XElement gallery = new XElement("ImageGallery");
 				foreach (var v in hstImageBar.Children)
 				{
-					gallery.Add(new XElement("Image", (((v as Image).Source) as FileImageSource).File));
+					gallery.Add(new XElement("Image",
+						await Task.Run(() => SmMsHelper.UploadImageAsync(new((((v as Image).Source) as FileImageSource).File)))));//本语句相当壮观
 				}
 				xd.Root.Add(gallery);
 			}
@@ -88,7 +93,6 @@ public partial class NewPostPage : ContentPage
 				WidthRequest = 80,
 				Margin = new Thickness(0, 0, 5, 0)
 			});
-			SmMsHelper.UploadImageAsync(photo.FullPath);
 		}
 	}
 }

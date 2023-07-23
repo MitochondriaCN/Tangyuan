@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Tangyuan.Data
@@ -13,21 +14,29 @@ namespace Tangyuan.Data
         private const string authorization = "gyNYN0762kVBFHvbEGEQzwpyPmuh8AHV";
 
         private static HttpClient client;
-
         static SmMsHelper()
         {
             client = new HttpClient();
             client.DefaultRequestHeaders.Add("Authorization", authorization);
         }
 
-        internal async static void UploadImageAsync(string path)
+        internal static string UploadImageAsync(FileInfo imageInfo)
         {
-            StringContent content = new(JsonSerializer.Serialize(new
+            HttpContent content = new StreamContent(imageInfo.OpenRead());
+            var mp = new MultipartFormDataContent();
+            mp.Add(content, "smfile", imageInfo.Name);
+            HttpResponseMessage r = client.PostAsync("https://smms.app/api/v2/upload", mp).Result;
+            string rstr = r.Content.ReadAsStringAsync().Result;
+            JsonDocument doc = JsonDocument.Parse(rstr);
+            bool success = doc.RootElement.GetProperty("success").GetBoolean();
+            if (success)
             {
-                smfile = File.ReadAllBytes(path),
-                format = "json"
-            }), Encoding.UTF8, "multipart/form-data");
-            HttpResponseMessage r = await client.PostAsync("https://sm.ms/api/v2/upload", content);
+                return doc.RootElement.GetProperty("data").GetProperty("url").GetString();
+            }
+            else
+            {
+                return doc.RootElement.GetProperty("images").GetString();
+            }
         }
     }
 }

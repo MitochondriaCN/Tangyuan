@@ -52,6 +52,7 @@ namespace Tangyuan.Data
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("insert into post_table values(" + postID +
                     "," + authorID +
+                    ","+GetUserInfoByID(authorID).SchoolID+
                     ",NOW()" +
                     ",0,0,'" + content.ToString(SaveOptions.DisableFormatting) + "')", conn);
                 cmd.ExecuteReader();
