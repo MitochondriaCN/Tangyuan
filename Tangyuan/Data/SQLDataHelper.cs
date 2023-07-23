@@ -81,7 +81,7 @@ namespace Tangyuan.Data
                         {
                             if (r.Next(0, 2) == 1)
                             {
-                                posts.Add(new PostInfo(data.GetUInt32("id"), data.GetUInt32("author_id"), data.GetDateTime("post_date"), data.GetUInt32("likes"),
+                                posts.Add(new PostInfo(data.GetUInt32("id"), data.GetUInt32("author_id"), data.GetDateTime("post_date").ToLocalTime(), data.GetUInt32("likes"),
                                     data.GetUInt32("views"), XDocument.Parse(data.GetString("content"))));
                             }
                         }
@@ -154,7 +154,7 @@ namespace Tangyuan.Data
                 MySqlCommand cmd = new MySqlCommand("select * from post_table where id=" + id + " limit 1", c);
                 MySqlDataReader r = cmd.ExecuteReader();
                 if (r.Read())
-                    return new PostInfo(r.GetUInt32("id"), r.GetUInt32("author_id"), r.GetDateTime("post_date"),
+                    return new PostInfo(r.GetUInt32("id"), r.GetUInt32("author_id"), r.GetDateTime("post_date").ToLocalTime(),
                         r.GetUInt32("likes"), r.GetUInt32("views"), XDocument.Parse(r.GetString("content")));
                 else
                     return null;
@@ -180,7 +180,7 @@ namespace Tangyuan.Data
                         r.GetUInt32("id"),
                         r.GetUInt32("user_id"),
                         r.GetUInt32("post_id"),
-                        r.GetDateTime("date"),
+                        r.GetDateTime("date").ToLocalTime(),
                         r.GetUInt32("likes"),
                         r.GetString("content"),
                         r.GetBoolean("is_reply"),
