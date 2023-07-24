@@ -34,14 +34,28 @@ public partial class PostPage : ContentPage,IQueryAttributable
 	{
 		this.postID = postID;
 		postInfo = await Task.Run(() => SQLDataHelper.GetPostByID(postID));
+		SchoolInfo si = await Task.Run(() => SQLDataHelper.GetSchoolInfoByID(postInfo.SchoolID));
 
-		crvImages.IndicatorView = idvCurrentImage;
+
+        crvImages.IndicatorView = idvCurrentImage;
 		
 		//排版基本信息
 		lblTitle.Text = postInfo.Content.Root.Descendants("Title").ToList()[0].Value.ToString();
 		lblDate.Text = postInfo.PostDate.ToString();
 		lblViews.Text = postInfo.Views.ToString();
 		lblLikes.Text = postInfo.Likes.ToString();
+		bodSchoolContainer.BackgroundColor = Color.Parse(si.ThemeColor.ToHex());
+		lblSchool.Text = si.SchoolName;
+
+		//设置作者和管理员功能
+		//管理员功能暂缺
+		if (LoginStatusManager.IsLoggedIn)
+		{
+			if (LoginStatusManager.LoggedInUserID == postInfo.AuthorID)
+			{
+				btnDeletePost.IsVisible = true;
+			}
+		}
 
 		//排版作者信息
 		UserInfo ui = await Task.Run(() => SQLDataHelper.GetUserInfoByID(postInfo.AuthorID));
@@ -121,5 +135,11 @@ public partial class PostPage : ContentPage,IQueryAttributable
                 TangyuanCommentsArranging(await Task.Run(() => SQLDataHelper.GetFirstLevelCommentsByPostID(postID)));
             }
 		}
+	}
+
+	private async void DeletePost_Clicked(object sender, EventArgs e)
+	{
+		await Shell.Current.GoToAsync("..");
+		await Task.Run(() => SQLDataHelper.DeletePostByID(postID));
 	}
 }

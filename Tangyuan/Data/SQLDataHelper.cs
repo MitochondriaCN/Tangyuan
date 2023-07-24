@@ -82,8 +82,14 @@ namespace Tangyuan.Data
                         {
                             if (r.Next(0, 2) == 1)
                             {
-                                posts.Add(new PostInfo(data.GetUInt32("id"), data.GetUInt32("author_id"), data.GetDateTime("post_date").ToLocalTime(), data.GetUInt32("likes"),
-                                    data.GetUInt32("views"), XDocument.Parse(data.GetString("content"))));
+                                posts.Add(new PostInfo(
+                                    data.GetUInt32("id"),
+                                    data.GetUInt32("author_id"),
+                                    data.GetUInt32("school_id"),
+                                    data.GetDateTime("post_date").ToLocalTime(), 
+                                    data.GetUInt32("likes"),
+                                    data.GetUInt32("views"),
+                                    XDocument.Parse(data.GetString("content"))));
                             }
                         }
                         if (posts.Count > maxNumber)
@@ -155,10 +161,25 @@ namespace Tangyuan.Data
                 MySqlCommand cmd = new MySqlCommand("select * from post_table where id=" + id + " limit 1", c);
                 MySqlDataReader r = cmd.ExecuteReader();
                 if (r.Read())
-                    return new PostInfo(r.GetUInt32("id"), r.GetUInt32("author_id"), r.GetDateTime("post_date").ToLocalTime(),
-                        r.GetUInt32("likes"), r.GetUInt32("views"), XDocument.Parse(r.GetString("content")));
+                    return new PostInfo(
+                        r.GetUInt32("id"),
+                        r.GetUInt32("author_id"),
+                        r.GetUInt32("school_id"),
+                        r.GetDateTime("post_date").ToLocalTime(),
+                        r.GetUInt32("likes"),
+                        r.GetUInt32("views"),
+                        XDocument.Parse(r.GetString("content")));
                 else
                     return null;
+            }
+        }
+
+        internal static void DeletePostByID(uint id)
+        {
+            using (MySqlConnection c = GetNewConnection())
+            {
+                c.Open();
+                new MySqlCommand("delete from post_table where id=" + id, c).ExecuteNonQuery();
             }
         }
 

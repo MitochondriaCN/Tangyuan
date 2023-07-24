@@ -32,11 +32,11 @@
                            HorizontalOptions="Center" Margin="10" HideSingle="False"/>
 
                 <Label x:Name="lblTitle" FontFamily="HiraginoW6" FontSize="Title" MaxLines="3" Margin="10,8,10,0"/>
-                <HorizontalStackLayout Margin="10,6,10,0" VerticalOptions="Center">
+                <HorizontalStackLayout Margin="10,6,10,0" VerticalOptions="Center" Spacing="5">
                     <Label x:Name="lblDate" FontSize="Micro" TextColor="{StaticResource Gray400}" VerticalTextAlignment="Center"/>
-                    <Label x:Name="lblLocation" Margin="12,0,0,0" FontSize="Micro" TextColor="{StaticResource Gray400}" VerticalTextAlignment="Center" Text="发布于甘肃"/>
+                    <Label x:Name="lblLocation" FontSize="Micro" TextColor="{StaticResource Gray400}" VerticalTextAlignment="Center" Text="发布于甘肃"/>
                     <Border x:Name="bodSchoolContainer" StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0" BackgroundColor="{StaticResource Secondary}" 
-                            Margin="12,0,0,0" VerticalOptions="Center">
+                            VerticalOptions="Center">
                         <Label x:Name="lblSchool" FontSize="Micro" Margin="3" TextColor="White" 
                                VerticalOptions="Center" FontFamily="HiraginoW6"/>
                     </Border>
@@ -72,7 +72,7 @@
                 <Editor x:Name="edtComment" AutoSize="TextChanges" Placeholder="键入评论" PlaceholderColor="{StaticResource Gray400}" TextColor="{StaticResource Prestige}"
                     Keyboard="Chat" MaxLength="1024" Margin="10,0,10,0"/>
             </Border>
-            <Border Grid.Column="1" StrokeShape="Ellipse" StrokeThickness="0" Margin="5,0,10,0" VerticalOptions="End">
+            <Border Grid.Column="1" StrokeShape="Ellipse" StrokeThickness="0" Margin="5,0,10,0" VerticalOptions="End" BackgroundColor="{StaticResource Secondary}">
                 <ImageButton Source="icon_send.png" VerticalOptions="End" Clicked="ImageButton_Clicked"/>
             </Border>
 
@@ -81,6 +81,8 @@
                 <Label x:Name="lblViews" TextColor="{StaticResource Primary}" VerticalOptions="Center" FontFamily="HiraginoW6"/>
                 <Image Source="icon_heart.png" WidthRequest="17" HeightRequest="17" Aspect="AspectFit"/>
                 <Label x:Name="lblLikes" TextColor="{StaticResource Primary}" VerticalOptions="Center" FontFamily="HiraginoW6"/>
+                <ImageButton x:Name="btnDeletePost" Source="icon_delete.png" WidthRequest="17" HeightRequest="17" Aspect="AspectFit"
+                             Clicked="DeletePost_Clicked" IsVisible="False"/>
             </HorizontalStackLayout>
         </Grid>
     </Grid>
