@@ -25,10 +25,23 @@ public partial class NewPostPage : ContentPage
 		btnSend.BackgroundColor = Colors.Gray;
 		btnSend.Text = "正在发送";
 		aidSendStatus.IsRunning = true;
-		
-		XDocument doc = await TangyuanEncoding();
-		if (doc != null)
+
+		if (!(string.IsNullOrEmpty(edtContent.Text) && string.IsNullOrEmpty(entTitle.Text)))
 		{
+			XDocument doc;
+			try
+			{
+				doc = await TangyuanEncoding();
+			}
+			catch (Exception ex)
+			{
+				await DisplayAlert("异常", ex.Message, "确认");
+                btnSend.IsEnabled = true;
+                btnSend.Text = "发帖";
+                btnSend.BackgroundColor = srcColor;
+                aidSendStatus.IsRunning = false;
+				return;
+            }
 			if (LoginStatusManager.IsLoggedIn)
 			{
 				SQLDataHelper.NewPost(LoginStatusManager.LoggedInUserID, doc);
@@ -51,41 +64,34 @@ public partial class NewPostPage : ContentPage
 	/// <returns></returns>
 	private async Task<XDocument> TangyuanEncoding()
 	{
-		if (entTitle.Text != null && edtContent.Text != null)
+		XDocument xd = new XDocument();
+
+		//根节点
+		xd.Add(new XElement("TangyuanPost"));
+		xd.Root.SetAttributeValue("Type", "Post");
+
+		//ImageGallery
+		if (hstImageBar.Children.Count > 0)
 		{
-			XDocument xd = new XDocument();
-
-			//根节点
-			xd.Add(new XElement("TangyuanPost"));
-			xd.Root.SetAttributeValue("Type", "Post");
-
-			//ImageGallery
-			if (hstImageBar.Children.Count > 0)
+			XElement gallery = new XElement("ImageGallery");
+			foreach (var v in hstImageBar.Children)
 			{
-				XElement gallery = new XElement("ImageGallery");
-				foreach (var v in hstImageBar.Children)
-				{
-					gallery.Add(new XElement("Image",
-						await Task.Run(() => SmMsHelper.UploadImageAsync(new((((v as Image).Source) as FileImageSource).File)))));//本语句相当壮观
-				}
-				xd.Root.Add(gallery);
+				gallery.Add(new XElement("Image",
+					await Task.Run(() => SmMsHelper.UploadImageAsync(new((((v as Image).Source) as FileImageSource).File)))));//本语句相当壮观
 			}
-
-			//Title
-			xd.Root.Add(new XElement("Title", entTitle.Text));
-
-			//P
-			foreach (var v in edtContent.Text.Trim().Split('\n'))
-			{
-				xd.Root.Add(new XElement("P", v));
-			}
-
-			return xd;
+			xd.Root.Add(gallery);
 		}
-		else
+
+		//Title
+		xd.Root.Add(new XElement("Title", entTitle.Text));
+
+		//P
+		foreach (var v in edtContent.Text.Trim().Split('\n'))
 		{
-			return null;
+			xd.Root.Add(new XElement("P", v));
 		}
+
+		return xd;
 	}
 
 	private async void btnPhoto_Clicked(object sender, EventArgs e)

@@ -23,7 +23,7 @@
                              Aspect="AspectFill"/>
                 </Border>
                 <Label x:Name="lblUserNickname" Margin="5" VerticalTextAlignment="Center" TextColor="{StaticResource Prestige}"
-                       FontFamily="HiraginoW6"/>
+                       FontFamily="HiraginoW6" LineBreakMode="WordWrap"/>
             </HorizontalStackLayout>
 
             <ActivityIndicator Grid.Column="1" x:Name="aciRefreshStatus" Color="{StaticResource Primary}" HeightRequest="25"/>
