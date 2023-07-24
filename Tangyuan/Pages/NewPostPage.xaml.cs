@@ -1,4 +1,6 @@
+using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Media;
+using System.Drawing;
 using System.Xml.Linq;
 using Tangyuan.Data;
 
@@ -19,14 +21,18 @@ public partial class NewPostPage : ContentPage
 	private async void btnSend_Clicked(object sender, EventArgs e)
 	{
 		btnSend.IsEnabled = false;
+		Microsoft.Maui.Graphics.Color srcColor = btnSend.BackgroundColor;
+		btnSend.BackgroundColor = Colors.Gray;
 		btnSend.Text = "正在发送";
+		aidSendStatus.IsRunning = true;
+		
 		XDocument doc = await TangyuanEncoding();
 		if (doc != null)
 		{
 			if (LoginStatusManager.IsLoggedIn)
 			{
 				SQLDataHelper.NewPost(LoginStatusManager.LoggedInUserID, doc);
-				await Shell.Current.GoToAsync("..");
+				Shell.Current.GoToAsync("..");
 			}
 		}
 		else
@@ -34,6 +40,8 @@ public partial class NewPostPage : ContentPage
 			await DisplayAlert("错误", "请键入标题和内容。", "好的");
 			btnSend.IsEnabled = true;
 			btnSend.Text = "发帖";
+			btnSend.BackgroundColor = srcColor;
+			aidSendStatus.IsRunning = false;
 		}
 	}
 

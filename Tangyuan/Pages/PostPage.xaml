@@ -19,7 +19,7 @@
         <!--主内容区-->
         <ScrollView Grid.Row="0">
             <StackLayout>
-                <CarouselView x:Name="crvImages">
+                <CarouselView x:Name="crvImages" Loop="False">
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
                             <Image Aspect="AspectFill" Source="{Binding ImageUrl}" HeightRequest="200"/>

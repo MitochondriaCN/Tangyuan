@@ -36,7 +36,7 @@
         </HorizontalStackLayout>
 
         <Label Grid.Column="1" Grid.Row="1" x:Name="lblContent" TextColor="{StaticResource Prestige}" LineBreakMode="WordWrap"
-               Margin="5,0,0,0"/>
+               Margin="5,0,0,0" LineHeight="1.1"/>
 
         <BoxView Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="Fill" HeightRequest="0.5" 
                  Color="{StaticResource Gray}" Margin="15,10,15,1"/>

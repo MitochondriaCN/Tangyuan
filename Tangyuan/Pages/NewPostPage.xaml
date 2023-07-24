@@ -29,7 +29,8 @@
                     <HorizontalStackLayout x:Name="hstImageBar"/>
                 </ScrollView>
                 <Editor x:Name="edtContent" AutoSize="TextChanges" Placeholder="键入帖子内容" PlaceholderColor="{StaticResource Gray400}"
-                    TextColor="{StaticResource Prestige}" MaxLength="10240" TextChanged="edtContent_TextChanged"/>
+                    TextColor="{StaticResource Prestige}" MaxLength="10240" TextChanged="edtContent_TextChanged"
+                        IsSpellCheckEnabled="False" IsTextPredictionEnabled="False"/>
             </StackLayout>
         </ScrollView>
 
@@ -40,11 +41,13 @@
             </Grid.ColumnDefinitions>
 
             <Label x:Name="lblRemainingTextLength" TextColor="{StaticResource Gray400}" VerticalTextAlignment="Center" Text="剩余 10240"/>
-            <HorizontalStackLayout Grid.Column="1" FlowDirection="RightToLeft">
+            <HorizontalStackLayout Grid.Column="1" FlowDirection="RightToLeft" Spacing="5">
                 <Button x:Name="btnSend" Text="发帖" BackgroundColor="{StaticResource Primary}" TextColor="White" FontFamily="HiraginoW6"
                     CornerRadius="20" Clicked="btnSend_Clicked"/>
                 <Button x:Name="btnPhoto" Text="图片" BackgroundColor="{StaticResource Forthly}" TextColor="White" FontFamily="HiraginoW6"
                     CornerRadius="20" Clicked="btnPhoto_Clicked"/>
+                <ActivityIndicator x:Name="aidSendStatus" Color="{StaticResource Primary}" HeightRequest="20"
+                                   VerticalOptions="Center" HorizontalOptions="Start"/>
             </HorizontalStackLayout>
             
         </Grid>

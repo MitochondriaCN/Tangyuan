@@ -66,10 +66,6 @@ public partial class PostPage : ContentPage,IQueryAttributable
 					images.Add(new ImageInfo(v.Value.ToString()));
 				}
 				crvImages.ItemsSource = images;
-				if (images.Count == 1)
-				{
-					crvImages.IsSwipeEnabled = false;
-				}
 			}
 
 			//ÅÅ°æÕıÎÄ
