@@ -48,7 +48,7 @@
     <ScrollView x:Name="scvMainView" BackgroundColor="{StaticResource Secondary}">
         <StackLayout Margin="10">
             <!--近期表白墙-->
-            <Border StrokeShape="RoundRectangle 15,15,15,15" BackgroundColor="{StaticResource Tertiary}" HeightRequest="200" Margin="5" StrokeThickness="0">
+            <Border StrokeShape="RoundRectangle 15,15,15,15" BackgroundColor="{StaticResource Primary}" HeightRequest="200" Margin="5" StrokeThickness="0">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>

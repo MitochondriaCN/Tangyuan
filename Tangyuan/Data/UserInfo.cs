@@ -41,5 +41,51 @@ namespace Tangyuan.Data
             GradeID = gradeID;
             UserRole = userRole;
         }
+
+        internal string GetUserRoleFriendlyName()
+        {
+            switch (UserRole)
+            {
+                case Role.Webmaster:
+                    return "站长";
+                case UserInfo.Role.CoFounder:
+                    return "联合创始人";
+                case UserInfo.Role.Observer:
+                    return "观察员";
+                case UserInfo.Role.SchoolLeader:
+                    return "校园领袖";
+                case UserInfo.Role.GradeLeader:
+                    return "年级领袖";
+                case UserInfo.Role.ClassLeader:
+                    return "班级领袖";
+                case UserInfo.Role.Teacher:
+                    return "老师";
+                default:
+                    return null;
+            }
+        }
+
+        internal Color GetThemeColorOfUserRole()
+        {
+            switch (UserRole)
+            {
+                case UserInfo.Role.Webmaster:
+                    return Color.Parse("#e74c3c");
+                case UserInfo.Role.CoFounder:
+                    return Color.Parse("#f1c40f");
+                case UserInfo.Role.Observer:
+                    return Color.Parse("#30336b");
+                case UserInfo.Role.SchoolLeader:
+                    return Color.Parse("#27ae60");
+                case UserInfo.Role.GradeLeader:
+                    return Color.Parse("#3498db");
+                case UserInfo.Role.ClassLeader:
+                    return Color.Parse("#9b59b6");
+                case UserInfo.Role.Teacher:
+                    return Color.Parse("#c0392b");
+                default:
+                    return null;
+            }
+        }
     }
 }
