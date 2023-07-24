@@ -67,6 +67,7 @@
 	  <None Remove="Resources\Fonts\HiraginoSansGB-W3.ttf" />
 	  <None Remove="Resources\Fonts\HiraginoSansGB-W6.ttf" />
 	  <None Remove="Resources\Images\70060680_p0_master1200.jpg" />
+	  <None Remove="Resources\Images\icon_refresh.png" />
 	  <None Remove="Resources\Images\icon_send.png" />
 	  <None Remove="Resources\Images\test.jpg" />
 	  <None Remove="Resources\Images\test2.jpg" />

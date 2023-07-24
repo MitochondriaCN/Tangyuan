@@ -25,9 +25,11 @@
                 <Label x:Name="lblUserNickname" Margin="5" VerticalTextAlignment="Center" TextColor="{StaticResource Prestige}"
                        FontFamily="HiraginoW6"/>
             </HorizontalStackLayout>
-            <!--选项卡占位-->
 
-            <!---->
+            <ActivityIndicator Grid.Column="1" x:Name="aciRefreshStatus" Color="{StaticResource Primary}" HeightRequest="25"/>
+            <ImageButton x:Name="btnRefresh" Grid.Column="1" Source="icon_refresh.png" Clicked="btnRefresh_Clicked" HeightRequest="25"
+                         WidthRequest="25"/>
+
             <HorizontalStackLayout FlowDirection="RightToLeft" Grid.Column="2">
                 <ImageButton x:Name="btnNewPost" Source="https://icons.veryicon.com/png/o/miscellaneous/smile-preference/add-255.png"
                              HeightRequest="24" WidthRequest="24" Margin="5"
@@ -43,55 +45,53 @@
     </Shell.TitleView>
 
     <!--主要内容-->
-    <RefreshView x:Name="rfvMainScroll" Refreshing="RefreshView_Refreshing" BackgroundColor="{StaticResource Secondary}">
-        <ScrollView x:Name="scvMainView" BackgroundColor="{StaticResource Secondary}">
-            <StackLayout Margin="10">
-                <!--近期表白墙-->
-                <Border StrokeShape="RoundRectangle 15,15,15,15" BackgroundColor="{StaticResource Tertiary}" HeightRequest="200" Margin="5" StrokeThickness="0">
-                    <Grid Margin="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Label FontSize="Title" FontAttributes="Bold" TextColor="{StaticResource White}">近期表白墙</Label>
-                        <FlexLayout Grid.Row="1" Margin="0,10,0,8" Wrap="Wrap" JustifyContent="SpaceAround"/>
-                    </Grid>
-                </Border>
-                <!--市场-->
-                <Border StrokeShape="RoundRectangle 15,15,15,15" BackgroundColor="#b2bec3" HeightRequest="160" Margin="5" StrokeThickness="0">
-                    <Grid Margin="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Label FontSize="Title" FontAttributes="Bold" TextColor="{StaticResource White}">近期市场</Label>
-                        <ScrollView Margin="0,3,0,0" Grid.Row="1" Orientation="Horizontal">
-                            <HorizontalStackLayout>
-                                <Border StrokeShape="RoundRectangle 10,10,10,10" WidthRequest="60" BackgroundColor="{StaticResource Secondary}" StrokeThickness="0">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Image Source="../Resources/Images/test2.jpg" Aspect="Fill"/>
-                                        <Label Grid.Row="1" FontAttributes="Bold" Margin="3" HorizontalTextAlignment="Start"
-                                       VerticalTextAlignment="Center" TextColor="{StaticResource Prestige}">￥500</Label>
-                                    </Grid>
-                                </Border>
-                            </HorizontalStackLayout>
-                        </ScrollView>
-                    </Grid>
-                </Border>
-                <!--推荐帖-->
-                <Grid RowDefinitions="Auto">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <VerticalStackLayout Margin="3" x:Name="stlPostsLeft"/>
-                    <VerticalStackLayout Margin="3" Grid.Column="1" x:Name="stlPostsRight"/>
+    <ScrollView x:Name="scvMainView" BackgroundColor="{StaticResource Secondary}">
+        <StackLayout Margin="10">
+            <!--近期表白墙-->
+            <Border StrokeShape="RoundRectangle 15,15,15,15" BackgroundColor="{StaticResource Tertiary}" HeightRequest="200" Margin="5" StrokeThickness="0">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label FontSize="Title" FontAttributes="Bold" TextColor="{StaticResource White}">近期表白墙</Label>
+                    <FlexLayout Grid.Row="1" Margin="0,10,0,8" Wrap="Wrap" JustifyContent="SpaceAround"/>
                 </Grid>
-            </StackLayout>
-        </ScrollView>
-    </RefreshView>
+            </Border>
+            <!--市场-->
+            <Border StrokeShape="RoundRectangle 15,15,15,15" BackgroundColor="#b2bec3" HeightRequest="160" Margin="5" StrokeThickness="0">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label FontSize="Title" FontAttributes="Bold" TextColor="{StaticResource White}">近期市场</Label>
+                    <ScrollView Margin="0,3,0,0" Grid.Row="1" Orientation="Horizontal">
+                        <HorizontalStackLayout>
+                            <Border StrokeShape="RoundRectangle 10,10,10,10" WidthRequest="60" BackgroundColor="{StaticResource Secondary}" StrokeThickness="0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Image Source="test2.jpg" Aspect="Fill"/>
+                                    <Label Grid.Row="1" FontAttributes="Bold" Margin="3" HorizontalTextAlignment="Start"
+                                       VerticalTextAlignment="Center" TextColor="{StaticResource Prestige}">￥500</Label>
+                                </Grid>
+                            </Border>
+                        </HorizontalStackLayout>
+                    </ScrollView>
+                </Grid>
+            </Border>
+            <!--推荐帖-->
+            <Grid RowDefinitions="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <VerticalStackLayout Margin="3" x:Name="stlPostsLeft"/>
+                <VerticalStackLayout Margin="3" Grid.Column="1" x:Name="stlPostsRight"/>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

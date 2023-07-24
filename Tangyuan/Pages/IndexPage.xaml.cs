@@ -44,8 +44,10 @@ public partial class IndexPage : ContentPage
 		Shell.Current.GoToAsync("/newpost");
 	}
 
-	private void RefreshView_Refreshing(object sender, EventArgs e)
+	private void btnRefresh_Clicked(object sender, EventArgs e)
 	{
+        btnRefresh.IsVisible = false;
+        aciRefreshStatus.IsRunning = true;
         RefreshPostsAsync();
     }
 
@@ -112,6 +114,7 @@ public partial class IndexPage : ContentPage
                 }
             }
         }
-        rfvMainScroll.IsRefreshing = false;
+        btnRefresh.IsVisible = true;
+        aciRefreshStatus.IsRunning = false;
     }
 }

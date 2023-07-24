@@ -60,8 +60,8 @@
                 <Editor x:Name="edtComment" AutoSize="TextChanges" Placeholder="键入评论" PlaceholderColor="{StaticResource Gray400}" TextColor="{StaticResource Prestige}"
                     Keyboard="Chat" MaxLength="1024" Margin="10,0,10,0"/>
             </Border>
-            <Border Grid.Column="1" StrokeShape="Ellipse" StrokeThickness="0" Margin="5,0,10,0">
-                <ImageButton Source="Resources/Images/icon_send.png" VerticalOptions="End" Clicked="ImageButton_Clicked"/>
+            <Border Grid.Column="1" StrokeShape="Ellipse" StrokeThickness="0" Margin="5,0,10,0" VerticalOptions="End">
+                <ImageButton Source="icon_send.png" VerticalOptions="End" Clicked="ImageButton_Clicked"/>
             </Border>
             
         </Grid>
