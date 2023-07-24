@@ -6,7 +6,8 @@
              Title="帖子"
              Shell.BackgroundColor="{StaticResource Secondary}"
              Shell.ForegroundColor="{StaticResource Prestige}"
-             Shell.TitleColor="{StaticResource Prestige}">
+             Shell.TitleColor="{StaticResource Prestige}"
+             Shell.NavBarHasShadow="False">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="true" IsVisible="true"/>
     </Shell.BackButtonBehavior>
@@ -54,7 +55,6 @@
 
                 <!--正文-->
                 <StackLayout x:Name="stlTextLayouter" Margin="0,15,0,0"/>
-                <Label x:Name="lblViews" HorizontalTextAlignment="End" TextColor="{StaticResource Gray400}" FontSize="Micro" Margin="10,5,10,0"/>
                 <!--评论-->
                 <Label x:Name="lblCommentsNumber" FontSize="Subtitle" Text="评论" FontAttributes="Bold" Margin="10,30,10,0"/>
                 <StackLayout x:Name="stlCommentsLayouter" Margin="10,15,10,0"/>
@@ -62,11 +62,9 @@
         </ScrollView>
 
         <!--评论框区-->
-        <Grid Grid.Row="1" Margin="0,5,0,0">
+        <Grid Grid.Row="1" Margin="0,5,0,0" RowDefinitions="Auto,Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
@@ -77,7 +75,13 @@
             <Border Grid.Column="1" StrokeShape="Ellipse" StrokeThickness="0" Margin="5,0,10,0" VerticalOptions="End">
                 <ImageButton Source="icon_send.png" VerticalOptions="End" Clicked="ImageButton_Clicked"/>
             </Border>
-            
+
+            <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="6" Margin="10">
+                <Image Source="icon_eye.png" WidthRequest="17" HeightRequest="17" Aspect="AspectFit"/>
+                <Label x:Name="lblViews" TextColor="{StaticResource Primary}" VerticalOptions="Center" FontFamily="HiraginoW6"/>
+                <Image Source="icon_heart.png" WidthRequest="17" HeightRequest="17" Aspect="AspectFit"/>
+                <Label x:Name="lblLikes" TextColor="{StaticResource Primary}" VerticalOptions="Center" FontFamily="HiraginoW6"/>
+            </HorizontalStackLayout>
         </Grid>
     </Grid>
 </ContentPage>

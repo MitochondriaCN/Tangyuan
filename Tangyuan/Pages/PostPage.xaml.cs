@@ -40,7 +40,8 @@ public partial class PostPage : ContentPage,IQueryAttributable
 		//排版基本信息
 		lblTitle.Text = postInfo.Content.Root.Descendants("Title").ToList()[0].Value.ToString();
 		lblDate.Text = postInfo.PostDate.ToString();
-		lblViews.Text = "阅读 " + postInfo.Views.ToString();
+		lblViews.Text = postInfo.Views.ToString();
+		lblLikes.Text = postInfo.Likes.ToString();
 
 		//排版作者信息
 		UserInfo ui = await Task.Run(() => SQLDataHelper.GetUserInfoByID(postInfo.AuthorID));
