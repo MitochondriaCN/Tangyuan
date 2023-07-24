@@ -11,6 +11,7 @@ namespace Tangyuan.Data
         internal uint UserID { get; private set; }
         internal string Password { get; private set; }
         internal string Nickname { get; private set; }
+        internal string Signature { get; private set; }
         internal string PhoneNumber { get; private set; }
         internal uint SchoolID { get; private set; }
         internal string Avatar { get; private set; }
@@ -28,11 +29,12 @@ namespace Tangyuan.Data
             OrdinaryStudent,//普通学生
             Teacher//老师
         }
-        internal UserInfo(uint userID, string passwd, string nickname, string phoneNumber, uint schoolID, string avatar, uint gradeID, Role userRole)
+        internal UserInfo(uint userID, string passwd, string nickname, string signature, string phoneNumber, uint schoolID, string avatar, uint gradeID, Role userRole)
         {
             UserID = userID;
             Password = passwd;
             Nickname = nickname;
+            Signature = signature;
             PhoneNumber = phoneNumber;
             SchoolID = schoolID;
             Avatar = avatar;

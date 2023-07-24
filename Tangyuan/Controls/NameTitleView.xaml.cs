@@ -10,6 +10,7 @@ public partial class NameTitleView : ContentView
 
         UpdateUIAsync(ui);
 	}
+
 	private async void UpdateUIAsync(UserInfo ui, bool isSchoolDisplay = true, bool isGradeDisplay = true, bool isRoleDisplay = true)
 	{
 		SchoolInfo si = await Task.Run(() => SQLDataHelper.GetSchoolInfoByID(ui.SchoolID));

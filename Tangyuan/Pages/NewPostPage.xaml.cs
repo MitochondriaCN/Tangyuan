@@ -23,7 +23,7 @@ public partial class NewPostPage : ContentPage
 		btnSend.IsEnabled = false;
 		Microsoft.Maui.Graphics.Color srcColor = btnSend.BackgroundColor;
 		btnSend.BackgroundColor = Colors.Gray;
-		btnSend.Text = "正在发送";
+		btnSend.Text = "正在发帖";
 		aidSendStatus.IsRunning = true;
 
 		if (!(string.IsNullOrEmpty(edtContent.Text) && string.IsNullOrEmpty(entTitle.Text)))
@@ -73,13 +73,24 @@ public partial class NewPostPage : ContentPage
 		//ImageGallery
 		if (hstImageBar.Children.Count > 0)
 		{
+			//UI代码本不该出现在此方法，但目前也没办法
+			string ori = btnSend.Text;
+			int i = 1;
+
 			XElement gallery = new XElement("ImageGallery");
 			foreach (var v in hstImageBar.Children)
 			{
+				//UI代码
+				btnSend.Text = "上传图片 " + i + "/" + hstImageBar.Children.Count;
+				i++;
+
 				gallery.Add(new XElement("Image",
 					await Task.Run(() => SmMsHelper.UploadImageAsync(new((((v as Image).Source) as FileImageSource).File)))));//本语句相当壮观
 			}
 			xd.Root.Add(gallery);
+
+			//UI代码
+			btnSend.Text = ori;
 		}
 
 		//Title

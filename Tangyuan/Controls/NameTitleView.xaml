@@ -2,18 +2,18 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Tangyuan.Controls.NameTitleView">
-    <HorizontalStackLayout>
-        <Label x:Name="lblNickname" Margin="0,0,3,0"/>
+    <HorizontalStackLayout VerticalOptions="Center">
+        <Label x:Name="lblNickname" Margin="0,0,3,0" VerticalOptions="Center" VerticalTextAlignment="Center"/>
         <Border x:Name="bodGradeContainer" StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0" Margin="3,0,0,0" VerticalOptions="Center">
-            <Label x:Name="lblGrade" FontSize="10" TextColor="White" Margin="3,2,3,2" 
+            <Label x:Name="lblGrade" FontSize="11" TextColor="White" Margin="3,2,3,2" 
                            VerticalTextAlignment="Center" FontFamily="HiraginoW6" VerticalOptions="Center"/>
         </Border>
         <Border x:Name="bodSchoolContainer" StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0" Margin="3,0,0,0" VerticalOptions="Center">
-            <Label x:Name="lblSchool" FontSize="10" TextColor="White" Margin="3,2,3,2" 
+            <Label x:Name="lblSchool" FontSize="11" TextColor="White" Margin="3,2,3,2" 
                            VerticalTextAlignment="Center" FontFamily="HiraginoW6" VerticalOptions="Center"/>
         </Border>
         <Border x:Name="bodRoleContainer" StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0" Margin="3,0,0,0" VerticalOptions="Center">
-            <Label x:Name="lblRole" FontSize="10" TextColor="White" Margin="3,2,3,2" 
+            <Label x:Name="lblRole" FontSize="11" TextColor="White" Margin="3,2,3,2" 
                            VerticalTextAlignment="Center" FontFamily="HiraginoW6" VerticalOptions="Center"/>
         </Border>
     </HorizontalStackLayout>

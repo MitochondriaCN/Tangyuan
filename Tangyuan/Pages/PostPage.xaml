@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Tangyuan.Controls"
              x:Class="Tangyuan.Pages.PostPage"
              Title="帖子"
              Shell.BackgroundColor="{StaticResource Secondary}"
@@ -28,18 +29,31 @@
                 </CarouselView>
                 <IndicatorView x:Name="idvCurrentImage" IndicatorColor="{StaticResource Gray200}" SelectedIndicatorColor="{StaticResource Gray300}"
                            HorizontalOptions="Center" Margin="10" HideSingle="False"/>
-                
-                <Label x:Name="lblTitle" FontFamily="HiraginoW6" FontSize="Title" MaxLines="3" Margin="10,4,10,0"/>
+
+                <Label x:Name="lblTitle" FontFamily="HiraginoW6" FontSize="Title" MaxLines="3" Margin="10,8,10,0"/>
                 <HorizontalStackLayout Margin="10,6,10,0" VerticalOptions="Center">
                     <Label x:Name="lblDate" FontSize="Micro" TextColor="{StaticResource Gray400}" VerticalTextAlignment="Center"/>
                     <Label x:Name="lblLocation" Margin="12,0,0,0" FontSize="Micro" TextColor="{StaticResource Gray400}" VerticalTextAlignment="Center" Text="发布于甘肃"/>
-                    <Border StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0" BackgroundColor="CadetBlue" Margin="12,0,0,0" VerticalOptions="Center">
+                    <Border x:Name="bodSchoolContainer" StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0" BackgroundColor="{StaticResource Secondary}" 
+                            Margin="12,0,0,0" VerticalOptions="Center">
                         <Label x:Name="lblSchool" FontSize="Micro" Margin="3" TextColor="White" 
-                               VerticalOptions="Center" Text="嘉峪关市酒钢三中" FontFamily="HiraginoW6"/>
+                               VerticalOptions="Center" FontFamily="HiraginoW6"/>
                     </Border>
                 </HorizontalStackLayout>
+
+                <Grid Margin="10,15,10,0" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" x:Name="grdAuthorBar">
+                    <Border StrokeShape="Ellipse" StrokeThickness="0" Margin="1,1,5,1" Grid.RowSpan="2">
+                        <Image x:Name="imgAvatar" WidthRequest="40" HeightRequest="40" Aspect="AspectFill"/>
+                    </Border>
+                    <Label x:Name="lblAuthorSignature" Grid.Row="1" Grid.Column="1" FontSize="Micro" TextColor="{StaticResource Gray400}"
+                           VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                </Grid>
+
+                <BoxView HorizontalOptions="Fill" HeightRequest="0.5" 
+                 Color="{StaticResource Gray}" Margin="10,10,10,0"/>
+
                 <!--正文-->
-                <StackLayout x:Name="stlTextLayouter" Margin="0,20,0,0"/>
+                <StackLayout x:Name="stlTextLayouter" Margin="0,15,0,0"/>
                 <Label x:Name="lblViews" HorizontalTextAlignment="End" TextColor="{StaticResource Gray400}" FontSize="Micro" Margin="10,5,10,0"/>
                 <!--评论-->
                 <Label x:Name="lblCommentsNumber" FontSize="Subtitle" Text="评论" FontAttributes="Bold" Margin="10,30,10,0"/>

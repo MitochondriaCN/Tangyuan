@@ -205,6 +205,7 @@ namespace Tangyuan.Data
                         reader.GetUInt32("id"),
                         reader.GetString("passwd"),
                         reader.GetString("nickname"),
+                        reader.GetString("signature"),
                         reader.GetString("phone_number"),
                         reader.GetUInt32("school_id"),
                         reader.GetString("avatar"),
@@ -228,6 +229,7 @@ namespace Tangyuan.Data
                         reader.GetUInt32("id"),
                         reader.GetString("passwd"),
                         reader.GetString("nickname"),
+                        reader.GetString("signature"),
                         reader.GetString("phone_number"),
                         reader.GetUInt32("school_id"),
                         reader.GetString("avatar"),
@@ -348,6 +350,7 @@ namespace Tangyuan.Data
                         GetNewIDInTable("user_table") + "," +
                         "'" + passwd + "'," +
                         "'" + nickname + "'," +
+                        "'该用户未填写签名'," +
                         "'" + phoneNumber + "'," +
                         schoolID + "," +
                         "'" + avatarUri + "'," +

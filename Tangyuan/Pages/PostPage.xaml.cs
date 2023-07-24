@@ -42,6 +42,12 @@ public partial class PostPage : ContentPage,IQueryAttributable
 		lblDate.Text = postInfo.PostDate.ToString();
 		lblViews.Text = "阅读 " + postInfo.Views.ToString();
 
+		//排版作者信息
+		UserInfo ui = await Task.Run(() => SQLDataHelper.GetUserInfoByID(postInfo.AuthorID));
+		imgAvatar.Source = ImageSource.FromUri(new Uri(ui.Avatar));
+		grdAuthorBar.Add(new NameTitleView(ui), 1);
+		lblAuthorSignature.Text = ui.Signature;
+
         //排版正文
         TangyuanArranging(postInfo.Content);
 
