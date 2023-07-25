@@ -261,6 +261,21 @@ namespace Tangyuan.Data
             }
         }
 
+        /// <summary>
+        /// 为指定帖子加上指定数量的阅读数。
+        /// </summary>
+        /// <param name="postID">指定帖子ID</param>
+        /// <param name="value">增加的阅读数（可为负）</param>
+        internal static void AddPostViewByID(uint postID, int value = 1)
+        {
+            using(MySqlConnection mc = GetNewConnection()) 
+            {
+                mc.Open();
+                new MySqlCommand("update post_table set views=views" + (value >= 0 ? "+" + value : value) + " where id=" + postID, mc)
+                    .ExecuteNonQueryAsync();
+            }
+        }
+
         internal static void NewComment(uint authorID, uint postID, string content)
         {
             string finalContent = System.Text.RegularExpressions.Regex.Escape(content).Replace("\'", "\\\'");

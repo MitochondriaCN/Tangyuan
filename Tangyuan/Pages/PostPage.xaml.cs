@@ -22,7 +22,6 @@ public partial class PostPage : ContentPage,IQueryAttributable
 	public PostPage()
 	{
 		InitializeComponent();
-		
 	}
 
 	public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -35,7 +34,6 @@ public partial class PostPage : ContentPage,IQueryAttributable
 		this.postID = postID;
 		postInfo = await Task.Run(() => SQLDataHelper.GetPostByID(postID));
 		SchoolInfo si = await Task.Run(() => SQLDataHelper.GetSchoolInfoByID(postInfo.SchoolID));
-
 
         crvImages.IndicatorView = idvCurrentImage;
 		
@@ -68,6 +66,9 @@ public partial class PostPage : ContentPage,IQueryAttributable
 
 		//排版评论
 		TangyuanCommentsArranging(await Task.Run(() => SQLDataHelper.GetFirstLevelCommentsByPostID(postID)));
+
+		//增加阅读数
+		Task.Run(() => SQLDataHelper.AddPostViewByID(postID);
 	}
 
 	/// <summary>
