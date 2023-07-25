@@ -44,8 +44,9 @@ public partial class NewPostPage : ContentPage
             }
 			if (LoginStatusManager.IsLoggedIn)
 			{
-				SQLDataHelper.NewPost(LoginStatusManager.LoggedInUserID, doc);
-				Shell.Current.GoToAsync("..");
+				uint postid = await Task.Run(() => SQLDataHelper.NewPost(LoginStatusManager.LoggedInUserID, doc));
+				await Shell.Current.GoToAsync("..");
+				Shell.Current.GoToAsync("/post?id=" + postid);
 			}
 		}
 		else

@@ -37,16 +37,9 @@ namespace Tangyuan.Data
         /// <summary>
         /// 发新帖
         /// </summary>
-        internal static void NewPost(uint authorID, XDocument content)
+        internal static uint NewPost(uint authorID, XDocument content)
         {
-            uint postID;
-            using (MySqlConnection conn = GetNewConnection())
-            {
-                conn.Open();
-                MySqlDataReader r = new MySqlCommand("select max(id) from post_table", conn).ExecuteReader();
-                r.Read();
-                postID = r.GetUInt32(0) + 1;
-            }
+            uint postID = GetNewIDInTable("post_table");
             using (MySqlConnection conn = GetNewConnection())//你他妈的，每一个指令都要一个新connection，烦死了
             {
                 conn.Open();
@@ -56,6 +49,7 @@ namespace Tangyuan.Data
                     ",NOW()" +
                     ",0,0,'" + content.ToString(SaveOptions.DisableFormatting) + "')", conn);
                 cmd.ExecuteReader();
+                return postID;
             }
         }
 
