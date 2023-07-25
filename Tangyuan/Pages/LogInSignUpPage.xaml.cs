@@ -23,6 +23,7 @@ public partial class LogInSignUpPage : ContentPage
 			{
 				//×¢²áÁ÷³Ì
 				vstSignUpFormLayouter.IsVisible = true;
+				btnNext.Text = "×¢²á";
 				if (entUsername.Text != null && entNewUserPasswd.Text != null && lstSchoolSelector.SelectedItem != null && pckGradePicker.SelectedItem != null)
 				{
 					if (SQLDataHelper.TrySignUp(entPhoneNumber.Text,

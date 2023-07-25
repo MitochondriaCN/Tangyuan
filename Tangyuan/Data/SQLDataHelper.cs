@@ -270,6 +270,16 @@ namespace Tangyuan.Data
             }
         }
 
+        internal static void AddPostLikeByID(uint postID, int value = 1)
+        {
+            using (MySqlConnection mc = GetNewConnection())
+            {
+                mc.Open();
+                new MySqlCommand("update post_table set likes=likes" + (value >= 0 ? "+" + value : value) + " where id=" + postID, mc)
+                    .ExecuteNonQueryAsync();
+            }
+        }
+
         internal static void NewComment(uint authorID, uint postID, string content)
         {
             string finalContent = System.Text.RegularExpressions.Regex.Escape(content).Replace("\'", "\\\'");

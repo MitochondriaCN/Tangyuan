@@ -41,7 +41,14 @@ public partial class IndexPage : ContentPage
 
 	private void btnNewPost_Clicked(object sender, EventArgs e)
 	{
-		Shell.Current.GoToAsync("/newpost");
+        if (LoginStatusManager.IsLoggedIn)
+        {
+            Shell.Current.GoToAsync("/newpost");
+        }
+        else
+        {
+            Shell.Current.GoToAsync("/login");
+        }
 	}
 
 	private void btnRefresh_Clicked(object sender, EventArgs e)

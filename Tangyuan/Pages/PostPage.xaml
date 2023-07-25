@@ -77,12 +77,13 @@
             </Border>
 
             <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="6" Margin="10">
-                <Image Source="icon_eye.png" WidthRequest="17" HeightRequest="17" Aspect="AspectFit"/>
+                <Image Source="icon_eye.png" WidthRequest="17" HeightRequest="17" Aspect="AspectFit" VerticalOptions="Center"/>
                 <Label x:Name="lblViews" TextColor="{StaticResource Primary}" VerticalOptions="Center" FontFamily="HiraginoW6"/>
-                <Image Source="icon_heart.png" WidthRequest="17" HeightRequest="17" Aspect="AspectFit"/>
+                <ImageButton Source="icon_heart.png" WidthRequest="17" HeightRequest="17" Aspect="AspectFit" VerticalOptions="Center"
+                             Clicked="LikeButton_Clicked"/>
                 <Label x:Name="lblLikes" TextColor="{StaticResource Primary}" VerticalOptions="Center" FontFamily="HiraginoW6"/>
-                <ImageButton x:Name="btnDeletePost" Source="icon_delete.png" WidthRequest="17" HeightRequest="17" Aspect="AspectFit"
-                             Clicked="DeletePost_Clicked" IsVisible="False"/>
+                <ImageButton x:Name="btnDeletePost" Source="icon_delete.png" WidthRequest="20" HeightRequest="20" Aspect="AspectFit"
+                             Clicked="DeletePost_Clicked" IsVisible="False" VerticalOptions="Center"/>
             </HorizontalStackLayout>
         </Grid>
     </Grid>

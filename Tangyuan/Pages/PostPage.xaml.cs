@@ -68,7 +68,7 @@ public partial class PostPage : ContentPage,IQueryAttributable
 		TangyuanCommentsArranging(await Task.Run(() => SQLDataHelper.GetFirstLevelCommentsByPostID(postID)));
 
 		//Ôö¼ÓÔÄ¶ÁÊý
-		Task.Run(() => SQLDataHelper.AddPostViewByID(postID);
+		Task.Run(() => SQLDataHelper.AddPostViewByID(postID));
 	}
 
 	/// <summary>
@@ -143,4 +143,15 @@ public partial class PostPage : ContentPage,IQueryAttributable
 		await Shell.Current.GoToAsync("..");
 		await Task.Run(() => SQLDataHelper.DeletePostByID(postID));
 	}
+
+    private async void LikeButton_Clicked(object sender, EventArgs e)
+    {
+		if (LoginStatusManager.IsLoggedIn)
+		{
+			Task.Run(() => SQLDataHelper.AddPostLikeByID(postID));
+			lblLikes.Text = (postInfo.Likes + 1).ToString();
+			await (sender as ImageButton).RotateTo(360);
+			(sender as ImageButton).Rotation = 0;
+		}
+    }
 }
