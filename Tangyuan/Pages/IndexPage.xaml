@@ -7,9 +7,9 @@
              Title="IndexPage"
              Shell.BackgroundColor="{StaticResource Secondary}"
              Shell.ForegroundColor="{StaticResource Prestige}"
-             Shell.NavBarHasShadow="False">
+             Shell.NavBarHasShadow="False" Shell.TabBarBackgroundColor="{StaticResource Secondary}">
     <ContentPage.Behaviors>
-        <tk:StatusBarBehavior StatusBarColor="Transparent" StatusBarStyle="LightContent"/>
+        <tk:StatusBarBehavior StatusBarColor="Transparent" StatusBarStyle="DarkContent"/>
     </ContentPage.Behaviors>
     <Shell.TitleView>
         <Grid Margin="0,0,15,0">
