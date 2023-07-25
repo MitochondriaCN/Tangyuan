@@ -2,11 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:control="clr-namespace:Tangyuan.Controls"
+             xmlns:tk="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Tangyuan.Pages.IndexPage"
              Title="IndexPage"
              Shell.BackgroundColor="{StaticResource Secondary}"
              Shell.ForegroundColor="{StaticResource Prestige}"
              Shell.NavBarHasShadow="False">
+    <ContentPage.Behaviors>
+        <tk:StatusBarBehavior StatusBarColor="Transparent" StatusBarStyle="LightContent"/>
+    </ContentPage.Behaviors>
     <Shell.TitleView>
         <Grid Margin="0,0,15,0">
             <Grid.ColumnDefinitions>
