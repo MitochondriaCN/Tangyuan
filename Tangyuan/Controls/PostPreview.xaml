@@ -6,7 +6,7 @@
         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
     </ContentView.GestureRecognizers>
     <Border Stroke="{StaticResource GrayBrush}" StrokeThickness="1"
-            StrokeShape="RoundRectangle 10,10,10,10" HorizontalOptions="Center">
+            StrokeShape="RoundRectangle 10,10,10,10" HorizontalOptions="Fill">
         <Grid x:Name="grdMain">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
