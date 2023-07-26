@@ -149,9 +149,11 @@ public partial class PostPage : ContentPage,IQueryAttributable
 		if (LoginStatusManager.IsLoggedIn)
 		{
 			Task.Run(() => SQLDataHelper.AddPostLikeByID(postID));
+			(sender as ImageButton).Source = ImageSource.FromFile("icon_loved.png");
 			lblLikes.Text = (postInfo.Likes + 1).ToString();
-			await (sender as ImageButton).RotateTo(360);
-			(sender as ImageButton).Rotation = 0;
+			object primaryColor;
+			App.Current.Resources.TryGetValue("Primary", out primaryColor);
+			lblLikes.TextColorTo((Color)primaryColor, 32, 300);
 		}
     }
 }

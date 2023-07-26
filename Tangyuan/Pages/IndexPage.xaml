@@ -35,7 +35,7 @@
                          WidthRequest="25"/>
 
             <HorizontalStackLayout FlowDirection="RightToLeft" Grid.Column="2">
-                <ImageButton x:Name="btnNewPost" Source="https://icons.veryicon.com/png/o/miscellaneous/smile-preference/add-255.png"
+                <ImageButton x:Name="btnNewPost" Source="icon_add.png"
                              HeightRequest="24" WidthRequest="24" Margin="5"
                              CornerRadius="12" Clicked="btnNewPost_Clicked"/>
                 <ImageButton Source="https://icons.veryicon.com/png/o/miscellaneous/data-product-icon-library/search-663.png"

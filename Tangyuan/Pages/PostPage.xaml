@@ -73,15 +73,16 @@
                     Keyboard="Chat" MaxLength="1024" Margin="10,0,10,0"/>
             </Border>
             <Border Grid.Column="1" StrokeShape="Ellipse" StrokeThickness="0" Margin="5,0,10,0" VerticalOptions="End" BackgroundColor="{StaticResource Secondary}">
-                <ImageButton Source="icon_send.png" VerticalOptions="End" Clicked="ImageButton_Clicked"/>
+                <ImageButton Source="icon_send.png" Clicked="ImageButton_Clicked" HeightRequest="30" WidthRequest="30" Margin="5"
+                             Aspect="AspectFit"/>
             </Border>
 
             <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="6" Margin="10">
                 <Image Source="icon_eye.png" WidthRequest="17" HeightRequest="17" Aspect="AspectFit" VerticalOptions="Center"/>
                 <Label x:Name="lblViews" TextColor="{StaticResource Primary}" VerticalOptions="Center" FontFamily="HiraginoW6"/>
-                <ImageButton Source="icon_heart.png" WidthRequest="17" HeightRequest="17" Aspect="AspectFit" VerticalOptions="Center"
+                <ImageButton Source="icon_love.png" WidthRequest="17" HeightRequest="17" Aspect="AspectFit" VerticalOptions="Center"
                              Clicked="LikeButton_Clicked"/>
-                <Label x:Name="lblLikes" TextColor="{StaticResource Primary}" VerticalOptions="Center" FontFamily="HiraginoW6"/>
+                <Label x:Name="lblLikes" TextColor="{StaticResource Prestige}" VerticalOptions="Center" FontFamily="HiraginoW6"/>
                 <ImageButton x:Name="btnDeletePost" Source="icon_delete.png" WidthRequest="20" HeightRequest="20" Aspect="AspectFit"
                              Clicked="DeletePost_Clicked" IsVisible="False" VerticalOptions="Center"/>
             </HorizontalStackLayout>

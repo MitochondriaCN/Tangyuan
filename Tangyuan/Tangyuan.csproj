@@ -77,8 +77,11 @@
 	  <None Remove="Resources\Fonts\HiraginoSansGB-W3.ttf" />
 	  <None Remove="Resources\Fonts\HiraginoSansGB-W6.ttf" />
 	  <None Remove="Resources\Images\70060680_p0_master1200.jpg" />
+	  <None Remove="Resources\Images\icon_add.png" />
+	  <None Remove="Resources\Images\icon_delete.png" />
 	  <None Remove="Resources\Images\icon_eye.png" />
-	  <None Remove="Resources\Images\icon_heart.png" />
+	  <None Remove="Resources\Images\icon_love.png" />
+	  <None Remove="Resources\Images\icon_loved.png" />
 	  <None Remove="Resources\Images\icon_refresh.png" />
 	  <None Remove="Resources\Images\icon_send.png" />
 	  <None Remove="Resources\Images\test.jpg" />
