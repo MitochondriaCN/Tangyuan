@@ -60,8 +60,10 @@ namespace Tangyuan.Data
                     return "班级领袖";
                 case UserInfo.Role.Teacher:
                     return "老师";
+                case Role.OrdinaryStudent:
+                    return "学生";
                 default:
-                    return null;
+                    return "未知";
             }
         }
 
@@ -83,8 +85,10 @@ namespace Tangyuan.Data
                     return Color.Parse("#9b59b6");
                 case UserInfo.Role.Teacher:
                     return Color.Parse("#c0392b");
+                case Role.OrdinaryStudent:
+                    return Color.FromRgb(255, 255, 255);
                 default:
-                    return null;
+                    return Color.FromRgb(255, 255, 255);
             }
         }
     }

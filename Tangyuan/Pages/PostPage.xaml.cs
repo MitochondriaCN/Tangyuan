@@ -60,7 +60,7 @@ public partial class PostPage : ContentPage,IQueryAttributable
 			//排版作者信息
 			UserInfo ui = await Task.Run(() => SQLDataHelper.GetUserInfoByID(postInfo.AuthorID));
 			imgAvatar.Source = ImageSource.FromUri(new Uri(ui.Avatar));
-			grdAuthorBar.Add(new NameTitleView(ui), 1);
+			grdAuthorBar.Add(new NameTitleView(ui, true, true, true, UserInfo.Role.OrdinaryStudent), 1);
 			lblAuthorSignature.Text = ui.Signature;
 
 			//排版正文
