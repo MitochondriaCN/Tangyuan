@@ -11,7 +11,7 @@ public partial class LogInSignUpPage : ContentPage
 
 	private async void btnNext_Clicked(object sender, EventArgs e)
 	{
-		if (entPhoneNumber.Text != null && entPhoneNumber.Text.Length == 11)
+		if ((!string.IsNullOrEmpty(entPhoneNumber.Text)) && entPhoneNumber.Text.Length == 11)
 		{
 			if (SQLDataHelper.GetUserInfoByPhoneNumber(entPhoneNumber.Text) != null)
 			{
@@ -24,21 +24,21 @@ public partial class LogInSignUpPage : ContentPage
 				//注册流程
 				vstSignUpFormLayouter.IsVisible = true;
 				btnNext.Text = "注册";
-				if (entUsername.Text != null && entNewUserPasswd.Text != null && lstSchoolSelector.SelectedItem != null && pckGradePicker.SelectedItem != null)
+				if (!(string.IsNullOrEmpty(entUsername.Text)) && (!string.IsNullOrEmpty(entNewUserPasswd.Text)) && lstSchoolSelector.SelectedItem != null && pckGradePicker.SelectedItem != null)
 				{
 					if (SQLDataHelper.TrySignUp(entPhoneNumber.Text,
 						entUsername.Text,
 						entNewUserPasswd.Text, (lstSchoolSelector.SelectedItem as SchoolInfo).SchoolID,
 						(pckGradePicker.SelectedItem as SchoolInfo.GradeDefinition).GradeID))
 					{
-                        await DisplayAlert("已注册", "注册成功，现在请登录。", "确定");
-                        await Shell.Current.GoToAsync("..");
+						await DisplayAlert("已注册", "注册成功，现在请登录。", "确定");
+						await Shell.Current.GoToAsync("..");
 						await Shell.Current.GoToAsync("/login");
-                    }
+					}
 				}
 			}
 		}
-		if (entPasswd.Text != null && entPasswd.Text.Length > 6)
+		if ((!string.IsNullOrEmpty(entPasswd.Text)) && entPasswd.Text.Length > 6)
 		{
 			if (LoginStatusManager.TryLogIn(entPhoneNumber.Text, entPasswd.Text))
 			{
