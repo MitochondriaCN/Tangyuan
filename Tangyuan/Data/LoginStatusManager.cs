@@ -36,7 +36,7 @@ namespace Tangyuan.Data
             LocalSQLDataHelper.LocalLoginInfo logininfo = LocalSQLDataHelper.GetLoginInfo();
             if (logininfo != null)
             {
-                if (LoginStatusManager.TryLogIn(logininfo.LoginUserPhoneNumber, logininfo.LoginUserPassword))
+                if (TryLogIn(logininfo.LoginUserPhoneNumber, logininfo.LoginUserPassword))
                 {
                     UserInfo ui = SQLDataHelper.GetUserInfoByPhoneNumber(logininfo.LoginUserPhoneNumber);
                     IsLoggedIn = true;
