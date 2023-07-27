@@ -31,7 +31,7 @@
                 <IndicatorView x:Name="idvCurrentImage" IndicatorColor="{StaticResource Gray200}" SelectedIndicatorColor="{StaticResource Gray300}"
                            HorizontalOptions="Center" Margin="10" HideSingle="False"/>
 
-                <Label x:Name="lblTitle" FontFamily="HiraginoW6" FontSize="Title" MaxLines="3" Margin="10,8,10,0"/>
+                <Label x:Name="lblTitle" FontFamily="LisongW5" FontSize="Title" MaxLines="3" Margin="10,8,10,0" LineHeight="1.2"/>
                 <HorizontalStackLayout Margin="10,6,10,0" VerticalOptions="Center" Spacing="5">
                     <Label x:Name="lblDate" FontSize="Micro" TextColor="{StaticResource Gray400}" VerticalTextAlignment="Center"/>
                     <Label x:Name="lblLocation" FontSize="Micro" TextColor="{StaticResource Gray400}" VerticalTextAlignment="Center" Text="发布于甘肃"/>
