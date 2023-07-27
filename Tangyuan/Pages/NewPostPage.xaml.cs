@@ -26,7 +26,7 @@ public partial class NewPostPage : ContentPage
 		btnSend.Text = "ÕýÔÚ·¢Ìû";
 		aidSendStatus.IsRunning = true;
 
-		if (!(string.IsNullOrEmpty(edtContent.Text) && string.IsNullOrEmpty(entTitle.Text)))
+		if (!(string.IsNullOrEmpty(edtContent.Text) || string.IsNullOrEmpty(entTitle.Text)))
 		{
 			XDocument doc;
 			try
