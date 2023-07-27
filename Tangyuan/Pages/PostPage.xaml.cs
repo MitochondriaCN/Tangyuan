@@ -31,44 +31,59 @@ public partial class PostPage : ContentPage,IQueryAttributable
 
 	private async void UICompleter(uint postID)
 	{
-		this.postID = postID;
-		postInfo = await Task.Run(() => SQLDataHelper.GetPostByID(postID));
-		SchoolInfo si = await Task.Run(() => SQLDataHelper.GetSchoolInfoByID(postInfo.SchoolID));
-
-        crvImages.IndicatorView = idvCurrentImage;
-		
-		//排版基本信息
-		lblTitle.Text = postInfo.Content.Root.Descendants("Title").ToList()[0].Value.ToString();
-		lblDate.Text = postInfo.PostDate.ToString();
-		lblViews.Text = postInfo.Views.ToString();
-		lblLikes.Text = postInfo.Likes.ToString();
-		bodSchoolContainer.BackgroundColor = Color.Parse(si.ThemeColor.ToHex());
-		lblSchool.Text = si.SchoolName;
-
-		//设置作者和管理员功能
-		//管理员功能暂缺
-		if (LoginStatusManager.IsLoggedIn)
+		try
 		{
-			if (LoginStatusManager.LoggedInUserID == postInfo.AuthorID)
+			this.postID = postID;
+			postInfo = await Task.Run(() => SQLDataHelper.GetPostByID(postID));
+			SchoolInfo si = await Task.Run(() => SQLDataHelper.GetSchoolInfoByID(postInfo.SchoolID));
+
+			crvImages.IndicatorView = idvCurrentImage;
+
+			//排版基本信息
+			lblTitle.Text = postInfo.Content.Root.Descendants("Title").ToList()[0].Value.ToString();
+			lblDate.Text = postInfo.PostDate.ToString();
+			lblViews.Text = postInfo.Views.ToString();
+			lblLikes.Text = postInfo.Likes.ToString();
+			bodSchoolContainer.BackgroundColor = Color.Parse(si.ThemeColor.ToHex());
+			lblSchool.Text = si.SchoolName;
+
+			//设置作者和管理员功能
+			//管理员功能暂缺
+			if (LoginStatusManager.IsLoggedIn)
 			{
-				btnDeletePost.IsVisible = true;
+				if (LoginStatusManager.LoggedInUserID == postInfo.AuthorID)
+				{
+					btnDeletePost.IsVisible = true;
+				}
 			}
+
+			//排版作者信息
+			UserInfo ui = await Task.Run(() => SQLDataHelper.GetUserInfoByID(postInfo.AuthorID));
+			imgAvatar.Source = ImageSource.FromUri(new Uri(ui.Avatar));
+			grdAuthorBar.Add(new NameTitleView(ui), 1);
+			lblAuthorSignature.Text = ui.Signature;
+
+			//排版正文
+			TangyuanArranging(postInfo.Content);
+
+			//排版评论
+			TangyuanCommentsArranging(await Task.Run(() => SQLDataHelper.GetFirstLevelCommentsByPostID(postID)));
+
+			//增加阅读数
+			Task.Run(() => SQLDataHelper.AddPostViewByID(postID));
 		}
-
-		//排版作者信息
-		UserInfo ui = await Task.Run(() => SQLDataHelper.GetUserInfoByID(postInfo.AuthorID));
-		imgAvatar.Source = ImageSource.FromUri(new Uri(ui.Avatar));
-		grdAuthorBar.Add(new NameTitleView(ui), 1);
-		lblAuthorSignature.Text = ui.Signature;
-
-        //排版正文
-        TangyuanArranging(postInfo.Content);
-
-		//排版评论
-		TangyuanCommentsArranging(await Task.Run(() => SQLDataHelper.GetFirstLevelCommentsByPostID(postID)));
-
-		//增加阅读数
-		Task.Run(() => SQLDataHelper.AddPostViewByID(postID));
+		catch
+		{
+			object gray400;
+			Resources.TryGetValue("Gray400", out gray400);
+			this.Content = new Label()
+			{
+				VerticalTextAlignment = TextAlignment.Center,
+				HorizontalTextAlignment = TextAlignment.Center,
+				TextColor = (Color)gray400,
+				Text = "加载失败，请重试。"
+			};
+		}
 	}
 
 	/// <summary>

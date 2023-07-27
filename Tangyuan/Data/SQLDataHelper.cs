@@ -30,6 +30,7 @@ namespace Tangyuan.Data
             sb.UserID = username;
             sb.Password = passwd;
             sb.SslMode = MySqlSslMode.None;
+            sb.ConnectionTimeout = 10;
             MySqlConnection conn = new MySqlConnection(sb.ToString());
             return conn;
         }
