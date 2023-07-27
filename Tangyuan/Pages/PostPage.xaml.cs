@@ -141,34 +141,73 @@ public partial class PostPage : ContentPage,IQueryAttributable
 	{
 		if (LoginStatusManager.IsLoggedIn)
 		{
-			if (edtComment.Text != null && edtComment.Text.Trim() != "")
+			if (!string.IsNullOrEmpty(edtComment.Text))
 			{
-				await ((ImageButton)sender).RotateTo(360);
-				((ImageButton)sender).Rotation = 0;
-				string content = edtComment.Text;
-				edtComment.Text = "";
-				await Task.Run(() => SQLDataHelper.NewComment(LoginStatusManager.LoggedInUserID, postID, content));
-                TangyuanCommentsArranging(await Task.Run(() => SQLDataHelper.GetFirstLevelCommentsByPostID(postID)));
+				try
+				{
+					await ((ImageButton)sender).RotateTo(360);
+					((ImageButton)sender).Rotation = 0;
+					string content = edtComment.Text;
+					await Task.Run(() => SQLDataHelper.NewComment(LoginStatusManager.LoggedInUserID, postID, content));
+                    edtComment.Text = "";
+                    try
+                    {
+                        TangyuanCommentsArranging(await Task.Run(() => SQLDataHelper.GetFirstLevelCommentsByPostID(postID)));
+                    }
+                    catch
+                    {
+                        stlCommentsLayouter.Children.Clear();
+                        object gray400;
+                        Resources.TryGetValue("Gray400", out gray400);
+                        stlCommentsLayouter.Add(new Label()
+                        {
+                            VerticalTextAlignment = TextAlignment.Center,
+                            HorizontalTextAlignment = TextAlignment.Center,
+                            TextColor = (Color)gray400,
+                            Text = "评论加载失败，请重试。"
+                        });
+                    }
+                }
+				catch
+				{
+					await DisplayAlert("异常", "评论失败", "确定");
+				}
+				
             }
 		}
 	}
 
 	private async void DeletePost_Clicked(object sender, EventArgs e)
 	{
-		await Shell.Current.GoToAsync("..");
-		await Task.Run(() => SQLDataHelper.DeletePostByID(postID));
+		try
+		{
+			await Shell.Current.GoToAsync("..");
+			await Task.Run(() => SQLDataHelper.DeletePostByID(postID));
+		}
+		catch
+		{
+			await DisplayAlert("异常", "删帖失败", "确定");
+		}
 	}
 
     private async void LikeButton_Clicked(object sender, EventArgs e)
     {
 		if (LoginStatusManager.IsLoggedIn)
 		{
-			Task.Run(() => SQLDataHelper.AddPostLikeByID(postID));
-			(sender as ImageButton).Source = ImageSource.FromFile("icon_loved.png");
-			lblLikes.Text = (postInfo.Likes + 1).ToString();
-			object primaryColor;
-			App.Current.Resources.TryGetValue("Primary", out primaryColor);
-			lblLikes.TextColorTo((Color)primaryColor, 32, 300);
+			try
+			{
+				await Task.Run(() => SQLDataHelper.AddPostLikeByID(postID));
+				(sender as ImageButton).Source = ImageSource.FromFile("icon_loved.png");
+				lblLikes.Text = (postInfo.Likes + 1).ToString();
+				object primaryColor;
+				App.Current.Resources.TryGetValue("Primary", out primaryColor);
+				lblLikes.TextColorTo((Color)primaryColor, 32, 300);
+			}
+			catch
+			{
+				await DisplayAlert("异常", "点赞失败", "确定");
+				return;
+			}
 		}
     }
 }
