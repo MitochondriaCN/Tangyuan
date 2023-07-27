@@ -91,7 +91,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" ForegroundScale="0.5" />
+	  <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" ForegroundScale="0.7" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -99,7 +99,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiSplashScreen Include="Resources\Splash\splash.svg" BaseSize="64,64" />
+	  <MauiSplashScreen Include="Resources\Splash\splash.svg" BaseSize="128,128" />
 	</ItemGroup>
 
 	<ItemGroup>
