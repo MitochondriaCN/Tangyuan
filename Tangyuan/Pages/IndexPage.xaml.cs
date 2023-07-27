@@ -12,19 +12,7 @@ public partial class IndexPage : ContentPage
 		InitializeComponent();
 
         RefreshPostsAsync();
-
-		#region µÇÂ¼
-		if (LoginStatusManager.TryLogIn())
-		{
-			UserInfo ui = SQLDataHelper.GetUserInfoByID(LoginStatusManager.LoggedInUserID);
-			imbUserAvatar.Source = ImageSource.FromUri(new Uri(ui.Avatar));
-			lblUserNickname.Text = ui.Nickname;
-		}
-		else
-		{
-			lblUserNickname.Text = "Î´µÇÂ¼";
-		}
-        #endregion
+        LoginAsync();
     }
 
 	private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
@@ -123,5 +111,19 @@ public partial class IndexPage : ContentPage
         }
         btnRefresh.IsVisible = true;
         aciRefreshStatus.IsRunning = false;
+    }
+
+    private async void LoginAsync()
+    {
+        if (LoginStatusManager.TryLogIn())
+        {
+            UserInfo ui = await Task.Run(() => SQLDataHelper.GetUserInfoByID(LoginStatusManager.LoggedInUserID));
+            imbUserAvatar.Source = ImageSource.FromUri(new Uri(ui.Avatar));
+            lblUserNickname.Text = ui.Nickname;
+        }
+        else
+        {
+            lblUserNickname.Text = "Î´µÇÂ¼";
+        }
     }
 }
