@@ -196,16 +196,21 @@ public partial class PostPage : ContentPage,IQueryAttributable
 		{
 			try
 			{
-				await Task.Run(() => SQLDataHelper.AddPostLikeByID(postID));
 				(sender as ImageButton).Source = ImageSource.FromFile("icon_loved.png");
 				lblLikes.Text = (postInfo.Likes + 1).ToString();
 				object primaryColor;
 				App.Current.Resources.TryGetValue("Primary", out primaryColor);
 				lblLikes.TextColorTo((Color)primaryColor, 32, 300);
-			}
+                await Task.Run(() => SQLDataHelper.AddPostLikeByID(postID));
+            }
 			catch
 			{
-				await DisplayAlert("异常", "点赞失败", "确定");
+                (sender as ImageButton).Source = ImageSource.FromFile("icon_love.png");
+                lblLikes.Text = postInfo.Likes.ToString();
+                object prestigeColor;
+                App.Current.Resources.TryGetValue("Prestige", out prestigeColor);
+                lblLikes.TextColorTo((Color)prestigeColor, 32, 300);
+                await DisplayAlert("异常", "点赞失败", "确定");
 				return;
 			}
 		}
