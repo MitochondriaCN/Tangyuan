@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tangyuan.Pages.UserHomePage"
+             Title="个人主页"
+             Shell.BackgroundColor="{StaticResource Secondary}"
+             Shell.ForegroundColor="{StaticResource Prestige}"
+             Shell.TitleColor="{StaticResource Prestige}"
+             Shell.NavBarHasShadow="False">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Grid Margin="10" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" x:Name="grdUserBar">
+                <Border StrokeShape="Ellipse" StrokeThickness="0" Margin="1,1,8,1" Grid.RowSpan="2">
+                    <Image x:Name="imgAvatar" WidthRequest="80" HeightRequest="80" Aspect="AspectFill"/>
+                </Border>
+
+                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                    <Label x:Name="lblUsername" FontSize="Large" FontFamily="HiraginoW6" VerticalTextAlignment="Center" TextColor="{StaticResource Prestige}"/>
+                    <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
+                        <Border x:Name="bodGradeContainer" StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0" VerticalOptions="Center">
+                            <Label x:Name="lblGrade" TextColor="White" Margin="3,2,3,2" 
+                           VerticalTextAlignment="Center" FontFamily="HiraginoW6" VerticalOptions="Center"/>
+                        </Border>
+                        <Border x:Name="bodSchoolContainer" StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0" VerticalOptions="Center">
+                            <Label x:Name="lblSchool" TextColor="White" Margin="3,2,3,2" 
+                           VerticalTextAlignment="Center" FontFamily="HiraginoW6" VerticalOptions="Center"/>
+                        </Border>
+                        <Border x:Name="bodRoleContainer" StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0" VerticalOptions="Center">
+                            <Label x:Name="lblRole" TextColor="White" Margin="3,2,3,2" 
+                           VerticalTextAlignment="Center" FontFamily="HiraginoW6" VerticalOptions="Center"/>
+                        </Border>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <Label x:Name="lblAuthorSignature" Grid.Row="1" Grid.Column="1" TextColor="{StaticResource Gray400}"
+                           VerticalOptions="Center" VerticalTextAlignment="Center"/>
+            </Grid>
+
+            <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="{StaticResource Gray}" Margin="10,6,10,0"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
