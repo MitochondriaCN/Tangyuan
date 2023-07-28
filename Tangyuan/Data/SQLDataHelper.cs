@@ -213,6 +213,24 @@ namespace Tangyuan.Data
 
         }
 
+        internal static CollectionInfo GetCollectionByID(uint id)
+        {
+            using (MySqlConnection c = GetNewConnection())
+            {
+                c.Open();
+                MySqlDataReader r = new MySqlCommand("select * from collection_table where id=" + id + " limit 1", c).ExecuteReader();
+                while (r.Read())
+                {
+                    return new CollectionInfo(
+                        r.GetUInt32("id"),
+                        r.GetUInt32("author_id"),
+                        r.GetString("collection_name"),
+                        r.GetString("description"));
+                }
+                return null;
+            }
+        }
+
         internal static UserInfo GetUserInfoByID(uint userID)
         {
             using (MySqlConnection mc = GetNewConnection())
