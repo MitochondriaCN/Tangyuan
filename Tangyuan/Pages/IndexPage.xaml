@@ -9,7 +9,7 @@
              Shell.ForegroundColor="{StaticResource Prestige}"
              Shell.NavBarHasShadow="False" Shell.TabBarBackgroundColor="{StaticResource Secondary}">
     <ContentPage.Behaviors>
-        <tk:StatusBarBehavior StatusBarColor="Transparent" StatusBarStyle="DarkContent"/>
+        <tk:StatusBarBehavior StatusBarColor="{StaticResource Secondary}" StatusBarStyle="DarkContent"/>
     </ContentPage.Behaviors>
     <Shell.TitleView>
         <Grid Margin="0,0,15,0">

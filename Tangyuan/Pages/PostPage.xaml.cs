@@ -66,9 +66,10 @@ public partial class PostPage : ContentPage,IQueryAttributable
 			//排版合集信息
 			if (postInfo.IsInCollection)
 			{
+				CollectionInfo ci = await Task.Run(() => SQLDataHelper.GetCollectionByID(postInfo.CollectionID));
 				grdCollectionContainer.IsVisible = true;
-				lblCollectionName.Text = "";//TODO
-				lblCollectionInfo.Text = "合集 · 共 " + "" + " 篇帖子";//TODO
+				lblCollectionName.Text = ci.CollectionName;
+				lblCollectionInfo.Text = "合集 · " + ci.Description;
 			}
 
 			//排版正文
