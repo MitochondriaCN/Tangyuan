@@ -7,6 +7,7 @@ using System.Xml;
 using System.Data;
 using System.Xml.Linq;
 using MySqlConnector;
+using static CoreFoundation.DispatchSource;
 
 namespace Tangyuan.Data
 {
@@ -81,10 +82,12 @@ namespace Tangyuan.Data
                                     data.GetUInt32("id"),
                                     data.GetUInt32("author_id"),
                                     data.GetUInt32("school_id"),
-                                    data.GetDateTime("post_date").ToLocalTime(), 
+                                    data.GetDateTime("post_date").ToLocalTime(),
                                     data.GetUInt32("likes"),
                                     data.GetUInt32("views"),
-                                    XDocument.Parse(data.GetString("content"))));
+                                    XDocument.Parse(data.GetString("content")),
+                                    data.GetBoolean("is_in_collection"),
+                                    data.GetUInt32("collection_id")));
                             }
                         }
                         if (posts.Count > maxNumber)
@@ -163,7 +166,9 @@ namespace Tangyuan.Data
                         r.GetDateTime("post_date").ToLocalTime(),
                         r.GetUInt32("likes"),
                         r.GetUInt32("views"),
-                        XDocument.Parse(r.GetString("content")));
+                        XDocument.Parse(r.GetString("content")),
+                        r.GetBoolean("is_in_collection"),
+                        r.GetUInt32("collection_id"));
                 else
                     return null;
             }

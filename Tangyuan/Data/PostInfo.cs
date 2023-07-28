@@ -16,8 +16,10 @@ namespace Tangyuan.Data
         internal uint Likes { get; private set; }
         internal uint Views { get; private set; }
         internal XDocument Content { get; private set; }
-
-        internal PostInfo(uint postID, uint authorID, uint schoolID, DateTime postDate, uint likes, uint views, XDocument content)
+        internal bool IsInCollection { get; private set; }
+        internal uint CollectionID { get; private set; }
+        internal PostInfo(uint postID, uint authorID, uint schoolID, DateTime postDate, uint likes, uint views, XDocument content, 
+            bool isInCollection, uint collectionID)
         {
             PostID = postID;
             AuthorID = authorID;
@@ -26,6 +28,8 @@ namespace Tangyuan.Data
             Likes = likes;
             Views = views;
             Content = content;
+            IsInCollection = isInCollection;
+            CollectionID = collectionID;
         }
     }
 }
