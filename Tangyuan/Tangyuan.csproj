@@ -113,6 +113,7 @@
 	  <None Remove="Resources\Fonts\LiSong-W5.ttf" />
 	  <None Remove="Resources\Images\70060680_p0_master1200.jpg" />
 	  <None Remove="Resources\Images\icon_add.png" />
+	  <None Remove="Resources\Images\icon_collection.png" />
 	  <None Remove="Resources\Images\icon_delete.png" />
 	  <None Remove="Resources\Images\icon_error.png" />
 	  <None Remove="Resources\Images\icon_eye.png" />

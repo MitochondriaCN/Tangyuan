@@ -63,6 +63,14 @@ public partial class PostPage : ContentPage,IQueryAttributable
 			grdAuthorBar.Add(new NameTitleView(ui, true, true, true, UserInfo.Role.OrdinaryStudent), 1);
 			lblAuthorSignature.Text = ui.Signature;
 
+			//排版合集信息
+			if (postInfo.IsInCollection)
+			{
+				grdCollectionContainer.IsVisible = true;
+				lblCollectionName.Text = "";//TODO
+				lblCollectionInfo.Text = "合集 · 共 " + "" + " 篇帖子";//TODO
+			}
+
 			//排版正文
 			TangyuanArranging(postInfo.Content);
 
