@@ -8,8 +8,8 @@
              Shell.TitleColor="{StaticResource Prestige}"
              Shell.NavBarHasShadow="False">
     <ScrollView>
-        <VerticalStackLayout>
-            <Grid Margin="10" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" x:Name="grdUserBar">
+        <VerticalStackLayout Margin="10,10,10,0">
+            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*,Auto" x:Name="grdUserBar">
                 <Border StrokeShape="Ellipse" StrokeThickness="0" Margin="1,1,8,1" Grid.RowSpan="2">
                     <Image x:Name="imgAvatar" WidthRequest="80" HeightRequest="80" Aspect="AspectFill"/>
                 </Border>
@@ -34,9 +34,31 @@
 
                 <Label x:Name="lblAuthorSignature" Grid.Row="1" Grid.Column="1" TextColor="{StaticResource Gray400}"
                            VerticalOptions="Center" VerticalTextAlignment="Center"/>
+
+                <VerticalStackLayout VerticalOptions="Center" Grid.RowSpan="2" Grid.Column="2" Spacing="8" Margin="10,0,0,0">
+                    <Button x:Name="btnFollow" Text="关注" CornerRadius="15" BackgroundColor="Transparent" FontSize="Small"
+                            BorderWidth="1" BorderColor="{StaticResource Gray400}" TextColor="{StaticResource Gray400}"/>
+                    <Button x:Name="btnEditProfile" Text="编辑资料" CornerRadius="15" BackgroundColor="Transparent" FontSize="Small"
+                            BorderWidth="1" BorderColor="{StaticResource Gray400}" TextColor="{StaticResource Gray400}" />
+                </VerticalStackLayout>
             </Grid>
 
-            <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="{StaticResource Gray}" Margin="10,6,10,0"/>
+            <Grid ColumnDefinitions="1*,1*,1*" Margin="0,15,0,0">
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label FontSize="Large" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
+                    <Label Text="粉丝" HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label FontSize="Large" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
+                    <Label Text="正在关注" HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label FontSize="Large" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
+                    <Label Text="帖子" HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="{StaticResource Gray}" Margin="10,10,10,0"/>
 
         </VerticalStackLayout>
     </ScrollView>

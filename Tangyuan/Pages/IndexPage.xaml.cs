@@ -19,7 +19,7 @@ public partial class IndexPage : ContentPage
 	{
 		if (LoginStatusManager.IsLoggedIn)
 		{
-            Shell.Current.GoToAsync("/login");
+            Shell.Current.GoToAsync("/user?id=" + LoginStatusManager.LoggedInUserID);
         }
 		else
 		{
