@@ -224,4 +224,9 @@ public partial class PostPage : ContentPage,IQueryAttributable
 			}
 		}
     }
+
+    private void grdAuthorBar_Tapped(object sender, TappedEventArgs e)
+    {
+		Shell.Current.GoToAsync("/user?id=" + postInfo.AuthorID);
+    }
 }
