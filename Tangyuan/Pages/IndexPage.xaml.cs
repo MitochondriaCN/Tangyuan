@@ -13,6 +13,8 @@ public partial class IndexPage : ContentPage
 
         RefreshPostsAsync();
         LoginAsync();
+
+        bool b = VersionControlHelper.IsANewerVersionReleased();
     }
 
 	private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
