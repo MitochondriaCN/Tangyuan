@@ -7,6 +7,8 @@ public partial class EditProfilePage : ContentPage,IQueryAttributable
 {
     UserInfo ui;
 
+    private bool isAvatarChanged;
+
 	public EditProfilePage()
 	{
 		InitializeComponent();
@@ -44,6 +46,7 @@ public partial class EditProfilePage : ContentPage,IQueryAttributable
             Success = imagefile =>
             {
                 avtAvatar.ImageSource = imagefile;
+                isAvatarChanged = true;
             }
         }.Show(this);
     }
@@ -54,7 +57,9 @@ public partial class EditProfilePage : ContentPage,IQueryAttributable
         btnSave.IsEnabled = false;
         btnSave.Text = "ÕýÔÚ±£´æ";
 
-        string avatar = await Task.Run(() => SmMsHelper.UploadImage(new FileInfo((avtAvatar.ImageSource as FileImageSource).File)));
+        string avatar = (avtAvatar.ImageSource as UriImageSource) == null ?
+            await Task.Run(() => SmMsHelper.UploadImage(new FileInfo((avtAvatar.ImageSource as FileImageSource).File))) :
+            (avtAvatar.ImageSource as UriImageSource).Uri.ToString();
         UserInfo newui = new(ui.UserID, ui.Password, entNickname.Text, edtSignature.Text, ui.PhoneNumber, ui.SchoolID, avatar, ui.GradeID, ui.UserRole);
         await Task.Run(() => SQLDataHelper.UpdateUser(newui));
 
