@@ -45,15 +45,15 @@
 
             <Grid ColumnDefinitions="1*,1*,1*" Margin="0,15,0,0">
                 <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                    <Label FontSize="Large" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="lblFans" FontSize="Large" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
                     <Label Text="粉丝" HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center">
-                    <Label FontSize="Large" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="lblFollowings" FontSize="Large" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
                     <Label Text="正在关注" HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center">
-                    <Label FontSize="Large" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="lblPostNumber" FontSize="Large" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
                     <Label Text="帖子" HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
             </Grid>

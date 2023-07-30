@@ -32,5 +32,7 @@ public partial class UserHomePage : ContentPage,IQueryAttributable
         imgAvatar.Source = ImageSource.FromUri(new Uri(ui.Avatar));
 
 		//关注、粉丝和帖子数
+		lblFans.Text = (await Task.Run(() => SQLDataHelper.GetFansByUserID(ui.UserID))).Length.ToString();
+		lblFollowings.Text = (await Task.Run(() => SQLDataHelper.GetFollowingsByUserID(ui.UserID))).Length.ToString();
     }
 }

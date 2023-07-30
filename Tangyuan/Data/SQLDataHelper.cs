@@ -127,7 +127,7 @@ namespace Tangyuan.Data
         /// </summary>
         /// <param name="id">要获取粉丝的用户ID</param>
         /// <returns></returns>
-        private static uint[] GetFansByUserID(uint id)
+        internal static uint[] GetFansByUserID(uint id)
         {
             using (MySqlConnection c = new MySqlConnection())
             {
