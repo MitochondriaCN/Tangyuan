@@ -36,15 +36,23 @@
                 <Label FontFamily="HiraginoW6" Text="学校" VerticalTextAlignment="Center"/>
                 <Label x:Name="lblSchool" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center"/>
             </Grid>
-            <Button x:Name="btnChangeSchool" Text="更换学校" HorizontalOptions="End" Margin="0,6,0,6"/>
+            <Button x:Name="btnChangeSchool" Text="更换学校" HorizontalOptions="End" Margin="0,6,0,6" BackgroundColor="Transparent"
+                    BorderWidth="1" BorderColor="{StaticResource Gray400}" TextColor="{StaticResource Gray400}"/>
             <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="{StaticResource Gray}" Margin="0,8,0,5"/>
             
             <Grid ColumnDefinitions="Auto,*" Margin="0,5,0,5">
                 <Label FontFamily="HiraginoW6" Text="年级" VerticalTextAlignment="Center"/>
                 <Label x:Name="lblGrade" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center"/>
             </Grid>
-            <Button x:Name="btnChangeGrade" Text="更换年级" HorizontalOptions="End" Margin="0,6,0,6"/>
+            <Button x:Name="btnChangeGrade" Text="更换年级" HorizontalOptions="End" Margin="0,6,0,6" BackgroundColor="Transparent"
+                    BorderWidth="1" BorderColor="{StaticResource Gray400}" TextColor="{StaticResource Gray400}"/>
             <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="{StaticResource Gray}" Margin="0,8,0,5"/>
+
+            <HorizontalStackLayout FlowDirection="RightToLeft" Spacing="3" Margin="0,10,0,0">
+                <Button x:Name="btnSave" HorizontalOptions="End" Text="保存" Clicked="btnSave_Clicked" VerticalOptions="Center"/>
+                <ActivityIndicator x:Name="adiSaveStatus" HeightRequest="20" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+            
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

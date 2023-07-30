@@ -28,20 +28,36 @@ public partial class EditProfilePage : ContentPage,IQueryAttributable
         lblGrade.Text = si.GradeDefinitions.Find(x => x.GradeID == ui.GradeID).GradeName;
     }
 
-    private async void avtAvatar_Tapped(object sender, TappedEventArgs e)
+    private void avtAvatar_Tapped(object sender, TappedEventArgs e)
     {
         new ImageCropper.Maui.ImageCropper()
         {
-            PageTitle = "选择头像",
+            PageTitle = "裁剪头像",
             CropShape = ImageCropper.Maui.ImageCropper.CropShapeType.Oval,
             AspectRatioX = 1,
             AspectRatioY = 1,
             TakePhotoTitle = "拍照",
-            PhotoLibraryTitle = "图片库",
+            PhotoLibraryTitle = "相册",
+            SelectSourceTitle = "选择图片来源",
+            CancelButtonTitle = "取消",
+            CropButtonTitle = "裁剪",
             Success = imagefile =>
             {
-                ;
+                avtAvatar.ImageSource = imagefile;
             }
         }.Show(this);
+    }
+
+    private async void btnSave_Clicked(object sender, EventArgs e)
+    {
+        adiSaveStatus.IsRunning = true;
+        btnSave.IsEnabled = false;
+        btnSave.Text = "正在保存";
+
+        string avatar = await Task.Run(() => SmMsHelper.UploadImage(new FileInfo((avtAvatar.ImageSource as FileImageSource).File)));
+        UserInfo newui = new(ui.UserID, ui.Password, entNickname.Text, edtSignature.Text, ui.PhoneNumber, ui.SchoolID, avatar, ui.GradeID, ui.UserRole);
+        await Task.Run(() => SQLDataHelper.UpdateUser(newui));
+
+        Shell.Current.GoToAsync("..?id=" + ui.UserID);
     }
 }

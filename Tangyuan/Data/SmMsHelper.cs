@@ -20,7 +20,7 @@ namespace Tangyuan.Data
             client.DefaultRequestHeaders.Add("Authorization", authorization);
         }
 
-        internal static string UploadImageAsync(FileInfo imageInfo)
+        internal static string UploadImage(FileInfo imageInfo)
         {
             HttpContent content = new StreamContent(imageInfo.OpenRead());
             var mp = new MultipartFormDataContent();

@@ -364,6 +364,22 @@ namespace Tangyuan.Data
         }
 
         /// <summary>
+        /// 更新用户信息
+        /// </summary>
+        /// <param name="ui">用户信息（必须是已经存在的用户）</param>
+        internal static void UpdateUser(UserInfo ui)
+        {
+            using (MySqlConnection c = GetNewConnection())
+            {
+                c.Open();
+                new MySqlCommand("update user_table set nickname='" + ui.Nickname + "'," +
+                    "signature='" + ui.Signature + "'," +
+                    "avatar='" + ui.Avatar + "' " +
+                    "where id=" + ui.UserID, c).ExecuteNonQuery();
+            }
+        }
+
+        /// <summary>
         /// 获取所有学校信息。
         /// </summary>
         /// <returns></returns>

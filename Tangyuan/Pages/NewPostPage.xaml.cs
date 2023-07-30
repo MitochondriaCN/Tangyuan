@@ -86,7 +86,7 @@ public partial class NewPostPage : ContentPage
 				i++;
 
 				gallery.Add(new XElement("Image",
-					await Task.Run(() => SmMsHelper.UploadImageAsync(new((((v as Image).Source) as FileImageSource).File)))));//本语句相当壮观
+					await Task.Run(() => SmMsHelper.UploadImage(new((((v as Image).Source) as FileImageSource).File)))));//本语句相当壮观
 			}
 			xd.Root.Add(gallery);
 
