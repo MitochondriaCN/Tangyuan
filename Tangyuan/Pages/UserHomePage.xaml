@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:t="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Tangyuan.Pages.UserHomePage"
              Title="个人主页"
              Shell.BackgroundColor="{StaticResource Secondary}"
              Shell.ForegroundColor="{StaticResource Prestige}"
              Shell.TitleColor="{StaticResource Prestige}"
              Shell.NavBarHasShadow="False">
+    <ContentPage.Behaviors>
+        <t:StatusBarBehavior StatusBarColor="{StaticResource Secondary}" StatusBarStyle="DarkContent"/>
+    </ContentPage.Behaviors>
+    
     <ScrollView>
-        <VerticalStackLayout Margin="10,10,10,0">
-            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*,Auto" x:Name="grdUserBar">
+        <VerticalStackLayout Margin="15,0,15,0">
+            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*,Auto" x:Name="grdUserBar" Margin="0,10,0,0">
                 <Border StrokeShape="Ellipse" StrokeThickness="0" Margin="1,1,8,1" Grid.RowSpan="2">
                     <Image x:Name="imgAvatar" WidthRequest="80" HeightRequest="80" Aspect="AspectFill"/>
                 </Border>
@@ -37,9 +42,10 @@
 
                 <VerticalStackLayout VerticalOptions="Center" Grid.RowSpan="2" Grid.Column="2" Spacing="8" Margin="10,0,0,0">
                     <Button x:Name="btnFollow" Text="关注" CornerRadius="15" BackgroundColor="Transparent" FontSize="Small"
-                            BorderWidth="1" BorderColor="{StaticResource Gray400}" TextColor="{StaticResource Gray400}"/>
+                            BorderWidth="1" BorderColor="{StaticResource Gray400}" TextColor="{StaticResource Gray400}" IsVisible="False"/>
                     <Button x:Name="btnEditProfile" Text="编辑资料" CornerRadius="15" BackgroundColor="Transparent" FontSize="Small"
-                            BorderWidth="1" BorderColor="{StaticResource Gray400}" TextColor="{StaticResource Gray400}" />
+                            BorderWidth="1" BorderColor="{StaticResource Gray400}" TextColor="{StaticResource Gray400}" IsVisible="False"
+                            Clicked="btnEditProfile_Clicked"/>
                 </VerticalStackLayout>
             </Grid>
 
