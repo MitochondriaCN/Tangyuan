@@ -1,5 +1,6 @@
 using Tangyuan.Data;
 using ImageCropper.Maui;
+using CommunityToolkit.Maui.Alerts;
 
 namespace Tangyuan.Pages;
 
@@ -14,20 +15,35 @@ public partial class EditProfilePage : ContentPage,IQueryAttributable
 		InitializeComponent();
 	}
 
-    public async void ApplyQueryAttributes(IDictionary<string, object> query)
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        ui = await Task.Run(() => SQLDataHelper.GetUserInfoByID(uint.Parse(query["id"].ToString())));
-        UICompleter();
+        UICompleter(uint.Parse(query["id"].ToString()));
     }
 
-    private async void UICompleter()
+    private async void UICompleter(uint id)
     {
-        SchoolInfo si = await Task.Run(() => SQLDataHelper.GetSchoolInfoByID(ui.SchoolID));
-        avtAvatar.ImageSource = ImageSource.FromUri(new Uri(ui.Avatar));
-        entNickname.Text = ui.Nickname;
-        edtSignature.Text = ui.Signature;
-        lblSchool.Text = si.SchoolName;
-        lblGrade.Text = si.GradeDefinitions.Find(x => x.GradeID == ui.GradeID).GradeName;
+        try
+        {
+            ui = await Task.Run(() => SQLDataHelper.GetUserInfoByID(id));
+            SchoolInfo si = await Task.Run(() => SQLDataHelper.GetSchoolInfoByID(ui.SchoolID));
+            avtAvatar.ImageSource = ImageSource.FromUri(new Uri(ui.Avatar));
+            entNickname.Text = ui.Nickname;
+            edtSignature.Text = ui.Signature;
+            lblSchool.Text = si.SchoolName;
+            lblGrade.Text = si.GradeDefinitions.Find(x => x.GradeID == ui.GradeID).GradeName;
+        }
+        catch(Exception ex)
+        {
+            object gray400;
+            Resources.TryGetValue("Gray400", out gray400);
+            this.Content = new Label()
+            {
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalTextAlignment = TextAlignment.Center,
+                TextColor = (Color)gray400,
+                Text = "加载失败，请重试。\n" + ex.Message
+            };
+        }
     }
 
     private void avtAvatar_Tapped(object sender, TappedEventArgs e)
@@ -57,12 +73,22 @@ public partial class EditProfilePage : ContentPage,IQueryAttributable
         btnSave.IsEnabled = false;
         btnSave.Text = "正在保存";
 
-        string avatar = (avtAvatar.ImageSource as UriImageSource) == null ?
-            await Task.Run(() => SmMsHelper.UploadImage(new FileInfo((avtAvatar.ImageSource as FileImageSource).File))) :
-            (avtAvatar.ImageSource as UriImageSource).Uri.ToString();
-        UserInfo newui = new(ui.UserID, ui.Password, entNickname.Text, edtSignature.Text, ui.PhoneNumber, ui.SchoolID, avatar, ui.GradeID, ui.UserRole);
-        await Task.Run(() => SQLDataHelper.UpdateUser(newui));
+        try
+        {
+            string avatar = (avtAvatar.ImageSource as UriImageSource) == null ?
+                await Task.Run(() => SmMsHelper.UploadImage(new FileInfo((avtAvatar.ImageSource as FileImageSource).File))) :
+                (avtAvatar.ImageSource as UriImageSource).Uri.ToString();
+            UserInfo newui = new(ui.UserID, ui.Password, entNickname.Text, edtSignature.Text, ui.PhoneNumber, ui.SchoolID, avatar, ui.GradeID, ui.UserRole);
+            await Task.Run(() => SQLDataHelper.UpdateUser(newui));
 
-        Shell.Current.GoToAsync("..?id=" + ui.UserID);
+            Shell.Current.GoToAsync("..?id=" + ui.UserID);
+        }
+        catch
+        {
+            Toast.Make("保存失败，请重试").Show();
+            adiSaveStatus.IsRunning = false;
+            btnSave.IsEnabled = true;
+            btnSave.Text = "保存";
+        }
     }
 }
