@@ -109,7 +109,7 @@ namespace Tangyuan.Data
         /// <returns></returns>
         internal static uint[] GetFollowingsByUserID(uint id)
         {
-            using (MySqlConnection c = new MySqlConnection())
+            using (MySqlConnection c = GetNewConnection())
             {
                 c.Open();
                 MySqlDataReader r = new MySqlCommand("select follow_id from follow_table where user_id=" + id, c).ExecuteReader();
@@ -129,7 +129,7 @@ namespace Tangyuan.Data
         /// <returns></returns>
         internal static uint[] GetFansByUserID(uint id)
         {
-            using (MySqlConnection c = new MySqlConnection())
+            using (MySqlConnection c = GetNewConnection())
             {
                 c.Open();
                 MySqlDataReader r = new MySqlCommand("select follow_id from follow_table where follow_id=" + id, c).ExecuteReader();
