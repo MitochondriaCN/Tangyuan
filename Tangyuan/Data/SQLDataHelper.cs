@@ -103,6 +103,46 @@ namespace Tangyuan.Data
         }
 
         /// <summary>
+        /// 获取用户正在关注的用户ID
+        /// </summary>
+        /// <param name="id">要获取关注用户的用户ID</param>
+        /// <returns></returns>
+        internal static uint[] GetFollowingsByUserID(uint id)
+        {
+            using (MySqlConnection c = new MySqlConnection())
+            {
+                c.Open();
+                MySqlDataReader r = new MySqlCommand("select follow_id from follow_table where user_id=" + id, c).ExecuteReader();
+                List<uint> ids = new();
+                while (r.Read())
+                {
+                    ids.Add(r.GetUInt32(0));
+                }
+                return ids.ToArray();
+            }
+        }
+
+        /// <summary>
+        /// 获取用户粉丝ID
+        /// </summary>
+        /// <param name="id">要获取粉丝的用户ID</param>
+        /// <returns></returns>
+        private static uint[] GetFansByUserID(uint id)
+        {
+            using (MySqlConnection c = new MySqlConnection())
+            {
+                c.Open();
+                MySqlDataReader r = new MySqlCommand("select follow_id from follow_table where follow_id=" + id, c).ExecuteReader();
+                List<uint> ids = new();
+                while (r.Read())
+                {
+                    ids.Add(r.GetUInt32(0));
+                }
+                return ids.ToArray();
+            }
+        }
+
+        /// <summary>
         /// 通过用户ID获取用户昵称。
         /// </summary>
         /// <param name="id"></param>

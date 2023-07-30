@@ -19,6 +19,7 @@ public partial class UserHomePage : ContentPage,IQueryAttributable
 
 	private async void UICompleter()
 	{
+		//头像和头衔
 		SchoolInfo si = await Task.Run(() => SQLDataHelper.GetSchoolInfoByID(ui.SchoolID));
         lblUsername.Text = ui.Nickname;
         lblGrade.Text = si.GradeDefinitions.Find(x => x.GradeID == ui.GradeID).GradeName;
@@ -29,5 +30,7 @@ public partial class UserHomePage : ContentPage,IQueryAttributable
         bodRoleContainer.BackgroundColor = ui.GetThemeColorOfUserRole();
         bodSchoolContainer.BackgroundColor = si.ThemeColor;
         imgAvatar.Source = ImageSource.FromUri(new Uri(ui.Avatar));
+
+		//关注、粉丝和帖子数
     }
 }
