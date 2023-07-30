@@ -1,4 +1,5 @@
 using Tangyuan.Data;
+using ImageCropper.Maui;
 
 namespace Tangyuan.Pages;
 
@@ -25,5 +26,22 @@ public partial class EditProfilePage : ContentPage,IQueryAttributable
         edtSignature.Text = ui.Signature;
         lblSchool.Text = si.SchoolName;
         lblGrade.Text = si.GradeDefinitions.Find(x => x.GradeID == ui.GradeID).GradeName;
+    }
+
+    private async void avtAvatar_Tapped(object sender, TappedEventArgs e)
+    {
+        new ImageCropper.Maui.ImageCropper()
+        {
+            PageTitle = "Ñ¡ÔñÍ·Ïñ",
+            CropShape = ImageCropper.Maui.ImageCropper.CropShapeType.Oval,
+            AspectRatioX = 1,
+            AspectRatioY = 1,
+            TakePhotoTitle = "ÅÄÕÕ",
+            PhotoLibraryTitle = "Í¼Æ¬¿â",
+            Success = imagefile =>
+            {
+                ;
+            }
+        }.Show(this);
     }
 }

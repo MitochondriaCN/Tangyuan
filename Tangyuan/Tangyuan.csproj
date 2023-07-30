@@ -189,4 +189,16 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-ios'">
+	  <PackageReference Include="ImageCropper.Maui">
+	    <Version>1.0.3</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android33.0'">
+	  <PackageReference Include="ImageCropper.Maui">
+	    <Version>1.0.3</Version>
+	  </PackageReference>
+	</ItemGroup>
+
 </Project>

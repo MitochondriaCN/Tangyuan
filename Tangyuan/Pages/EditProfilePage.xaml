@@ -12,7 +12,11 @@
         <VerticalStackLayout Padding="15,10,15,0">
             <Grid ColumnDefinitions="Auto,*">
                 <Label FontFamily="HiraginoW6" Text="头像" VerticalTextAlignment="Center"/>
-                <t:AvatarView x:Name="avtAvatar" Grid.Column="1" HorizontalOptions="End"/>
+                <t:AvatarView x:Name="avtAvatar" Grid.Column="1" HorizontalOptions="End">
+                    <t:AvatarView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="avtAvatar_Tapped"/>
+                    </t:AvatarView.GestureRecognizers>
+                </t:AvatarView>
             </Grid>
             <BoxView HorizontalOptions="Fill" HeightRequest="1" Color="{StaticResource Gray}" Margin="0,5,0,5"/>
             
