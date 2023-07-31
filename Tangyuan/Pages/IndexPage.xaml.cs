@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Alerts;
 using System.Xml.Linq;
 using Tangyuan.Controls;
 using Tangyuan.Data;
@@ -6,15 +7,13 @@ namespace Tangyuan.Pages;
 
 public partial class IndexPage : ContentPage
 {
-
 	public IndexPage()
 	{
 		InitializeComponent();
 
         RefreshPostsAsync();
         LoginAsync();
-
-        bool b = VersionControlHelper.IsANewerVersionReleased();
+        HotUpdateAsync();
     }
 
 	private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
@@ -144,6 +143,34 @@ public partial class IndexPage : ContentPage
         catch
         {
             lblUserNickname.Text = "未登录";
+        }
+    }
+
+    /// <summary>
+    /// 热更新
+    /// </summary>
+    private async void HotUpdateAsync()
+    {
+        try
+        {
+            bool isnew = await VersionControlHelper.IsANewerVersionReleasedAsync();
+            await DisplayAlert("糖原内测", "当前版本：" + AppInfo.Current.VersionString + "\nBuild号：" + AppInfo.Current.BuildString +
+                "\n是否有新版本：" + isnew, "确定");
+            if (isnew)
+            {
+#if ANDROID
+            Toast.Make("开始下载新版本……").Show();
+            string path = await VersionControlHelper.DownloadNewestVersionAsync();
+            if (await DisplayAlert("更新", "新版本已下载完毕，是否现在更新？若不选择现在更新，则该对话框每次启动糖原时显示一次。", "更新", "不更新"))
+            {
+                Launcher.Default.OpenAsync(new OpenFileRequest("安装", new ReadOnlyFile(path)));
+            }
+#endif
+            }
+        }
+        catch
+        {
+            Toast.Make("热更新失败").Show();
         }
     }
 }

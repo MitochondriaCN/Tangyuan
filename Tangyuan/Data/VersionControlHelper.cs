@@ -22,7 +22,7 @@ namespace Tangyuan.Data
         ///  检查是否有新版本
         /// </summary>
         /// <returns></returns>
-        internal static bool IsANewerVersionReleased()
+        internal async static Task<bool> IsANewerVersionReleasedAsync()
         {
             List<KeyValuePair<string, string>> args = new()
             {
@@ -31,24 +31,24 @@ namespace Tangyuan.Data
                 new("buildVersion",AppInfo.Current.BuildString)
             };
             FormUrlEncodedContent content = new(args);
-            HttpResponseMessage resp = client.PostAsync("https://www.pgyer.com/apiv2/app/check", content).Result;
+            HttpResponseMessage resp = await client.PostAsync("https://www.pgyer.com/apiv2/app/check", content);
             JsonDocument respdoc = JsonDocument.Parse(resp.Content.ReadAsStringAsync().Result);
             return respdoc.RootElement.GetProperty("data").GetProperty("buildHaveNewVersion").GetBoolean();
         }
 
         /// <summary>
-        /// 安装最新版本
+        /// 下载最新版本
         /// </summary>
-        internal static void InstallNewestVersion()
+        /// <returns>下载路径</returns>
+        internal async static Task<string> DownloadNewestVersionAsync()
         {
-#if ANDROID
-            HttpResponseMessage resp = client.GetAsync("https://www.pgyer.com/apiv2/app/install?_api_key=" + apikey + "&appKey=" + appkey).Result;
+            HttpResponseMessage resp = await client.GetAsync("https://www.pgyer.com/apiv2/app/install?_api_key=" + apikey + "&appKey=" + appkey);
             var stream = resp.Content.ReadAsStream();
-            using (var filestream = new FileStream(FileSystem.Current.CacheDirectory + "/newversion.apk", FileMode.Create))
+            using (var filestream = new FileStream(Path.Combine(FileSystem.Current.CacheDirectory, "newversion.apk"), FileMode.Create))
             {
                 stream.CopyTo(filestream);
             }
-#endif
+            return Path.Combine(FileSystem.Current.CacheDirectory, "newversion.apk");
         }
     }
 }
