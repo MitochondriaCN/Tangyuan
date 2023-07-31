@@ -31,7 +31,7 @@ public partial class UserHomePage : ContentPage,IQueryAttributable
 			bodGradeContainer.BackgroundColor = si.GradeDefinitions.Find(x => x.GradeID == ui.GradeID).ThemeColor;
 			bodRoleContainer.BackgroundColor = ui.GetThemeColorOfUserRole();
 			bodSchoolContainer.BackgroundColor = si.ThemeColor;
-			imgAvatar.Source = ImageSource.FromUri(new Uri(ui.Avatar));
+			imgAvatar.ImageSource = ImageSource.FromUri(new Uri(ui.Avatar));
 
 			//关注和编辑资料按钮
 			if (ui.UserID == LoginStatusManager.LoggedInUserID)

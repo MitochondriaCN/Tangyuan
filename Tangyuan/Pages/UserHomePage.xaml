@@ -15,35 +15,34 @@
     <ScrollView>
         <VerticalStackLayout Margin="15,0,15,0">
             <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*,Auto" x:Name="grdUserBar" Margin="0,10,0,0">
-                <Border StrokeShape="Ellipse" StrokeThickness="0" Margin="1,1,8,1" Grid.RowSpan="2">
-                    <Image x:Name="imgAvatar" WidthRequest="80" HeightRequest="80" Aspect="AspectFill"/>
-                </Border>
-
+                <t:AvatarView x:Name="imgAvatar" WidthRequest="50" HeightRequest="50" Margin="0,0,5,0" VerticalOptions="Center"/>
+                
                 <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
-                    <Label x:Name="lblUsername" FontSize="Large" FontFamily="HiraginoW6" VerticalTextAlignment="Center" TextColor="{StaticResource Prestige}"/>
+                    <Label x:Name="lblUsername" FontSize="Medium" FontFamily="HiraginoW6" VerticalTextAlignment="Center" 
+                           TextColor="{StaticResource Prestige}" LineBreakMode="TailTruncation"/>
                     <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
                         <Border x:Name="bodGradeContainer" StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0" VerticalOptions="Center">
-                            <Label x:Name="lblGrade" TextColor="White" Margin="3,2,3,2" 
+                            <Label x:Name="lblGrade" TextColor="White" Margin="3,2,3,2" FontSize="Micro"
                            VerticalTextAlignment="Center" FontFamily="HiraginoW6" VerticalOptions="Center"/>
                         </Border>
                         <Border x:Name="bodSchoolContainer" StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0" VerticalOptions="Center">
-                            <Label x:Name="lblSchool" TextColor="White" Margin="3,2,3,2" 
+                            <Label x:Name="lblSchool" TextColor="White" Margin="3,2,3,2"  FontSize="Micro"
                            VerticalTextAlignment="Center" FontFamily="HiraginoW6" VerticalOptions="Center"/>
                         </Border>
                         <Border x:Name="bodRoleContainer" StrokeShape="RoundRectangle 5,5,5,5" StrokeThickness="0" VerticalOptions="Center">
-                            <Label x:Name="lblRole" TextColor="White" Margin="3,2,3,2" 
+                            <Label x:Name="lblRole" TextColor="White" Margin="3,2,3,2"  FontSize="Micro"
                            VerticalTextAlignment="Center" FontFamily="HiraginoW6" VerticalOptions="Center"/>
                         </Border>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
 
-                <Label x:Name="lblAuthorSignature" Grid.Row="1" Grid.Column="1" TextColor="{StaticResource Gray400}"
-                           VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                <Label x:Name="lblAuthorSignature" Grid.Row="1" Grid.ColumnSpan="2" TextColor="{StaticResource Prestige}"
+                           VerticalOptions="Center" VerticalTextAlignment="Center" Margin="0,10,0,0" MaxLines="4"/>
 
-                <VerticalStackLayout VerticalOptions="Center" Grid.RowSpan="2" Grid.Column="2" Spacing="8" Margin="10,0,0,0">
-                    <Button x:Name="btnFollow" Text="关注" CornerRadius="15" BackgroundColor="Transparent" FontSize="Small"
+                <VerticalStackLayout VerticalOptions="Center" Grid.Column="2" Spacing="8" Margin="10,0,0,0">
+                    <Button x:Name="btnFollow" Text="关注" CornerRadius="15" BackgroundColor="Transparent" FontSize="12"
                             BorderWidth="1" BorderColor="{StaticResource Gray400}" TextColor="{StaticResource Gray400}" IsVisible="False"/>
-                    <Button x:Name="btnEditProfile" Text="编辑资料" CornerRadius="15" BackgroundColor="Transparent" FontSize="Small"
+                    <Button x:Name="btnEditProfile" Text="编辑资料" CornerRadius="15" BackgroundColor="Transparent" FontSize="12"
                             BorderWidth="1" BorderColor="{StaticResource Gray400}" TextColor="{StaticResource Gray400}" IsVisible="False"
                             Clicked="btnEditProfile_Clicked"/>
                 </VerticalStackLayout>
@@ -51,15 +50,15 @@
 
             <Grid ColumnDefinitions="1*,1*,1*" Margin="0,15,0,0">
                 <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                    <Label x:Name="lblFans" FontSize="Large" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="lblFans" FontSize="Medium" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
                     <Label Text="粉丝" HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center">
-                    <Label x:Name="lblFollowings" FontSize="Large" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="lblFollowings" FontSize="Medium" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
                     <Label Text="正在关注" HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center">
-                    <Label x:Name="lblPostNumber" FontSize="Large" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="lblPostNumber" FontSize="Medium" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
                     <Label Text="帖子" HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
             </Grid>
