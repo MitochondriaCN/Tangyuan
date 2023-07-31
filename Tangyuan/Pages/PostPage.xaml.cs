@@ -101,6 +101,10 @@ public partial class PostPage : ContentPage,IQueryAttributable
 	/// <param name="tangyuanpost">帖子内容，自动排版至用户界面</param>
 	private void TangyuanArranging(XDocument tangyuanPost)
 	{
+		//先清空
+		images.Clear();
+		stlTextLayouter.Children.Clear();
+
 		//帖子类型
 		if (tangyuanPost.Root.Attribute("Type").Value == "Post")
 		{
@@ -134,6 +138,7 @@ public partial class PostPage : ContentPage,IQueryAttributable
 	/// <param name="comments"></param>
 	private void TangyuanCommentsArranging(List<CommentInfo> comments)
 	{
+		//先清空
 		stlCommentsLayouter.Children.Clear();
 
 		lblCommentsNumber.Text = "评论 · " + comments.Count.ToString();
@@ -228,5 +233,10 @@ public partial class PostPage : ContentPage,IQueryAttributable
     private void grdAuthorBar_Tapped(object sender, TappedEventArgs e)
     {
 		Shell.Current.GoToAsync("/user?id=" + postInfo.AuthorID);
+    }
+
+    private void Image_Tapped(object sender, TappedEventArgs e)
+    {
+		Shell.Current.GoToAsync("/image?uri=" + ((sender as Image).Source as UriImageSource).Uri.ToString());
     }
 }
