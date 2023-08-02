@@ -35,7 +35,7 @@ public partial class UserHomePage : ContentPage,IQueryAttributable
 		//这个方法执行完成前把query清理了。
 	}
 
-	private async void UICompleter(uint id)
+	private async Task UICompleter(uint id)
 	{
 		try
 		{
@@ -161,5 +161,15 @@ public partial class UserHomePage : ContentPage,IQueryAttributable
 			clvPosts.SelectedItem = null;
 			Shell.Current.GoToAsync("/post?id=" + selection.PostID);
 		}
+    }
+
+    private void Followings_Tapped(object sender, TappedEventArgs e)
+    {
+		Shell.Current.GoToAsync("/followingfans?id=" + ui.UserID + "&type=following");
+    }
+
+    private void Fans_Tapped(object sender, TappedEventArgs e)
+    {
+		Shell.Current.GoToAsync("/followingfans?id=" + ui.UserID + "&type=fans");
     }
 }
