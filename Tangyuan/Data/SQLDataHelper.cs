@@ -209,6 +209,38 @@ namespace Tangyuan.Data
         }
 
         /// <summary>
+        /// 设置新关注关系。
+        /// </summary>
+        /// <param name="srcUserID"></param>
+        /// <param name="targetUserID"></param>
+        internal static void NewFollowRelation(uint srcUserID, uint targetUserID)
+        {
+            using (MySqlConnection c = GetNewConnection())
+            {
+                c.Open();
+                new MySqlCommand("insert into follow_table (id,user_id,follow_id) values (" +
+                    GetNewIDInTable("follow_table") + "," +
+                    srcUserID + "," +
+                    targetUserID + ")", c).ExecuteNonQuery();
+            }
+            
+        }
+
+        /// <summary>
+        /// 删除现有关注关系。
+        /// </summary>
+        /// <param name="srcUserID"></param>
+        /// <param name="targetUserID"></param>
+        internal static void DeleteFollowRelation(uint srcUserID, uint targetUserID)
+        {
+            using (MySqlConnection c = GetNewConnection())
+            {
+                c.Open();
+                new MySqlCommand("delete from follow_table where user_id=" + srcUserID + " and follow_id=" + targetUserID, c).ExecuteNonQuery();
+            }
+        }
+
+        /// <summary>
         /// 获取指定用户的贴子总数
         /// </summary>
         /// <param name="userID">指定用户ID</param>
