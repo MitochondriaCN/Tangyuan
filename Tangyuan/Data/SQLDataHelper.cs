@@ -135,7 +135,7 @@ namespace Tangyuan.Data
             using (MySqlConnection c = GetNewConnection())
             {
                 c.Open();
-                MySqlDataReader r = new MySqlCommand("select follow_id from follow_table where follow_id=" + id, c).ExecuteReader();
+                MySqlDataReader r = new MySqlCommand("select user_id from follow_table where follow_id=" + id, c).ExecuteReader();
                 List<uint> ids = new();
                 while (r.Read())
                 {

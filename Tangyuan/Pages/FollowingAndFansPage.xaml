@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:t="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+             x:Class="Tangyuan.Pages.FollowingAndFansPage"
+             Title="关注和粉丝">
+    <ScrollView>
+        <CollectionView x:Name="clvUserList" EmptyView="无用户" SelectionMode="Single" SelectionChanged="clvUserList_SelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView android:SwipeView.SwipeTransitionMode="Drag" IsEnabled="{Binding IsMenuEnabled}">
+                        <HorizontalStackLayout Spacing="5">
+                            <t:AvatarView ImageSource="{Binding Avatar}" WidthRequest="36" HeightRequest="36" Margin="15,0,0,0"/>
+                            <Label Text="{Binding UserName}" VerticalOptions="Center" FontFamily="HiraginoW6"/>
+                        </HorizontalStackLayout>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="取消关注"
+                                           BackgroundColor="{StaticResource Tertiary}"
+                                           Invoked="Unfollow_Invoked"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.Footer>
+                <ActivityIndicator x:Name="adiLoading" WidthRequest="30" HeightRequest="30"/>
+            </CollectionView.Footer>
+        </CollectionView>
+    </ScrollView>
+</ContentPage>

@@ -52,10 +52,16 @@
                 <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label x:Name="lblFans" FontSize="Medium" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
                     <Label Text="粉丝" HorizontalTextAlignment="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Fans_Tapped"/>
+                    </VerticalStackLayout.GestureRecognizers>
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center">
                     <Label x:Name="lblFollowings" FontSize="Medium" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
                     <Label Text="正在关注" HorizontalTextAlignment="Center"/>
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Followings_Tapped"/>
+                    </VerticalStackLayout.GestureRecognizers>
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center">
                     <HorizontalStackLayout Spacing="5">
@@ -81,7 +87,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="4"/>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="7"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.Footer>
                     <ActivityIndicator x:Name="adiPostLoadingStatus" IsRunning="True"/>
