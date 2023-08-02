@@ -26,8 +26,11 @@ public partial class PostPage : ContentPage,IQueryAttributable
 
 	public void ApplyQueryAttributes(IDictionary<string, object> query)
 	{
-        Console.WriteLine(Shell.Current.CurrentState.ToString());
-        UICompleter(uint.Parse(query["id"].ToString()));
+		if (query.Count != 0)
+		{
+			UICompleter(uint.Parse(query["id"].ToString()));
+			query.Clear();
+		}
 	}
 
 	private async void UICompleter(uint postID)
@@ -126,8 +129,8 @@ public partial class PostPage : ContentPage,IQueryAttributable
 				{
 					LineBreakMode = LineBreakMode.WordWrap,
 					Text = v.Value.ToString(),
-					Margin = new Thickness(10, 0, 10, 10),
-					LineHeight=1.4
+					Margin = new Thickness(10, 0, 10, 15),
+					LineHeight=1.5
 				});
 			}
 		}
