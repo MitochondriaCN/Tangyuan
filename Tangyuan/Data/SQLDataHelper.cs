@@ -4,6 +4,9 @@ using MySqlConnector;
 
 namespace Tangyuan.Data
 {
+    /// <summary>
+    /// SQL数据帮助类。除本类外，软件内所有的时间均应使用本地时。
+    /// </summary>
     internal static class SQLDataHelper
     {
         private const string host = "tangyuan-maindb.mysql.database.azure.com";
@@ -176,6 +179,48 @@ namespace Tangyuan.Data
                 {
                     throw new Exception("尚未连接数据库。");
                 }
+            }
+        }
+
+        /// <summary>
+        /// 获取指定用户指定日期（不含）之前发表的帖子，时间由近到远。
+        /// </summary>
+        /// <param name="userID">指定用户ID</param>
+        /// <param name="time">指定日期，应当使用本地时</param>
+        /// <param name="limit">获取帖子上限</param>
+        /// <returns>指定用户发表的帖子</returns>
+        internal static List<PostInfo> GetPostsByUserID(uint userID, DateTime time, uint limit = 50)
+        {
+            using (MySqlConnection c = GetNewConnection())
+            {
+                c.Open();
+                MySqlCommand m = new MySqlCommand(
+                    "select * from post_table where author_id=" + userID + " && post_date < '" + time.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + "' " +
+                    "order by post_date desc limit " + limit,
+                    c);
+                MySqlDataReader r = m.ExecuteReader();
+                List<PostInfo> lst = new();
+                while (r.Read())
+                {
+                    lst.Add(GetPostByID(r.GetUInt32(0)));
+                }
+                return lst;
+            }
+        }
+
+        /// <summary>
+        /// 获取指定用户的贴子总数
+        /// </summary>
+        /// <param name="userID">指定用户ID</param>
+        /// <returns></returns>
+        internal static uint GetCountOfPostOfUser(uint userID)
+        {
+            using (MySqlConnection c = GetNewConnection())
+            {
+                c.Open();
+                MySqlDataReader r = new MySqlCommand("select count(*) from post_table where author_id=" + userID, c).ExecuteReader();
+                r.Read();
+                return r.GetUInt32(0);
             }
         }
 

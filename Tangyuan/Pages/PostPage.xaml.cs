@@ -26,7 +26,8 @@ public partial class PostPage : ContentPage,IQueryAttributable
 
 	public void ApplyQueryAttributes(IDictionary<string, object> query)
 	{
-		UICompleter(uint.Parse(query["id"].ToString()));
+        Console.WriteLine(Shell.Current.CurrentState.ToString());
+        UICompleter(uint.Parse(query["id"].ToString()));
 	}
 
 	private async void UICompleter(uint postID)

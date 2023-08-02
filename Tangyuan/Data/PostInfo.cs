@@ -12,6 +12,9 @@ namespace Tangyuan.Data
         internal uint PostID { get; private set; }
         internal uint AuthorID { get; private set; }
         internal uint SchoolID { get; private set; }
+        /// <summary>
+        /// 应当已转换为本地时
+        /// </summary>
         internal DateTime PostDate { get; private set; }
         internal uint Likes { get; private set; }
         internal uint Views { get; private set; }
