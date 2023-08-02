@@ -58,7 +58,10 @@
                     <Label Text="正在关注" HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center">
-                    <Label x:Name="lblPostNumber" FontSize="Medium" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
+                    <HorizontalStackLayout Spacing="5">
+                        <Label x:Name="lblPostNumber" FontSize="Medium" FontFamily="HiraginoW6" Text="0" HorizontalTextAlignment="Center"/>
+                        <ActivityIndicator x:Name="adiInitializing" IsRunning="True" HeightRequest="18" WidthRequest="18" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
                     <Label Text="帖子" HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
             </Grid>
@@ -84,7 +87,6 @@
                     <ActivityIndicator x:Name="adiPostLoadingStatus" IsRunning="True"/>
                 </CollectionView.Footer>
             </CollectionView>
-
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -13,7 +13,7 @@ public partial class CommentView : ContentView
 		UpdateUIAsync();
 	}
 
-	private async void UpdateUIAsync()
+	private async Task UpdateUIAsync()
 	{
 		lblDate.Text = comment.Date.ToString();
 		lblLikes.Text = comment.Likes.ToString();

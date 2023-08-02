@@ -40,7 +40,11 @@ public partial class UserHomePage : ContentPage,IQueryAttributable
 		try
 		{
 			ui = await Task.Run(() => SQLDataHelper.GetUserInfoByID(id));
-            SchoolInfo si = await Task.Run(() => SQLDataHelper.GetSchoolInfoByID(ui.SchoolID));           
+            SchoolInfo si = await Task.Run(() => SQLDataHelper.GetSchoolInfoByID(ui.SchoolID));
+
+			//转圈
+			adiInitializing.IsRunning = true;
+
 			//头像和头衔
 			lblUsername.Text = ui.Nickname;
 			lblGrade.Text = si.GradeDefinitions.Find(x => x.GradeID == ui.GradeID).GradeName;
@@ -68,7 +72,7 @@ public partial class UserHomePage : ContentPage,IQueryAttributable
 			lblPostNumber.Text = (await Task.Run(() => SQLDataHelper.GetCountOfPostOfUser(ui.UserID))).ToString();
 
 			//帖子列表
-			UpdatePostCollectionAsync();
+			await UpdatePostCollectionAsync();
 
 			//管理员功能
 			if (LoginStatusManager.IsLoggedIn)
@@ -79,6 +83,10 @@ public partial class UserHomePage : ContentPage,IQueryAttributable
 					btnEditProfile.IsVisible = true;
 				}
 			}
+
+			//停止转圈
+			adiInitializing.IsRunning = false;
+			adiInitializing.IsVisible = false;
 		}
 		catch (Exception ex)
 		{

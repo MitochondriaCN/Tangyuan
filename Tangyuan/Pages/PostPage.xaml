@@ -38,7 +38,7 @@
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
-                <IndicatorView x:Name="idvCurrentImage" IndicatorColor="{StaticResource Gray200}" SelectedIndicatorColor="{StaticResource Gray300}"
+                <IndicatorView x:Name="idvCurrentImage" IndicatorColor="{StaticResource Gray200}" SelectedIndicatorColor="{StaticResource Primary}"
                            HorizontalOptions="Center" Margin="10" HideSingle="False"/>
 
                 <!--标头-->
