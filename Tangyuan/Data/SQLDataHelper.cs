@@ -519,7 +519,29 @@ namespace Tangyuan.Data
             }
         }
 
-        
+        /// <summary>
+        /// 根据ID获取商品信息。
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        internal static ProductInfo GetProductInfoByID(uint id)
+        {
+            using (MySqlConnection c = GetNewConnection())
+            {
+                c.Open();
+                MySqlDataReader r = new MySqlCommand("select * from product_table where id=" + id + " limit 1", c).ExecuteReader();
+                while (r.Read())
+                {
+                    return new ProductInfo(r.GetUInt32("id"),
+                        r.GetUInt32("publisher_id"),
+                        r.GetUInt32("category_id"),
+                        r.GetUInt32("views"),
+                        r.GetBoolean("take_off_after_selling"),
+                        XDocument.Parse(r.GetString("content")));
+                }
+                return null;
+            }
+        }
 
         /// <summary>
         /// 尝试注册新用户。
