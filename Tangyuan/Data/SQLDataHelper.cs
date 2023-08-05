@@ -543,6 +543,33 @@ namespace Tangyuan.Data
             }
         }
 
+        internal static List<ProductInfo> GetProductInfosRandomly(uint limit)
+        {
+            MySqlDataReader r = GetRandomly("product_table", "id", limit);
+            List<ProductInfo> pis = new();
+            while (r.Read())
+            {
+                pis.Add(GetProductInfoByID(r.GetUInt32("id")));
+            }
+            return pis;
+        }
+
+        /// <summary>
+        /// 随机获取指定表中数据。该算法来自于CSDN。
+        /// </summary>
+        /// <param name="table">指定表名</param>
+        /// <param name="primaryKey">主键名</param>
+        /// <param name="limit">最多条目数</param>
+        /// <returns></returns>
+        private static MySqlDataReader GetRandomly(string table, string primaryKey = "id", uint limit = 100)
+        {
+            MySqlConnection c = GetNewConnection();
+            c.Open();
+            return new MySqlCommand("select * from " + table + " as t1 where t1." + primaryKey + ">=" +
+                "(RAND()*(SELECT MAX(" + primaryKey + ") FROM " + table + ")) LIMIT " + limit,
+                c).ExecuteReader();
+        }
+
         /// <summary>
         /// 尝试注册新用户。
         /// </summary>

@@ -9,21 +9,27 @@
     </ContentPage.Behaviors>
 
     <ScrollView>
-        <VerticalStackLayout Margin="10,0,10,0">
-            <CollectionView x:Name="clvRecommendedProductList">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <VerticalStackLayout>
-                        <Image Source="{Binding PreviewImage}" Aspect="AspectFill" MaximumHeightRequest="200"/>
-                        <Label FontSize="Large" FontFamily="LisongW5" Text="{Binding Title}" MaxLines="2"/>
-                        <Label Text="{Binding Description}" MaxLines="2"/>
-                        <Label Text="{Binding Price}" FontSize="Medium" TextColor="{StaticResource Tertiary}"/>
-                    </VerticalStackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout VerticalItemSpacing="6" HorizontalItemSpacing="6" Span="2" Orientation="Vertical"/>
-            </CollectionView.ItemsLayout>
+        <VerticalStackLayout Margin="20,0,20,0">
+            <CollectionView x:Name="clvRecommendedProductList" RemainingItemsThreshold="0" 
+                            RemainingItemsThresholdReached="clvRecommendedProductList_RemainingItemsThresholdReached"
+                            EmptyView="无商品">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border StrokeShape="RoundRectangle 10,10,10,10" StrokeThickness="0" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="8">
+                                <Image Source="{Binding PreviewImage}" Aspect="AspectFill" MaximumHeightRequest="200"/>
+                                <Label Text="{Binding Description}" MaxLines="2" Padding="5,0,5,0"/>
+                                <Label Text="{Binding Price}" FontSize="Small" TextColor="{StaticResource Tertiary}" Padding="5,0,5,0"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout VerticalItemSpacing="6" HorizontalItemSpacing="6" Span="2" Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.Footer>
+                    <ActivityIndicator x:Name="adiListLoading"/>
+                </CollectionView.Footer>
             </CollectionView>
         </VerticalStackLayout>
     </ScrollView>
