@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:t="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Tangyuan.Pages.MarketPage"
-             Title="MarketPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="市场">
+    <ContentPage.Behaviors>
+        <t:StatusBarBehavior StatusBarColor="{StaticResource Secondary}" StatusBarStyle="DarkContent"/>
+    </ContentPage.Behaviors>
+
+    <ScrollView>
+        <VerticalStackLayout Margin="10,0,10,0">
+            <CollectionView x:Name="clvRecommendedProductList">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout>
+                        <Image Source="{Binding PreviewImage}" Aspect="AspectFill" MaximumHeightRequest="200"/>
+                        <Label FontSize="Large" FontFamily="LisongW5" Text="{Binding Title}" MaxLines="2"/>
+                        <Label Text="{Binding Description}" MaxLines="2"/>
+                        <Label Text="{Binding Price}" FontSize="Medium" TextColor="{StaticResource Tertiary}"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout VerticalItemSpacing="6" HorizontalItemSpacing="6" Span="2" Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
