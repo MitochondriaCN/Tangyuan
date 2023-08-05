@@ -41,7 +41,8 @@
 
                 <VerticalStackLayout VerticalOptions="Center" Grid.Column="2" Spacing="8" Margin="10,0,0,0">
                     <Button x:Name="btnFollow" Text="关注" CornerRadius="15" BackgroundColor="Transparent" FontSize="12"
-                            BorderWidth="1" BorderColor="{StaticResource Gray400}" TextColor="{StaticResource Gray400}" IsVisible="False"/>
+                            BorderWidth="1" BorderColor="{StaticResource Gray400}" TextColor="{StaticResource Gray400}" IsVisible="False"
+                            Clicked="btnFollow_Clicked"/>
                     <Button x:Name="btnEditProfile" Text="编辑资料" CornerRadius="15" BackgroundColor="Transparent" FontSize="12"
                             BorderWidth="1" BorderColor="{StaticResource Gray400}" TextColor="{StaticResource Gray400}" IsVisible="False"
                             Clicked="btnEditProfile_Clicked"/>

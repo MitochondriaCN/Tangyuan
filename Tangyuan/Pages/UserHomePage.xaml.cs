@@ -2,7 +2,7 @@ using Tangyuan.Data;
 
 namespace Tangyuan.Pages;
 
-public partial class UserHomePage : ContentPage,IQueryAttributable
+public partial class UserHomePage : ContentPage, IQueryAttributable
 {
 	UserInfo ui;
 
@@ -40,7 +40,7 @@ public partial class UserHomePage : ContentPage,IQueryAttributable
 		try
 		{
 			ui = await Task.Run(() => SQLDataHelper.GetUserInfoByID(id));
-            SchoolInfo si = await Task.Run(() => SQLDataHelper.GetSchoolInfoByID(ui.SchoolID));
+			SchoolInfo si = await Task.Run(() => SQLDataHelper.GetSchoolInfoByID(ui.SchoolID));
 
 			//◊™»¶
 			adiInitializing.IsRunning = true;
@@ -90,27 +90,27 @@ public partial class UserHomePage : ContentPage,IQueryAttributable
 		}
 		catch (Exception ex)
 		{
-            object gray400;
-            Resources.TryGetValue("Gray400", out gray400);
+			object gray400;
+			Resources.TryGetValue("Gray400", out gray400);
 			this.Content = new Label()
 			{
 				VerticalTextAlignment = TextAlignment.Center,
 				HorizontalTextAlignment = TextAlignment.Center,
 				TextColor = (Color)gray400,
 				Text = "º”‘ÿ ß∞‹£¨«Î÷ÿ ‘°£\n" + ex.Message
-            };
-        }
-    }
+			};
+		}
+	}
 
-    private void btnEditProfile_Clicked(object sender, EventArgs e)
-    {
+	private void btnEditProfile_Clicked(object sender, EventArgs e)
+	{
 		Shell.Current.GoToAsync("/editprofile?id=" + ui.UserID);
-    }
+	}
 
-    private void clvPosts_RemainingItemsThresholdReached(object sender, EventArgs e)
-    {
+	private void clvPosts_RemainingItemsThresholdReached(object sender, EventArgs e)
+	{
 		UpdatePostCollectionAsync();
-    }
+	}
 
 	private async Task UpdatePostCollectionAsync()
 	{
@@ -153,23 +153,28 @@ public partial class UserHomePage : ContentPage,IQueryAttributable
 
 		adiPostLoadingStatus.IsRunning = false;
 	}
-    private void clvPosts_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
+	private void clvPosts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+	{
 		if (e.CurrentSelection.FirstOrDefault() != null)
 		{
 			PostItem selection = e.CurrentSelection.FirstOrDefault() as PostItem;
 			clvPosts.SelectedItem = null;
 			Shell.Current.GoToAsync("/post?id=" + selection.PostID);
 		}
-    }
+	}
 
-    private void Followings_Tapped(object sender, TappedEventArgs e)
-    {
+	private void Followings_Tapped(object sender, TappedEventArgs e)
+	{
 		Shell.Current.GoToAsync("/followingfans?id=" + ui.UserID + "&type=following");
-    }
+	}
 
-    private void Fans_Tapped(object sender, TappedEventArgs e)
-    {
+	private void Fans_Tapped(object sender, TappedEventArgs e)
+	{
 		Shell.Current.GoToAsync("/followingfans?id=" + ui.UserID + "&type=fans");
-    }
+	}
+
+	private void btnFollow_Clicked(object sender, EventArgs e)
+	{
+		;
+	}
 }
