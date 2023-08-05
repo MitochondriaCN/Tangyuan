@@ -519,6 +519,8 @@ namespace Tangyuan.Data
             }
         }
 
+        
+
         /// <summary>
         /// 尝试注册新用户。
         /// </summary>
