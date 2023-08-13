@@ -94,8 +94,8 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Border StrokeShape="RoundRectangle 10,10,10,10" StrokeThickness="0" Padding="8" BackgroundColor="White">
-                            <VerticalStackLayout>
-                                <Label Text="{Binding Title}" FontSize="Medium" FontFamily="LisongW5" MaxLines="2" LineHeight="1.2"/>
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="{Binding Title}" FontSize="Medium" FontFamily="LisongW5" MaxLines="2" LineHeight="1.1"/>
                                 <Label Text="{Binding Description}" MaxLines="3" LineHeight="1.2"/>
                             </VerticalStackLayout>
                         </Border>

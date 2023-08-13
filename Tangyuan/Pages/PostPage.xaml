@@ -54,33 +54,32 @@
                 </HorizontalStackLayout>
 
                 <!--作者-->
-                <Grid Margin="10,15,10,0" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" x:Name="grdAuthorBar">
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="grdAuthorBar_Tapped"/>
-                    </Grid.GestureRecognizers>
-                    <Border StrokeShape="Ellipse" StrokeThickness="0" Margin="1,1,5,1" Grid.RowSpan="2">
-                        <Image x:Name="imgAvatar" WidthRequest="40" HeightRequest="40" Aspect="AspectFill"/>
-                    </Border>
-                    <Label x:Name="lblAuthorSignature" Grid.Row="1" Grid.Column="1" FontSize="Micro" TextColor="{StaticResource Gray400}"
+                <Border Margin="10,15,10,0" Padding="8" StrokeShape="RoundRectangle 10,10,10,10" StrokeThickness="0" BackgroundColor="{StaticResource Gray}">
+                    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" x:Name="grdAuthorBar">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="grdAuthorBar_Tapped"/>
+                        </Grid.GestureRecognizers>
+                        <Border StrokeShape="Ellipse" StrokeThickness="0" Margin="1,1,5,1" Grid.RowSpan="2">
+                            <Image x:Name="imgAvatar" WidthRequest="40" HeightRequest="40" Aspect="AspectFill"/>
+                        </Border>
+                        <Label x:Name="lblAuthorSignature" Grid.Row="1" Grid.Column="1" FontSize="Micro"
                            VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                </Grid>
+                    </Grid>
+                </Border>
 
                 <!--合集-->
-                <Grid Margin="10,10,10,0" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" x:Name="grdCollectionContainer" IsVisible="False">
+                <Grid Margin="18,5,10,0" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" x:Name="grdCollectionContainer" IsVisible="False">
                     <Border StrokeShape="RoundRectangle 10,10,10,10" StrokeThickness="0" Margin="1,1,5,1"
                             Grid.RowSpan="2" BackgroundColor="{StaticResource Secondary }">
                         <Image WidthRequest="40" HeightRequest="40" Aspect="AspectFill" Source="icon_collection.png"/>
                     </Border>
-                    <Label x:Name="lblCollectionName" Grid.Column="1" TextColor="{StaticResource Prestige}" VerticalTextAlignment="Center"/>
-                    <Label x:Name="lblCollectionInfo" Grid.Row="1" Grid.Column="1" FontSize="Micro" TextColor="{StaticResource Gray400}"
+                    <Label x:Name="lblCollectionName" Grid.Column="1" FontFamily="HiraginoW6" VerticalTextAlignment="Center"/>
+                    <Label x:Name="lblCollectionInfo" Grid.Row="1" Grid.Column="1" FontSize="Micro"
                            VerticalOptions="Center" VerticalTextAlignment="Center" Text="合集"/>
                 </Grid>
 
-                <BoxView HorizontalOptions="Fill" HeightRequest="0.5" 
-                 Color="{StaticResource Gray}" Margin="10,10,10,0"/>
-
                 <!--正文-->
-                <StackLayout x:Name="stlTextLayouter" Margin="0,15,0,0"/>
+                <StackLayout x:Name="stlTextLayouter" Margin="0,20,0,0"/>
                 
                 <!--评论-->
                 <Label x:Name="lblCommentsNumber" FontSize="Subtitle" Text="评论" FontAttributes="Bold" Margin="10,30,10,0"/>
