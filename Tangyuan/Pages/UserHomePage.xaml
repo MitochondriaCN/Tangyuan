@@ -95,12 +95,12 @@
                     <DataTemplate>
                         <Border StrokeShape="RoundRectangle 10,10,10,10" StrokeThickness="0" BackgroundColor="White">
                             <VerticalStackLayout Spacing="5">
-                                <Grid ColumnDefinitions="Auto,Auto,Auto">
+                                <Grid ColumnDefinitions="*,*,*">
                                     <Image Source="{Binding Image1}" Aspect="AspectFill" MaximumHeightRequest="100"/>
                                     <Image Grid.Column="1" Source="{Binding Image2}" Aspect="AspectFill" MaximumHeightRequest="100"/>
                                     <Image Grid.Column="2" Source="{Binding Image3}" Aspect="AspectFill" MaximumHeightRequest="100"/>
                                 </Grid>
-                                <Label Margin="8,0,8,0" Text="{Binding Title}" FontSize="Medium" FontFamily="LisongW5" MaxLines="2" LineHeight="1.1"/>
+                                <Label Margin="8,5,8,0" Text="{Binding Title}" FontSize="Medium" FontFamily="LisongW5" MaxLines="2" LineHeight="1.1"/>
                                 <Label Margin="8,0,8,8" Text="{Binding Description}" MaxLines="3" LineHeight="1.2"/>
                             </VerticalStackLayout>
                         </Border>
