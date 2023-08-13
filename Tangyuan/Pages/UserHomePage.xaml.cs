@@ -15,7 +15,10 @@ public partial class UserHomePage : ContentPage, IQueryAttributable
 		public string Title { get; set; }
 		public string Description { get; set; }
 		public DateTime PostDate { get; set; }
-	}
+		public ImageSource Image1 { get; set; }
+		public ImageSource Image2 { get; set; }
+        public ImageSource Image3 { get; set; }
+    }
 
 	public UserHomePage()
 	{
@@ -150,13 +153,25 @@ public partial class UserHomePage : ContentPage, IQueryAttributable
 		}
 		foreach (var v in postlist)
 		{
-			postitems.Add(new PostItem()
+			PostItem p = new()
 			{
 				PostID = v.PostID,
 				Title = v.Content.Root.Descendants("Title").ToList()[0].Value,
 				Description = v.Content.Root.Descendants("P").ToList()[0].Value,
 				PostDate = v.PostDate
-			});
+			};
+			if (v.Content.Root.Descendants("Image").Count() > 0)
+			{
+				//装载第一张图
+				p.Image1 = ImageSource.FromUri(new(v.Content.Root.Descendants("Image").ToList()[0].Value));
+				//装载第二张图
+				if(v.Content.Root.Descendants("Image").Count()>1)
+					p.Image2= ImageSource.FromUri(new(v.Content.Root.Descendants("Image").ToList()[1].Value));
+				//装载第三张图
+				if (v.Content.Root.Descendants("Image").Count() > 2)
+					p.Image3 = ImageSource.FromUri(new(v.Content.Root.Descendants("Image").ToList()[2].Value));
+            }
+			postitems.Add(p);
 		}
 
 		clvPosts.ItemsSource = postitems;
