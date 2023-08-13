@@ -33,7 +33,7 @@ public partial class PostPage : ContentPage,IQueryAttributable
 		}
 	}
 
-	private async void UICompleter(uint postID)
+	private async Task UICompleter(uint postID)
 	{
 		try
 		{

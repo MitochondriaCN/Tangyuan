@@ -64,6 +64,16 @@ public partial class UserHomePage : ContentPage, IQueryAttributable
 			else
 			{
 				btnFollow.IsVisible = true;
+				if (LoginStatusManager.IsLoggedIn)
+				{
+					var followings = await Task.Run(() => SQLDataHelper.GetFollowingsByUserID(LoginStatusManager.LoggedInUserID));
+					if (followings.Contains(ui.UserID))
+					{
+						object followedButtonStyle;
+						Resources.TryGetValue("FollowedButton", out followedButtonStyle);
+						btnFollow.Style = (Style)followedButtonStyle;
+					}
+				}
 			}
 
 			//关注、粉丝和帖子数

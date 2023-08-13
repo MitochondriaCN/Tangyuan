@@ -11,6 +11,21 @@
     <ContentPage.Behaviors>
         <t:StatusBarBehavior StatusBarColor="{StaticResource Secondary}" StatusBarStyle="DarkContent"/>
     </ContentPage.Behaviors>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" x:Key="FollowedButton">
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="BorderColor" Value="{StaticResource Gray400}"/>
+                <Setter Property="TextColor" Value="{StaticResource Gray400}"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="Text" Value="已关注"/>
+            </Style>
+            <Style TargetType="Button" x:Key="FollowButton">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                <Setter Property="Text" Value="关注"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ScrollView>
         <VerticalStackLayout Margin="15,0,15,0">
@@ -40,8 +55,7 @@
                            VerticalOptions="Center" VerticalTextAlignment="Center" Margin="0,10,0,0" MaxLines="4"/>
 
                 <VerticalStackLayout VerticalOptions="Center" Grid.Column="2" Spacing="8" Margin="10,0,0,0">
-                    <Button x:Name="btnFollow" Text="关注" CornerRadius="15" BackgroundColor="Transparent" FontSize="12"
-                            BorderWidth="1" BorderColor="{StaticResource Gray400}" TextColor="{StaticResource Gray400}" IsVisible="False"
+                    <Button x:Name="btnFollow" Style="{StaticResource FollowButton}" CornerRadius="15" FontSize="12" IsVisible="False"
                             Clicked="btnFollow_Clicked"/>
                     <Button x:Name="btnEditProfile" Text="编辑资料" CornerRadius="15" BackgroundColor="Transparent" FontSize="12"
                             BorderWidth="1" BorderColor="{StaticResource Gray400}" TextColor="{StaticResource Gray400}" IsVisible="False"
